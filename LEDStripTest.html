@@ -1,8 +1,28 @@
 <html>
 	<head>
-		
+		<title>on/off</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			function submitform( formNum, photonID, funcName, accessToken )
+			{
+				var dataObj = {};
+				dataObj.args = formNum;
+
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				$.post( link, dataObj, function( dataObj ) {
+			  		$( "#result" ).html( JSON.stringify(dataObj) );
+				});
+				return false;
+			}
+		</script>
 	</head>
 	<body>
-		
+		<center>
+			<input type="number" id="ledVal">
+		</center>
+		<script type="text/javascript">
+			var ledVal = document.getElementById("ledVal");
+			setInterval(submitform(submitform(ledVal, ), 100);
+		</script>
 	</body>
 </html>
