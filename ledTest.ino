@@ -5,7 +5,7 @@ int changeIntensity(String param);
 void setup() {
   pinMode(led7, OUTPUT);
   Particle.function("changeIntensity", changeIntensity);
-  digitalWrite(led7, LOW);
+  digitalWrite(led7, HIGH);
 }
 
 void loop() {}
