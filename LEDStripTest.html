@@ -27,8 +27,7 @@
 			var hi = document.getElementById("hi");
 			var n = parseInt(ledVal.value);
 			setInterval(submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32"), 100);
-			setInterval(hi.innerHTML = n;, 100);
-		</script>
+			setInterval(function(){hi.innerHTML = n;}, 100);
 		</script>
 	</body>
 </html>
