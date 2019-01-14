@@ -1,18 +1,18 @@
-int led7 = D7;
+int buzzerPin = D7;
 
 int changeIntensity(String param);
 
 void setup() {
-  pinMode(led7, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
   Particle.function("changeIntensity", changeIntensity);
-  digitalWrite(led7, HIGH);
+  digitalWrite(buzzerPin, HIGH);
 }
 
 void loop() {}
 
 int changeIntensity(String param){
-  int ledIntensity = param.toInt();
-  if (0 <= ledIntensity <= 255){
-    digitalWrite(led7, ledIntensity);
+  int frequency = param.toInt();
+  if (0 <= frequency <= 500){
+    tone(buzzerPin, frequency);
   }
 }
