@@ -1,20 +1,17 @@
-int buzzerPin = 7;
-int frequency = 50;
+int led7 = D7;
 
 int changeIntensity(String param);
 
-void setup() {
-  pinMode(buzzerPin, OUTPUT);
+void setup{
+  pinmode(led7, OUTPUT);
   Particle.function("changeIntensity", changeIntensity);
 }
 
-void loop() {
-  tone(buzzerPin, frequency, 1000);
-}
+void loop{}
 
 int changeIntensity(String param){
-  int n = param.toInt();
-  if (0 <= n <= 500){
-    frequency = n;
+  int ledIntensity = param.toInt();
+  if (0 <= ledIntensity <= 255){
+    analogWrite(led, brightness);
   }
 }
