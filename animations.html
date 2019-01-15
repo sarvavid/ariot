@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style>
+		body {
+		  background-color: black;
+		  position: relative;
+		 	/* Safari 4.0 - 8.0 */
+			-webkit-animation: changeBGcolor 5s linear infinite alternate;
+			/* Standard syntax */
+			animation: changeBGcolor 5s linear infinite alternate;
+		}
+		.containerDiv {
+		  border-radius: 50%;
+		  border-style: solid;
+		  border-width: 5px;
+		  border-color: #33b5e5;
+		  position: absolute;
+	      height: 110px;
+	      width: 110px;
+		}
+
+		.spinDiv {
+			border-radius: 50px;
+			border-style: solid;
+			border-width: 10px;
+			border-color: blue;
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			/* Safari 4.0 - 8.0 */
+			-webkit-animation: spin 5s linear infinite alternate;
+			/* Standard syntax */
+			animation: spin 5s linear infinite alternate;
+		}
+
+		.inputDiv {
+		  border-style: solid;
+		  border-width: 5px;
+		  border-color: white;
+			width: 200px;
+			height: 200px;
+			position: absolute;
+		}
+
+		/* Standard syntax */
+		@keyframes spin {
+		  from {
+		    transform: rotate(0deg);
+		  }
+		  to {
+		    transform: rotate(360deg);
+		  }
+		}
+
+		/* Safari 4.0 - 8.0 */
+		@-webkit-keyframes changeBGcolor {
+		  0%   {background-color:black;}
+		  25%  {background-color:red;}
+		  50%  {background-color:yellow;}
+		  75%  {background-color:green;}
+		  100% {background-color:black;}
+		}
+
+		/* Standard syntax */
+		@keyframes changeBGcolor {
+		  0%   {background-color:black;}
+		  25%  {background-color:red;}
+		  50%  {background-color:yellow;}
+		  75%  {background-color:green;}
+		  100% {background-color:black;}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px;">
+		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
+			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
+			<button style="position:absolute; left: 100px; top: 100px" class="buttonClass" onclick="print()">get input</button>
+		</div>
+		<div class="containerDiv" style="opacity: 0.75;">
+			<div class="spinDiv" style="animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;"></div>
+			<div class="spinDiv"></div>
+		</div>
+	</div>
+	<script>
+		var movingDiv = document.getElementsByClassName("movingDiv")[0];
+		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
+		movingDiv.style.top = window.innerHeight/2 - movingDiv.offsetHeight/2 + "px";
+
+		var div = document.getElementsByClassName("containerDiv")[0];
+		div.style.left = div.parentElement.offsetWidth/2 - div.offsetWidth/2 + "px";
+		div.style.top = div.parentElement.offsetHeight/2 - div.offsetHeight/2 + "px";
+
+		var spinDiv1 = document.getElementsByClassName("spinDiv")[0];
+		spinDiv1.style.left = spinDiv1.parentElement.offsetWidth/2 - spinDiv1.offsetWidth/2 + "px";
+		spinDiv1.style.top = spinDiv1.parentElement.offsetHeight/2 - spinDiv1.offsetHeight/2 + "px";
+
+		var spinDiv2 = document.getElementsByClassName("spinDiv")[1];
+		spinDiv2.style.left = spinDiv2.parentElement.offsetWidth/2 - spinDiv2.offsetWidth/2 + "px";
+		spinDiv2.style.top = spinDiv2.parentElement.offsetHeight/2 - spinDiv2.offsetHeight/2 + "px";
+
+		var inputDiv = document.getElementsByClassName("inputDiv")[0];
+		inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
+		inputDiv.style.top = inputDiv.parentElement.offsetHeight/2 - inputDiv.offsetHeight/2 + "px";
+
+		var input = document.getElementsByClassName("inputClass")[0];
+		input.style.left = "5px";
+		input.style.top = "5px";
+
+		var button = document.getElementsByClassName("buttonClass")[0];
+		button.style.left = input.offsetWidth + 10 + "px";
+		button.style.top = input.style.top;
+
+		var canDrag = false;
+
+		movingDiv.onmousedown = function(){
+			canDrag = true;
+		}
+
+		document.onmousemove = function(){
+			if (canDrag){
+				movingDiv.style.left = event.clientX - movingDiv.offsetWidth/2 + "px";
+				movingDiv.style.top = event.clientY - movingDiv.offsetHeight/2 + "px";
+			}
+		}
+
+		document.onmouseup = function(){
+			canDrag = false;
+		}
+
+		function isClose(p1, p2) {
+			return abs(p1 - p1) <= 100
+		}
+
+		function print(){
+			alert(input.value);
+		}
+	</script>
+</body>
+</html>
