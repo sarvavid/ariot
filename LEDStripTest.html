@@ -23,13 +23,13 @@
 			<div id="hi"></div>
 		</center>
 		<script type="text/javascript">
-			window.setInterval(function(){hi.innerHTML = 8;}, 1000);
+			window.setInterval(
 				var ledVal = document.getElementById("ledVal");
 				var hi = document.getElementById("hi");
 				var n = parseInt(ledVal.value);
 				hi.innerHTML = n;
 				submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-			}
+			});
 		</script>
 	</body>
 </html>
