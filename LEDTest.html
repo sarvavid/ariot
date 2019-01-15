@@ -18,18 +18,43 @@
 	</head>
 	<body>
 		<center>
+			<div id="state">Regular LED's</div>
 			<input type="number" id="ledVal" value="0">
+			<button type="button" onclick="changeState();">click</button>
 			<div id="result"></div>
 			<div id="hi"></div>
 		</center>
 		<script type="text/javascript">
+			var stateLabel = document.getElementById("state");
+			var states = ["reg", "rgb"]
+			var index = 0;
+			var currState = states[index];
+
 			window.setInterval(function(){
+				currState = states[index];
+				stateLabel.innerHTML = currState;
+
 				var ledVal = document.getElementById("ledVal");
 				var hi = document.getElementById("hi");
 				var n = parseInt(ledVal.value);
 				hi.innerHTML = n;
-				submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+
+				if (currState == "reg"){
+					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				}
+				else if (currState == "rgb"){
+					submitform(n, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				}
 			}, 100);
+
+			function changeState(){
+				if (index < 2){
+					index += 1
+				}
+				else{
+					index = 0
+				}
+			}
 		</script>
 	</body>
 </html>
