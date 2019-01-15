@@ -1,4 +1,4 @@
-int ledPin = D6;
+int ledPin = 6;
 
 int changeIntensity(String param);
 
@@ -13,7 +13,7 @@ void loop(){}
 int changeIntensity(String param){
   int ledIntensity = param.toInt();
   if (0 <= ledIntensity && ledIntensity <= 255){
-    analogWrite(ledPin, ledIntensity);
+    digitalWrite(ledPin, ledIntensity);
     Serial.println(ledIntensity);
   }
 }

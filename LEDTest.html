@@ -10,9 +10,16 @@
 
 				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
 				$.post( link, dataObj, function( dataObj ) {
-			  		$( "#result" ).html( JSON.stringify(dataObj) );
+			  	$( "#result" ).html( JSON.stringify(dataObj) );
 				});
 				return false;
+			}
+
+			function getData(){
+				$.getJSON(requestURL, function(json) {
+	        $( "#hi" ).html( parseInt(json.result) );
+	      });
+	      return false;
 			}
 		</script>
 	</head>
@@ -25,9 +32,7 @@
 		<script type="text/javascript">
 			window.setInterval(function(){
 				var ledVal = document.getElementById("ledVal");
-				var hi = document.getElementById("hi");
 				var n = parseInt(ledVal.value);
-				hi.innerHTML = n;
 				submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 			}, 100);
 		</script>
