@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>change intensity of led</title>
+		<title>ffrick</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -23,11 +23,13 @@
 			<div id="hi"></div>
 		</center>
 		<script type="text/javascript">
-			var ledVal = document.getElementById("ledVal");
-			var hi = document.getElementById("hi");
-			var n = parseInt(ledVal.value);
 			window.setInterval(function(){hi.innerHTML = 8;}, 1000);
-			window.setInterval(submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32"), 1000);
+				var ledVal = document.getElementById("ledVal");
+				var hi = document.getElementById("hi");
+				var n = parseInt(ledVal.value);
+				hi.innerHTML = n;
+				submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+			}
 		</script>
 	</body>
 </html>
