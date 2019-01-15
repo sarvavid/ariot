@@ -2,17 +2,18 @@ int led7 = D7;
 
 int changeIntensity(String param);
 
-void setup() {
+void setup(){
   pinMode(led7, OUTPUT);
   Particle.function("changeIntensity", changeIntensity);
-  digitalWrite(led7, HIGH);
+  Serial.begin(9600);
 }
 
-void loop() {}
+void loop(){}
 
 int changeIntensity(String param){
   int ledIntensity = param.toInt();
   if (0 <= ledIntensity <= 255){
-    digitalWrite(led7, ledIntensity);
+    analogWrite(led7, ledIntensity);
   }
+  Serial.println(ledIntensity);
 }
