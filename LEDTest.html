@@ -15,8 +15,9 @@
 				return false;
 			}
 
-			function getData(){
-				$.getJSON(requestURL, function(json) {
+			function getData( photonID, funcName, accessToken ){
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				$.getJSON(link, function(json) {
 	        $( "#hi" ).html( parseInt(json.result) );
 	      });
 	      return false;
@@ -34,6 +35,7 @@
 				var ledVal = document.getElementById("ledVal");
 				var n = parseInt(ledVal.value);
 				submitform(n, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				getData("3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 			}, 100);
 		</script>
 	</body>
