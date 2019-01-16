@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LED h</title>
+		<title>LED g</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -21,7 +21,7 @@
 				dataObj.args = formNum;
 
 				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
-				$.getJSON(requestURL, function(json) {
+				$.getJSON(link, function(json) {
 	         document.getElementById("hi").value = parseInt(json.result);
 	         });
 				return false;
