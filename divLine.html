@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Div Lines</title>
+		<style >
+				
+			.line{
+				width: 11px;
+				height: 0px;
+				border-bottom: 2px solid black;
+				border-top: 2px solid black;
+				position: absolute;
+				transform-origin: top left;
+			}
+			.square0{
+				width: 20px;
+				height:20px;
+				border-bottom: 2px solid black;
+				border-top: 2px solid black;
+				border-right: 2px solid black;
+				border-left:2px solid black;
+				position: absolute;
+			}
+
+			.square1{
+				width: 20px;
+				height:20px;
+				border-bottom: 2px solid black;
+				border-top: 2px solid black;
+				border-right: 2px solid black;
+				border-left:2px solid black;
+				position: absolute;
+			}
+		</style>
+	</head>
+
+		<div class = "line" ></div>
+		<div class = "square0"></div>
+		<div class = "square1"></div>
+		<script>
+
+
+
+
+
+			var square0 = document.getElementsByClassName ("square0")[0];
+			square0.style.left = "100px";
+			square0.style.top = "100px";
+			
+			var square1 = document.getElementsByClassName ("square1")[0];
+			square1.style.left = "50px";
+			square1.style.top = "300px";
+
+			var x0;
+			var y0;
+			var x1;
+			var y1;
+			function initCoords (){
+				x0 = 0;
+				y0 = 0;
+				x1 = 0;
+				y1 = 0;
+			}
+			initCoords ();
+			var down = false;
+			var line = document.getElementsByClassName("line")[0];
+
+			var placed = false;
+
+
+
+			line.style.left = "0px";
+			line.style.top = "0px"
+			function arctan (x0, x1, y0, y1){
+				if ((x1 - x0)>0){
+					return Math.PI + Math.atan((-y1+y0)/(x1 - x0));
+				}
+				else{
+					return Math.atan((-y1+y0)/(x1 - x0));
+				}
+			}
+			function setLine (x0, y0, x1, y1){
+			 	var r = Math.sqrt(Math.pow((x0-x1),2) + Math.pow ((y0-y1),2));
+			 	line.style.transform = "rotate(0deg)";
+			 	line.style.top = 0;
+			 	line.style.left = 20;
+			 	line.setAttribute("style","width:" + r + "px");
+			 	w = arctan(x0, x1, y0, y1);
+			 	line.style.transform = "rotate(" + -w + "rad)";
+			 	line.style.top = y1 + "px";
+			 	line.style.left = x1 + "px";
+
+			 }
+
+			 // line.style.transformorigin = "top left rotate(30deg)";
+
+			setLine (x0, y0, x1, y1);
+			square0.onmousedown = function (){
+				down = true;
+				x0 = square0.offsetLeft;
+				y0 = square0.offsetTop;
+			}
+			square1.onmousedown = function (){
+				down = true;
+				x0 = square1.offsetLeft;
+				y0 = square1.offsetTop;
+			}
+
+			square0.onmouseup = function () {
+				x1 = square0.offsetLeft;
+				y1 = square0.offsetTop;
+				setLine (x0, y0, x1, y1);
+				placed = true;
+			}
+			square1.onmouseup = function () {
+				x1 = square1.offsetLeft;
+				y1 = square1.offsetTop;
+				setLine (x0, y0, x1, y1);
+				placed = true;
+			}
+			
+			window.onmouseup = function	(){
+				down = false;
+				if (!placed){
+					initCoords();
+					setLine (x0, y0, x1, y1);
+				}
+				placed = false;
+			}
+
+			window.onmousemove = function (){
+				if (down){
+					x1 = event.clientX;
+					y1 = event.clientY;
+					setLine (x0, y0, x1, y1);
+				}
+			}
+		</script>
+</html>
