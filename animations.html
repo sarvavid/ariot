@@ -118,6 +118,8 @@
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
 		movingDiv.style.top = window.innerHeight/2 - movingDiv.offsetHeight/2 + "px";
+		centerX = window.innerWidth/2
+		centerY = window.innerHeight/2 
 
 		for (i = 0; i < 4; i++)
 		{
@@ -159,14 +161,19 @@
 
 
 		movingDiv.onmousedown = function(){
+			startX = event.clientX;
+			startY = event.clientY;
+
+			distance = ((centerX-startX)**2+(centerY-startY)**2)**.5;
+			if (distance < 115)
+			{
 			canDrag = true;
+		}
 			//if the coordinates of the mouse click are in some range of radii from the center point 
 			//then canRotate = true
 		}
 
 		document.onmousedown = function(){
-			centerX = window.innerWidth/2;
-			centerY = Math.floor(window.innerHeight/2);
 			startX = event.clientX;
 			startY = event.clientY;
 
@@ -176,6 +183,7 @@
 			{
 				canRotate = true;
 			}
+			document.getElementById("myText").innerHTML = centerX +", " + centerY+"  |  " + startX+", "+ startY+"  |  "+" distance: "+distance;
 
 		}
 
@@ -183,16 +191,26 @@
 			if (canDrag){
 				movingDiv.style.left = event.clientX - movingDiv.offsetWidth/2 + "px";
 				movingDiv.style.top = event.clientY - movingDiv.offsetHeight/2 + "px";
+				centerX = event.clientX 
+				centerY = event.clientY
+
 			}
 			if (canRotate)
 			{
-				document.getElementById("myText").innerHTML = "yay";
+				document.getElementById("myText").innerHTML = centerX +", " + centerY+"  |  " + startX+", "+ startY+"  |  "+" distance: "+distance+"yay";
 				currentX = event.clientX;
 				currentY = event.clientY;
+				slopeAX = currentX-startX
+				slopeAY = startY - currentY
+
+				slopeBX = currentX-startX
+
+
 			}
 		}
 
 		document.onmouseup = function(){
+			alert("up")
 			canDrag = false;
 			canRotate = false;
 			// canRotate = false;
