@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LEDs</title>
+		<title>Buzzer</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -39,7 +39,7 @@
 				var n = parseInt(input.value);
 				hi.innerHTML = n;
 
-				if (currState == "reg"){
+				if (currState == "buzzer"){
 					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 				else if (currState == "lcd"){
