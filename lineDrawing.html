@@ -199,7 +199,7 @@
 
 		square0.onmousemove = function(){
 			if (down){
-				line.attr('x2',event.clientX).attr('y2',event.clientY);
+				line.attr('x1',x1).attr('y1',y1).attr('x2',event.clientX).attr('y2',event.clientY);
 			}
 		}
 
