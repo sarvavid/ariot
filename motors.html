@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>LEDs</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			function submitform( formNum, photonID, funcName, accessToken )
+			{
+				var dataObj = {};
+				dataObj.args = formNum;
+
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				$.post( link, dataObj, function( dataObj ) {
+			  		$( "#result" ).html( JSON.stringify(dataObj) );
+				});
+				return false;
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<div id="state"></div>
+			<input type="number" id="input" value="0">
+			<button type="button" onclick="changeState();">click</button>
+			<div id="result"></div>
+			<div id="hi"></div>
+		</center>
+		<script type="text/javascript">
+			var stateLabel = document.getElementById("state");
+			var states = ["stepper", "dc", "servo"]
+			var index = 0;
+			var currState = states[index];
+
+			window.setInterval(function(){
+				currState = states[index];
+				stateLabel.innerHTML = currState;
+
+				var input = document.getElementById("input");
+				var hi = document.getElementById("hi");
+				var n = parseInt(input.value);
+				hi.innerHTML = n;
+
+				if (currState == "stepper"){
+					submitform(n, "3f0039000b47363330353437", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				}
+			}, 100);
+
+			function changeState(){
+				input.value = "0";
+				submitform(0, "3f0039000b47363330353437", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				if (index < states.length - 1){
+					index += 1
+				}
+				else{
+					index = 0
+				}
+			}
+		</script>
+	</body>
+</html>
