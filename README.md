@@ -1,4 +1,4 @@
-# modulAR-iot
+# ModulAR-IoT
 
 An AR app that points arrows between connected/communicating modules.
 
