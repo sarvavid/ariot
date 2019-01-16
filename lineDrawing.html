@@ -13,12 +13,13 @@
 			animation: changeBGcolor 5s linear infinite alternate;
 		}
 		.line{
-			width: 11px;
-			height: 0px;
-			border-bottom: 2px solid black;
-			border-top: 2px solid black;
+			display: none;
+			background: black;
 			position: absolute;
 			transform-origin: top left;
+			z-index: 1;
+			width: 200px;
+			height: 200px;
 		}
 		.containerDiv {
 		  border-radius: 50%;
@@ -78,9 +79,10 @@
 	</style>
 </head>
 <body>
-	<div class = "line" ></div>
+	<div class="line" ></div>
+	<canvas id="can" style="width:100%; height:100%; position: absolute;"></canvas>
 
-	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px;">
+	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px; z-index: -1">
 		<div class="square0" style="z-index: 1; position: absolute; width: 20px; height: 20px; background: black;"></div>
 		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
 			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
@@ -168,99 +170,32 @@
 		button1.style.left = input1.offsetWidth + 10 + "px";
 		button1.style.top = input1.style.top;
 
-		function isClose(p1, p2) {
-			return abs(p1 - p1) <= 100
-		}
-
 		function print(){
 			alert(input.value);
 		}
 
-		var x0;
-		var y0;
-		var x1;
-		var y1;
-		function initCoords (){
-			x0 = 0;
-			y0 = 0;
-			x1 = 0;
-			y1 = 0;
-		}
-		initCoords ();
-
 		var down = false;
 		var line = document.getElementsByClassName("line")[0];
+		var c = document.getElementById("can");
+		var ctx = c.getContext("2d");
 
-		var placed = false;
-
-
-
-		line.style.left = "0px";
-		line.style.top = "0px"
-		function arctan (x0, x1, y0, y1){
-			if ((x1 - x0)>0){
-				return Math.PI + Math.atan((-y1+y0)/(x1 - x0));
-			}
-			else{
-				return Math.atan((-y1+y0)/(x1 - x0));
-			}
-		}
-		function setLine (x0, y0, x1, y1){
-		 	var r = Math.sqrt(Math.pow((x0-x1),2) + Math.pow ((y0-y1),2));
-		 	line.style.transform = "rotate(0deg)";
-		 	line.style.top = 0;
-		 	line.style.left = 20;
-		 	line.setAttribute("style","width:" + r + "px");
-		 	w = arctan(x0, x1, y0, y1);
-		 	line.style.transform = "rotate(" + -w + "rad)";
-		 	line.style.top = y1 + "px";
-		 	line.style.left = x1 + "px";
-
-		 }
-
-		 // line.style.transformorigin = "top left rotate(30deg)";
-
-		setLine (x0, y0, x1, y1);
-		square0.onmousedown = function (){
+		square0.onmousedown = function(){
 			down = true;
-			x0 = square0.offsetLeft;
-			y0 = square0.offsetTop;
-		}
-		square1.onmousedown = function (){
-			down = true;
-			x0 = square1.offsetLeft;
-			y0 = square1.offsetTop;
+			ctx.beginPath();
+			ctx.moveTo(square0.style.left, square0.style.top);
 		}
 
-		square0.onmouseup = function () {
-			x1 = square0.offsetLeft;
-			y1 = square0.offsetTop;
-			setLine (x0, y0, x1, y1);
-			placed = true;
-		}
-		square1.onmouseup = function () {
-			x1 = square1.offsetLeft;
-			y1 = square1.offsetTop;
-			setLine (x0, y0, x1, y1);
-			placed = true;
-		}
-		
-		window.onmouseup = function	(){
-			down = false;
-			if (!placed){
-				initCoords();
-				setLine (x0, y0, x1, y1);
-			}
-			placed = false;
-		}
-
-		window.onmousemove = function (){
+		square0.onmousemove = function(){
 			if (down){
-				x1 = event.clientX;
-				y1 = event.clientY;
-				setLine (x0, y0, x1, y1);
+				ctx.lineTo(event.clientX, event.clientY);
+				ctx.stroke();
 			}
 		}
+
+	square0.onmouseup = function(){
+		down = false;
+	}		
+		
 	</script>
 </body>
 </html>
