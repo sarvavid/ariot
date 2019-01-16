@@ -12,14 +12,22 @@
 			/* Standard syntax */
 			animation: changeBGcolor 5s linear infinite alternate;
 		}
+		.line{
+			width: 11px;
+			height: 0px;
+			border-bottom: 2px solid black;
+			border-top: 2px solid black;
+			position: absolute;
+			transform-origin: top left;
+		}
 		.containerDiv {
 		  border-radius: 50%;
 		  border-style: solid;
 		  border-width: 5px;
 		  border-color: #33b5e5;
 		  position: absolute;
-	      height: 110px;
-	      width: 110px;
+	    height: 110px;
+	    width: 110px;
 		}
 		.spinDiv {
 			border-radius: 50px;
@@ -70,7 +78,22 @@
 	</style>
 </head>
 <body>
+	<div class = "line" ></div>
+
 	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px;">
+		<div class="square0" style="z-index: 1; position: absolute; width: 20px; height: 20px; background: black;"></div>
+		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
+			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
+			<button style="position:absolute; left: 100px; top: 100px" class="buttonClass" onclick="print()">get input</button>
+		</div>
+		<div class="containerDiv" style="opacity: 0.75;">
+			<div class="spinDiv" style="animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;"></div>
+			<div class="spinDiv"></div>
+		</div>
+	</div>
+
+	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px;">
+		<div class="square1" style="z-index: 1; position: absolute; width: 20px; height: 20px; background: black;"></div>
 		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
 			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
 			<button style="position:absolute; left: 100px; top: 100px" class="buttonClass" onclick="print()">get input</button>
@@ -82,44 +105,161 @@
 	</div>
 	<script>
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
-		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
-		movingDiv.style.top = window.innerHeight/2 - movingDiv.offsetHeight/2 + "px";
+		movingDiv.style.left = movingDiv.offsetWidth/2 + "px";
+		movingDiv.style.top = movingDiv.offsetHeight/2 + "px";
+
 		var div = document.getElementsByClassName("containerDiv")[0];
 		div.style.left = div.parentElement.offsetWidth/2 - div.offsetWidth/2 + "px";
 		div.style.top = div.parentElement.offsetHeight/2 - div.offsetHeight/2 + "px";
+
+		var square0 = document.getElementsByClassName("square0")[0];
+		square0.style.left = square0.parentElement.offsetWidth - square0.offsetWidth/2 + "px";
+		square0.style.top = square0.parentElement.offsetHeight/2 - square0.offsetHeight/2 + "px";
+
 		var spinDiv1 = document.getElementsByClassName("spinDiv")[0];
 		spinDiv1.style.left = spinDiv1.parentElement.offsetWidth/2 - spinDiv1.offsetWidth/2 + "px";
 		spinDiv1.style.top = spinDiv1.parentElement.offsetHeight/2 - spinDiv1.offsetHeight/2 + "px";
+
 		var spinDiv2 = document.getElementsByClassName("spinDiv")[1];
 		spinDiv2.style.left = spinDiv2.parentElement.offsetWidth/2 - spinDiv2.offsetWidth/2 + "px";
 		spinDiv2.style.top = spinDiv2.parentElement.offsetHeight/2 - spinDiv2.offsetHeight/2 + "px";
+
 		var inputDiv = document.getElementsByClassName("inputDiv")[0];
 		inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
 		inputDiv.style.top = inputDiv.parentElement.offsetHeight/2 - inputDiv.offsetHeight/2 + "px";
+
 		var input = document.getElementsByClassName("inputClass")[0];
 		input.style.left = "5px";
 		input.style.top = "5px";
+
 		var button = document.getElementsByClassName("buttonClass")[0];
 		button.style.left = input.offsetWidth + 10 + "px";
 		button.style.top = input.style.top;
-		var canDrag = false;
-		movingDiv.onmousedown = function(){
-			canDrag = true;
-		}
-		document.onmousemove = function(){
-			if (canDrag){
-				movingDiv.style.left = event.clientX - movingDiv.offsetWidth/2 + "px";
-				movingDiv.style.top = event.clientY - movingDiv.offsetHeight/2 + "px";
-			}
-		}
-		document.onmouseup = function(){
-			canDrag = false;
-		}
+
+		var movingDiv1 = document.getElementsByClassName("movingDiv")[1];
+		movingDiv1.style.left = window.innerWidth/2 - movingDiv1.offsetWidth/2 + "px";
+		movingDiv1.style.top = window.innerHeight/2 - movingDiv1.offsetHeight/2 + "px";
+
+		var div1 = document.getElementsByClassName("containerDiv")[1];
+		div1.style.left = div1.parentElement.offsetWidth/2 - div1.offsetWidth/2 + "px";
+		div1.style.top = div1.parentElement.offsetHeight/2 - div1.offsetHeight/2 + "px";
+
+		var square1 = document.getElementsByClassName("square1")[0];
+		square1.style.left = square1.offsetWidth/2 + "px";
+		square1.style.top = square1.parentElement.offsetHeight/2 - square1.offsetHeight/2 + "px";
+
+		var spinDiv3 = document.getElementsByClassName("spinDiv")[2];
+		spinDiv3.style.left = spinDiv3.parentElement.offsetWidth/2 - spinDiv3.offsetWidth/2 + "px";
+		spinDiv3.style.top = spinDiv3.parentElement.offsetHeight/2 - spinDiv3.offsetHeight/2 + "px";
+
+		var spinDiv4 = document.getElementsByClassName("spinDiv")[3];
+		spinDiv4.style.left = spinDiv4.parentElement.offsetWidth/2 - spinDiv4.offsetWidth/2 + "px";
+		spinDiv4.style.top = spinDiv4.parentElement.offsetHeight/2 - spinDiv4.offsetHeight/2 + "px";
+
+		var inputDiv1 = document.getElementsByClassName("inputDiv")[1];
+		inputDiv1.style.left = inputDiv1.parentElement.offsetWidth/2 - inputDiv1.offsetWidth/2 + "px";
+		inputDiv1.style.top = inputDiv1.parentElement.offsetHeight/2 - inputDiv1.offsetHeight/2 + "px";
+
+		var input1 = document.getElementsByClassName("inputClass")[1];
+		input1.style.left = "5px";
+		input1.style.top = "5px";
+
+		var button1 = document.getElementsByClassName("buttonClass")[1];
+		button1.style.left = input1.offsetWidth + 10 + "px";
+		button1.style.top = input1.style.top;
+
 		function isClose(p1, p2) {
 			return abs(p1 - p1) <= 100
 		}
+
 		function print(){
 			alert(input.value);
+		}
+
+		var x0;
+		var y0;
+		var x1;
+		var y1;
+		function initCoords (){
+			x0 = 0;
+			y0 = 0;
+			x1 = 0;
+			y1 = 0;
+		}
+		initCoords ();
+
+		var down = false;
+		var line = document.getElementsByClassName("line")[0];
+
+		var placed = false;
+
+
+
+		line.style.left = "0px";
+		line.style.top = "0px"
+		function arctan (x0, x1, y0, y1){
+			if ((x1 - x0)>0){
+				return Math.PI + Math.atan((-y1+y0)/(x1 - x0));
+			}
+			else{
+				return Math.atan((-y1+y0)/(x1 - x0));
+			}
+		}
+		function setLine (x0, y0, x1, y1){
+		 	var r = Math.sqrt(Math.pow((x0-x1),2) + Math.pow ((y0-y1),2));
+		 	line.style.transform = "rotate(0deg)";
+		 	line.style.top = 0;
+		 	line.style.left = 20;
+		 	line.setAttribute("style","width:" + r + "px");
+		 	w = arctan(x0, x1, y0, y1);
+		 	line.style.transform = "rotate(" + -w + "rad)";
+		 	line.style.top = y1 + "px";
+		 	line.style.left = x1 + "px";
+
+		 }
+
+		 // line.style.transformorigin = "top left rotate(30deg)";
+
+		setLine (x0, y0, x1, y1);
+		square0.onmousedown = function (){
+			down = true;
+			x0 = square0.offsetLeft;
+			y0 = square0.offsetTop;
+		}
+		square1.onmousedown = function (){
+			down = true;
+			x0 = square1.offsetLeft;
+			y0 = square1.offsetTop;
+		}
+
+		square0.onmouseup = function () {
+			x1 = square0.offsetLeft;
+			y1 = square0.offsetTop;
+			setLine (x0, y0, x1, y1);
+			placed = true;
+		}
+		square1.onmouseup = function () {
+			x1 = square1.offsetLeft;
+			y1 = square1.offsetTop;
+			setLine (x0, y0, x1, y1);
+			placed = true;
+		}
+		
+		window.onmouseup = function	(){
+			down = false;
+			if (!placed){
+				initCoords();
+				setLine (x0, y0, x1, y1);
+			}
+			placed = false;
+		}
+
+		window.onmousemove = function (){
+			if (down){
+				x1 = event.clientX;
+				y1 = event.clientY;
+				setLine (x0, y0, x1, y1);
+			}
 		}
 	</script>
 </body>
