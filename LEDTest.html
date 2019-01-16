@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LED thing</title>
+		<title>LED h</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -50,13 +50,13 @@
 				var hi = document.getElementById("hi");
 				var n = parseInt(ledVal.value);
 
-				getData("3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-
 				if (currState == "reg"){
 					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					getData("3f0039000b47363330353437", "ledIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 				else if (currState == "rgb"){
 					submitform(n, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					getData("3f0039000b47363330353437", "color", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 			}, 100);
 
