@@ -91,7 +91,7 @@
 	</div>
 
 	<div class="movingDiv" style="display: none; z-index: 1; position: absolute; width: 250px; height: 250px;">
-		<div class="label" style="position: absolute; left: 100px; top: 90px"></div>
+		<div class="label" style="position: absolute; left: 100px; top: 80px"></div>
 		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
 			<input style="position: absolute; width: 50px;" class="inputClass" type="number" value="0">
 			<button type="button" style="position: absolute; left: 100px; top: 100px" class="buttonClass" onclick="changeState()">click</button>
@@ -223,7 +223,7 @@
 
 			var label = document.getElementsByClassName("label")[0];
 			label.style.left = label.parentElement.offsetWidth/2 - label.offsetWidth/2 + "px";
-			label.style.top = label.parentElement.offsetHeight/2 - label.offsetHeight/2 - 20 + "px";
+			label.style.top = label.parentElement.offsetHeight/2 - label.offsetHeight/2 - 30 + "px";
 
 			var inputDiv = document.getElementsByClassName("inputDiv")[0];
 			inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
