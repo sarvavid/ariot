@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LEDs</title>
+		<title>motors</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -40,13 +40,13 @@
 				hi.innerHTML = n;
 
 				if (currState == "stepper"){
-					submitform(n, "3f0039000b47363330353437", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(n, "3f0035000547363332363639", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 			}, 100);
 
 			function changeState(){
 				input.value = "0";
-				submitform(0, "3f0039000b47363330353437", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "3f0035000547363332363639", "changeSpd", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				if (index < states.length - 1){
 					index += 1
 				}
