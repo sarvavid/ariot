@@ -88,7 +88,6 @@
 
 	<div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; color: #333; line-height: 30px;">
 		<p id="text">[state]</p>
-		<p id="mark">[marker1 position]</p>
 	</div>
 
 	<div class="movingDiv" style="display: none; z-index: 1; position: absolute; width: 250px; height: 250px;">
@@ -240,7 +239,6 @@
 			if (markerRoot1.visible === true){
 				movingDiv.style.display = ""
 				var proj = toScreenPosition(markerRoot1, camera);
-				document.getElementById("mark").innerHTML = proj.x + ", " + proj.y;
 				movingDiv.style.left = proj.x - movingDiv.offsetWidth/2 + 'px';
 				movingDiv.style.top = proj.y - movingDiv.offsetHeight/2 + 'px';
 			}
