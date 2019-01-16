@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LED test</title>
+		<title>LEDs</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -26,7 +26,7 @@
 		</center>
 		<script type="text/javascript">
 			var stateLabel = document.getElementById("state");
-			var states = ["reg", "rgb"]
+			var states = ["reg", "rgb", "strip"]
 			var index = 0;
 			var currState = states[index];
 
@@ -44,6 +44,9 @@
 				}
 				else if (currState == "rgb"){
 					submitform(n, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				}
+				else if (currState == "strip"){
+					submitform(n, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 			}, 100);
 
