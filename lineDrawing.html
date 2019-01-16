@@ -13,6 +13,7 @@
 			-webkit-animation: changeBGcolor 5s linear infinite alternate;
 			/* Standard syntax */
 			animation: changeBGcolor 5s linear infinite alternate;
+			z-index: -1;
 		}
 		.line{
 			display: none;
@@ -77,6 +78,12 @@
 		  50%  {background-color:yellow;}
 		  75%  {background-color:green;}
 		  100% {background-color:black;}
+		}
+
+		#line{
+		  stroke-width:2px;
+		  stroke:rgb(0,0,0);
+		  z-index: 1;
 		}
 	</style>
 </head>
@@ -180,19 +187,19 @@
 		var down = false;
 		var line = $('#line');
 
-		var x1 = square0.offset().left + (square0.width()/2);
-		var y1 = square0.offset().top + (square0.height()/2);
-		var x2 = square1.offset().left + (square1.width()/2);
-		var y2 = square1.offset().top + (square1.height()/2);
+		var x1 = square0.offsetLeft;
+		var y1 = square0.offsetTop;
+		var x2 = square1.offsetLeft;
+		var y2 = square1.offsetTop;
 
 		square0.onmousedown = function(){
 			down = true;
-			line.attr('x1',x1).attr('y1',y1).attr('x2',x1).attr('y2',y1);
+			line.attr('x1',x1).attr('y1',y1).attr('x2',event.clientX).attr('y2',event.clientY);
 		}
 
 		square0.onmousemove = function(){
 			if (down){
-				line.attr('x1',x1).attr('y1',y1).attr('x2',event.clientX).attr('y2',event.clientY);
+				line.attr('x2',event.clientX).attr('y2',event.clientY);
 			}
 		}
 

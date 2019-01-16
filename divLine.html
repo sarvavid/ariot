@@ -78,8 +78,8 @@
 			function setLine (x0, y0, x1, y1){
 			 	var r = Math.sqrt(Math.pow((x0-x1),2) + Math.pow ((y0-y1),2));
 			 	line.style.transform = "rotate(0deg)";
-			 	line.style.top = 0;
-			 	line.style.left = 20;
+			 	line.style.top = "0px";
+			 	line.style.left = "20px";
 			 	line.setAttribute("style","width:" + r + "px");
 			 	w = arctan(x0, x1, y0, y1);
 			 	line.style.transform = "rotate(" + -w + "rad)";
