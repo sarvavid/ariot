@@ -42,19 +42,15 @@
 				if (currState == "reg"){
 					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
-				else if (currState == "rgb"){
-					submitform(n, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				}
-				else if (currState == "strip"){
-					submitform(n, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				else if (currState == "lcd"){
+					submitform(n, "3f0039000b47363330353437", "changeText", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				}
 			}, 100);
 
 			function changeState(){
 				input.value = "0";
 				submitform(0, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				submitform(0, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				submitform(0, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "3f0039000b47363330353437", "changeText", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 				if (index < states.length - 1){
 					index += 1
 				}
