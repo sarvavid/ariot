@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>LED</title>
+		<title>LED thing</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function submitform( formNum, photonID, funcName, accessToken )
@@ -12,6 +12,18 @@
 				$.post( link, dataObj, function( dataObj ) {
 			  		$( "#result" ).html( JSON.stringify(dataObj) );
 				});
+				return false;
+			}
+
+			function getData( formNum, photonID, funcName, accessToken )
+			{
+				var dataObj = {};
+				dataObj.args = formNum;
+
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				$.getJSON(requestURL, function(json) {
+	         document.getElementById("hi").value = parseInt(json.result);
+	         });
 				return false;
 			}
 		</script>
@@ -37,7 +49,8 @@
 				var ledVal = document.getElementById("ledVal");
 				var hi = document.getElementById("hi");
 				var n = parseInt(ledVal.value);
-				hi.innerHTML = n;
+
+				getData("3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 
 				if (currState == "reg"){
 					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
