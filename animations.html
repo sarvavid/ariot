@@ -45,6 +45,7 @@
 			position: absolute;
 		}
 
+
 		/* Standard syntax */
 		@keyframes spin {
 		  from {
@@ -84,50 +85,64 @@
 
 </head>
 <body>
-	<div class="movingDiv" style="z-index: 1; position: absolute; width: 250px; height: 250px;">
-		<div class = "rings" style="opacity: 0.75; width:300px;height:310px;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
-			<img src = "OuterRing3.png" style="width:100%;height:100%;">
+	<h1>"the value for number is: " <span id="myText"></span></h1>
+	<div class="movingDiv" style="background: black;z-index: 1; position: absolute; width: 300px; height: 300px;">
+		<div class = "dial" style="opacity: 0.75; width:300px;height:310px;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:310px;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
-			<img src = "SecondInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
-			<img src = "ThirdInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
-			<img src = "FourthInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
-			<img src = "FifthInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
+	
 
-		<!-- <div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
+		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
 			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
 			<button style="position:absolute; left: 100px; top: 100px" class="buttonClass" onclick="print()">get input</button>
 		</div>
-		<div class="containerDiv" style="opacity: 0.75;">
+		<!-- <div class="containerDiv" style="opacity: .75;">
 			<div class="spinDiv" style="animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;"></div>
 			<div class="spinDiv"></div>
 		</div> -->
 	</div>
-
 
 	<script>
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
 		movingDiv.style.top = window.innerHeight/2 - movingDiv.offsetHeight/2 + "px";
 
-		var div = document.getElementsByClassName("containerDiv")[0];
-		div.style.left = div.parentElement.offsetWidth/2 - div.offsetWidth/2 + "px";
-		div.style.top = div.parentElement.offsetHeight/2 - div.offsetHeight/2 + "px";
+		for (i = 0; i < 4; i++)
+		{
+		var rings = document.getElementsByClassName("rings")[i];
+		rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
+		rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
+		}
+		
 
-		var spinDiv1 = document.getElementsByClassName("spinDiv")[0];
-		spinDiv1.style.left = spinDiv1.parentElement.offsetWidth/2 - spinDiv1.offsetWidth/2 + "px";
-		spinDiv1.style.top = spinDiv1.parentElement.offsetHeight/2 - spinDiv1.offsetHeight/2 + "px";
+		var dial = document.getElementsByClassName("dial")[0];
+		dial.style.left = dial.parentElement.offsetWidth/2 - dial.offsetWidth/2 + "px";
+		dial.style.top = dial.parentElement.offsetHeight/2 - dial.offsetHeight/2 + "px";
 
-		var spinDiv2 = document.getElementsByClassName("spinDiv")[1];
-		spinDiv2.style.left = spinDiv2.parentElement.offsetWidth/2 - spinDiv2.offsetWidth/2 + "px";
-		spinDiv2.style.top = spinDiv2.parentElement.offsetHeight/2 - spinDiv2.offsetHeight/2 + "px";
+
+		// var div = document.getElementsByClassName("containerDiv")[0];
+		// div.style.left = div.parentElement.offsetWidth/2 - div.offsetWidth/2 + "px";
+		// div.style.top = div.parentElement.offsetHeight/2 - div.offsetHeight/2 + "px";
+
+		// var spinDiv1 = document.getElementsByClassName("spinDiv")[0];
+		// spinDiv1.style.left = spinDiv1.parentElement.offsetWidth/2 - spinDiv1.offsetWidth/2 + "px";
+		// spinDiv1.style.top = spinDiv1.parentElement.offsetHeight/2 - spinDiv1.offsetHeight/2 + "px";
+
+		// var spinDiv2 = document.getElementsByClassName("spinDiv")[1];
+		// spinDiv2.style.left = spinDiv2.parentElement.offsetWidth/2 - spinDiv2.offsetWidth/2 + "px";
+		// spinDiv2.style.top = spinDiv2.parentElement.offsetHeight/2 - spinDiv2.offsetHeight/2 + "px";
 
 		var inputDiv = document.getElementsByClassName("inputDiv")[0];
 		inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
@@ -145,6 +160,23 @@
 
 		movingDiv.onmousedown = function(){
 			canDrag = true;
+			//if the coordinates of the mouse click are in some range of radii from the center point 
+			//then canRotate = true
+		}
+
+		document.onmousedown = function(){
+			centerX = window.innerWidth/2;
+			centerY = Math.floor(window.innerHeight/2);
+			startX = event.clientX;
+			startY = event.clientY;
+
+			distance = ((centerX-startX)**2+(centerY-startY)**2)**.5;
+
+			if (distance >= 115 && distance <= 175)
+			{
+				canRotate = true;
+			}
+
 		}
 
 		document.onmousemove = function(){
@@ -152,19 +184,45 @@
 				movingDiv.style.left = event.clientX - movingDiv.offsetWidth/2 + "px";
 				movingDiv.style.top = event.clientY - movingDiv.offsetHeight/2 + "px";
 			}
+			if (canRotate)
+			{
+				document.getElementById("myText").innerHTML = "yay";
+				currentX = event.clientX;
+				currentY = event.clientY;
+			}
 		}
 
 		document.onmouseup = function(){
 			canDrag = false;
+			canRotate = false;
+			// canRotate = false;
+
 		}
 
+
+
 		function isClose(p1, p2) {
-			return abs(p1 - p1) <= 100
+			return abs(p1 - p1) <= 100;
 		}
 
 		function print(){
 			alert(input.value);
 		}
+
+
+		// function rotate(){
+		// 	centerX = movingDiv.offsetWidth/2
+		// 	centerY = movingDiv.offsetHeight/2
+
+		// 		// find the slope of first line between center to click then slope of second line between center and click
+		// 		// find angle between the lines 
+		// }
+
+
+
+
+			
+		
 	</script>
 </body>
 </html>
