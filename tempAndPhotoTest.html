@@ -1,15 +1,16 @@
 <html>
 	<head>
-		<title>fake sensors</title>
+		<title>photo and temp sensors</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			function getData( photonID, funcName, accessToken )
 			{
+				var currData = "loading...";
 				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
 				$.getJSON(link, function(json) {
-          document.getElementById("result").innerHTML = json.result;
+          currData = json.result;
         });
-				return false;
+				return currData;
 			}
 		</script>
 	</head>
@@ -17,21 +18,30 @@
 		<center>
 			<div id="state"></div><br/>
 			<button type="button" onclick="changeState();">click me</button>
-			<div id="result"></div>
+			<div id="result">0</div>
 			<div id="label"></div>
 		</center>
 		<script type="text/javascript">
 			var stateLabel = document.getElementById("state");
-			var states = ["photo"]
+			var states = ["photo", "temp"]
 			var index = 0;
 			var currState = states[index];
+
+			var photoVal;
+			var tempVal;
 
 			window.setInterval(function(){
 				currState = states[index];
 				stateLabel.innerHTML = currState;
 
+
 				if (currState == "photo"){
-					getData("3f0035000547363332363639", "getVal", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					photoVal = getData("3f0035000547363332363639", "getVal", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					document.getElementById("result").innerHTML = photoVal;
+				}
+				else if (currState == "temp"){
+					tempVal = getData("3f0035000547363332363639", "getTemp", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					document.getElementById("result").innerHTML = tempVal;
 				}
 			}, 100);
 
