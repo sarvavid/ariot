@@ -168,7 +168,7 @@
 		var LEDIndex = 0;
 		var photoTemIndex = 0;
 
-		var currLEDState = "RGB";
+		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
 
 		var canRotate = false
@@ -343,6 +343,7 @@
 				{
 					inputLEDStateRGB.style.display = "none";
 				}
+				
 				inputLEDStateStrip.style.display ="none";
 
 			}
@@ -355,7 +356,7 @@
 					inputLEDStateRGB.style.display = "";
 				}
 
-					inputLEDStateStrip.style.display = "none";
+				inputLEDStateStrip.style.display = "none";
 			}
 			else if (LEDIndex == 2)
 			{
