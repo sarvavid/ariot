@@ -35,7 +35,7 @@
 		}
 	</script>
 
-	<title>Led & PhotoTemp Sensor</title>
+	<title>Led & Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -87,20 +87,20 @@
 		<p id="text"></p>
 	</div>
 
-	<div class="movingDiv" style="z-index: 1; position: absolute; width: 300px; height: 300px;">
-		<div class = "dial" style="opacity: 0.5; width:300px;height:310px;">
+	<div class="movingDiv" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class = "dial" style="opacity: 0.5; width:100%;height:100%;">
 			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
 		</div>
-		<div class = "rings" style="opacity: 0.5;width:300px;height:310px;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
 			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-		<div class = "rings" style="opacity: 0.5;width:300px;height:300px;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
 			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-		<div class = "rings" style="opacity: 0.5;width:300px;height:300px;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
 			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-		<div class = "rings" style="opacity: 0.5;width:300px;height:300px;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
 			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; color: #333;">
@@ -108,17 +108,17 @@
 			<h12 style="color:#333;"> Mode: <span id = "Modes">Intensity</span> </h12> 
 			<br>
 			<div class = "brightnessDiv">
-				Brightness: <input style="width: 75px;" class="inputClass" type="number" value="0">
+				Brightness: <input style="width: 25px; height: 10px" class="inputClass" type="number" value="0">
 			</div>
 
 			<div class = "rgbDiv" style = "display:none">
-				Red: <input style="width: 25px;" class="inputClass2" type="number" value="0">
-				Green: <input style="width: 25px;" class="inputClass2" type="number" value="0">
-				Blue: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+				Red: <input style="width: 25px; height: 10px" class="inputClass2" type="number" value="0">
+				Green: <input style="width: 25px; height: 10px" class="inputClass2" type="number" value="0">
+				Blue: <input style="width: 25px; height: 10px" class="inputClass2" type="number" value="0">
 			</div>
 
 			<div class = "stripDiv" style = "display:none">
-				Hue: <input style="width: 75px;" class="inputClass3" type="number" value="0">
+				Hue: <input style="width: 25px; height: 10px" class="inputClass3" type="number" value="0">
 			</div>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
 
