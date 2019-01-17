@@ -44,7 +44,7 @@
 			}
 	</script>
 
-	<title>Led &&& PhotoTemp Sensor</title>
+	<title>Led & PhotoTemp Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -136,15 +136,23 @@
 
 			<h12 style="color:black;"> Mode: <span id = "Modes">Intensity</span> </h12> 
 			<br>
-			<input style="width: 75px;" class="inputClass" type="number" value="0">
+			<div class = "inputClass">
+			Brightness: <input style="width: 75px;" class="inputClass" type="number" value="0">
+			</div>
 
-			<input style="width: 25px;display: none" class="inputClass2" type="number" value="0">
-			<input style="width: 25px;display: none" class="inputClass2" type="number" value="0">
-			<input style="width: 25px;display: none" class="inputClass2" type="number" value="0">
+			<div class = "inputClass2" style = "display:none">
+			Red: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+			Green: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+			Blue: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+			</div>
 
-			<input style="width: 75px; display:none" class="inputClass3" type="number" value="0">
+			<div class = "inputClass3" style = "display:none">
+			Hue: <input style="width: 75px;" class="inputClass3" type="number" value="0">
+			</div>
+
 			<br>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+
 		</div>
 	</div>
 
