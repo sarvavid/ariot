@@ -254,6 +254,7 @@
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
+			
 			document.getElementById("Modes").innerHTML = " " + currLEDState + " " + LEDIndex; 
 
 			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
