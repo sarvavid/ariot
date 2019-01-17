@@ -26,7 +26,7 @@
 			var index = 0;
 			var currState = states[index];
 
-			var currData = 0;
+			var currData = "loading";
 			var photoVal;
 			var tempVal;
 
@@ -48,7 +48,7 @@
 			}, 100);
 
 			function changeState(){
-				currData = 0;
+				currData = "loading";
 				if (index < states.length - 1){
 					index += 1
 				}
