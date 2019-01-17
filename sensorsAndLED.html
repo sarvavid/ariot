@@ -35,7 +35,7 @@
 		}
 	</script>
 
-	<title>Led & Sensors</title>
+	<title>Led & PhotoTemp Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -243,7 +243,7 @@
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
 
-			document.getElementById("Modes").innerHTML = " " + currLEDState + " " + LEDIndex; 
+			document.getElementById("Modes").innerHTML = " " + currLEDState; 
 
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
 			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
@@ -262,9 +262,9 @@
 					inputLEDStateStripDisplay.style.display ="none";
 				}
 				else if (currLEDState == "RGB"){
-					var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"]
+					var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"];
 					for (var i = 0; i < 3; i++){
-						submitform(inputLEDStateRGBArray[i], caramelApple, rbgFuncs[i], accessCode);
+						submitform(parseInt(inputLEDStateRGBArray[i].value), caramelApple, rbgFuncs[i], accessCode);
 					}
 					//change the display
 					inputLEDStateBrightnessDisplay.style.display = "none";
