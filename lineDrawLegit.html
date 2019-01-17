@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>line drawing</title>
+	<title>line drawing!</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
@@ -226,7 +226,7 @@
 
 		document.onkeydown = function (){
 			if (event.which == 38){
-				movingDiv.style.top = (movingDiv.offsetTop + 1) + "px";
+				movingDiv.style.top = (movingDiv.offsetTop+1) + "px";
 			}
 			if (placed){
 				line.attr('x1', square0.getBoundingClientRect().x + square0.getBoundingClientRect().width/2)
@@ -244,8 +244,9 @@
 
 		}
 
-		square1.onmouseup = square1.ontouchend = square0.onmouseup = square0.ontouchend =function (){
+		square1.onmouseup = square1.ontouchend = square0.onmouseup = square0.ontouchend = function (){
 			placed = true;
+			alert("placed")
 		}
 		
 	</script>
