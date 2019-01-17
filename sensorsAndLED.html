@@ -35,7 +35,7 @@
 		}
 	</script>
 
-	<title>Led & PhotoTemp Sensor</title>
+	<title>Led & Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -245,10 +245,8 @@
 
 			document.getElementById("Modes").innerHTML = " " + currLEDState + " " + LEDIndex; 
 
-			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
-			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
-			var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
-			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
+			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
+			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
 			var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
@@ -256,31 +254,28 @@
 			var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
 
 			if (markerRoot1.visible === true){
-				try{
-					if (currLEDState == "Intensity"){
-						submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
-						//change the display 
-						inputLEDStateBrightnessDisplay.style.display = "";
-						inputLEDStateRGBDisplay.style.display = "none";
-						inputLEDStateStripDisplay.style.display ="none";
-					}
-					else if (currLEDState == "RGB"){
-						submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
-						//change the display
-						inputLEDStateBrightnessDisplay.style.display = "none";
-						inputLEDStateRGBDisplay.style.display = "";
-						inputLEDStateStripDisplay.style.display = "none";
-					}
-					else if (currLEDState == "Strip"){
-						submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
-						//change the display
-						inputLEDStateBrightnessDisplay.style.display = "none";
-						inputLEDStateRGBDisplay.style.display = "none";
-						inputLEDStateStripDisplay.style.display = "";
-					}
+				if (currLEDState == "Intensity"){
+					submitform(parseInt(inputLEDStateReg.value), caramelApple, "changeIntensity", accessCode);
+					//change the display 
+					inputLEDStateBrightnessDisplay.style.display = "";
+					inputLEDStateRGBDisplay.style.display = "none";
+					inputLEDStateStripDisplay.style.display ="none";
 				}
-				catch(err){
-					document.getElementById("text").innerHTML = err.message;
+				else if (currLEDState == "RGB"){
+					for (var i = 0; i < 3; i++){
+						submitform(inputLEDStateRGBArray[i], caramelApple, "changeColor", accessCode);
+					}
+					//change the display
+					inputLEDStateBrightnessDisplay.style.display = "none";
+					inputLEDStateRGBDisplay.style.display = "";
+					inputLEDStateStripDisplay.style.display = "none";
+				}
+				else if (currLEDState == "Strip"){
+					submitform(parseInt(inputLEDStateStrip.value), caramelApple, "changeColorStrip", accessCode);
+					//change the display
+					inputLEDStateBrightnessDisplay.style.display = "none";
+					inputLEDStateRGBDisplay.style.display = "none";
+					inputLEDStateStripDisplay.style.display = "";
 				}
 			}
 		}, 100);
