@@ -281,7 +281,7 @@
 					}
 				}
 				catch(err){
-					document.getElementById("text").innerHeight = "Hardware Error";
+					document.getElementById("text").innerHTML = err.message;
 				}
 			}
 		}, 100);
