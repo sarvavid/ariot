@@ -136,18 +136,18 @@
 
 			<h12 style="color:black;"> Mode: <span id = "Modes">Intensity</span> </h12> 
 			<br>
-			<div class = "inputDiv">
-			Brightness: <input style="width: 75px;" class="inputClass" type="number" value="0">
+			<div class = "brightnessDiv">
+				Brightness: <input style="width: 75px;" class="inputClass" type="number" value="0">
 			</div>
 
-			<div class = "inputDiv2" style = "display:none">
-			Red: <input style="width: 25px;" class="inputClass2" type="number" value="0">
-			Green: <input style="width: 25px;" class="inputClass2" type="number" value="0">
-			Blue: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+			<div class = "rgbDiv" style = "display:none">
+				Red: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+				Green: <input style="width: 25px;" class="inputClass2" type="number" value="0">
+				Blue: <input style="width: 25px;" class="inputClass2" type="number" value="0">
 			</div>
 
 			<div class = "inputDiv3" style = "display:none">
-			Hue: <input style="width: 75px;" class="inputClass3" type="number" value="0">
+				Hue: <input style="width: 75px;" class="inputClass3" type="number" value="0">
 			</div>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
 
@@ -254,7 +254,7 @@
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
-			document.getElementById("Modes").innerHTML = " " + currLEDState +" "+  LEDIndex; 
+			document.getElementById("Modes").innerHTML = " " + currLEDState + " " + LEDIndex; 
 
 			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
 			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
@@ -262,45 +262,30 @@
 			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
-			var inputLEDStateRegDisplay = document.getElementsByClassName("inputDiv")[0];
-			var inputLEDStateRGBDisplay = document.getElementsByClassName("inputDiv2")[0];
+			var inputLEDStateRegDisplay = document.getElementsByClassName("brightnessDiv")[0];
+			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
 			var inputLEDStateStripDisplay = document.getElementsByClassName("inputDiv3")[0];
 
 			if (currLEDState == "Intensity"){
 				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
 				//change the display 
 				inputLEDStateRegDisplay.style.display = "";
-
-				for (i = 0; i <3;i++){
-					inputLEDStateRGBDisplay[i].style.display = "none";
-				}
-
+				inputLEDStateRGBDisplay.style.display = "none";
 				inputLEDStateStripDisplay.style.display ="none";
 
 			}
 			else if (currLEDState == "RGB"){
 				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
-
 				//change the display
 				inputLEDStateRegDisplay.style.display = "none";
-
-				for (i = 0; i <3;i++)
-				{
-					inputLEDStateRGBDisplay[i].style.display = "";
-				}
-
+				inputLEDStateRGBDisplay.style.display = "";
 				inputLEDStateStripDisplay.style.display = "none";
 			}
 			else if (currLEDState == "Strip"){
 				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
-
 				//change the display
 				inputLEDStateRegDisplay.style.display = "none";
-
-				for (i = 0; i <3;i++){
-					inputLEDStateRGBDisplay[i].style.display = "none";
-				}
-
+				inputLEDStateRGBDisplay.style.display = "none";
 				inputLEDStateStripDisplay.style.display = "";
 			}
 		}, 100);
