@@ -250,20 +250,48 @@
 			currPhotoTempState = photoTempStates[photoTemIndex];
 			document.getElementById("Modes").innerHTML = " " + currLEDState +" "+  LEDIndex; 
 
-			// var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
-			// var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
-			// var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
-			// var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
-			// var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
+			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
+			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
+			var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
+			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
+			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
 			if (currLEDState == "Intensity"){
 				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
+				//change the display 
+				inputLEDStateReg.style.display = "";
+
+				for (i = 0; i <3;i++){
+					inputLEDStateRGB[i].style.display = "none";
+				}
+
+				inputLEDStateStrip.style.display ="none";
+
 			}
 			else if (currLEDState == "RGB"){
 				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
+
+				//change the display
+				inputLEDStateReg.style.display = "none";
+
+				for (i = 0; i <3;i++)
+				{
+					inputLEDStateRGB[i].style.display = "";
+				}
+
+				inputLEDStateStrip.style.display = "none";
 			}
 			else if (currLEDState == "Strip"){
 				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
+
+				//change the display
+				inputLEDStateReg.style.display = "none";
+
+				for (i = 0; i <3;i++){
+					inputLEDStateRGB[i].style.display = "none";
+				}
+
+				inputLEDStateStrip.style.display = "";
 			}
 		}, 100);
 
@@ -335,36 +363,8 @@
 			submitform(0, caramelApple, "changeIntensity", accessCode);
 			submitform(0, caramelApple, "changeColor", accessCode);
 			submitform(0, caramelApple, "changeColorStrip", accessCode);
-
-			if (LEDIndex == 0){
-				inputLEDStateReg.style.display = "";
-
-				for (i = 0; i <3;i++){
-					inputLEDStateRGB[i].style.display = "none";
-				}
-
-				inputLEDStateStrip.style.display ="none";
-
-			}
-			else if (LEDIndex == 1){
-				inputLEDStateReg.style.display = "none";
-
-				for (i = 0; i <3;i++)
-				{
-					inputLEDStateRGB[i].style.display = "";
-				}
-
-				inputLEDStateStrip.style.display = "none";
-			}
-			else if (LEDIndex == 2){
-				inputLEDStateReg.style.display = "none";
-
-				for (i = 0; i <3;i++){
-					inputLEDStateRGB[i].style.display = "none";
-				}
-
-				inputLEDStateStrip.style.display = "";
-			}
+			//for some reason not working, although RGB is associated with the Index 1, that index is not appearing
+			//Strip is getting RGB's options
 			
 			if (LEDIndex < LEDStates.length - 1){
 				LEDIndex += 1;
