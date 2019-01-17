@@ -248,9 +248,12 @@
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
+			document.getElementById("Modes").innerHTML = " " + currLEDState; 
 
 			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
 			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
+			var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
+			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
 			if (currLEDState == "Intensity"){
@@ -326,20 +329,18 @@
 
 		function changeState(){
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
-			var inputLEDStateRGB = document.getElementsByClassName("inputClass2")[0];
+			var inputLEDStateRGB = document.getElementsByClassName("inputClass2");
 			var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
 
 			submitform(0, caramelApple, "changeIntensity", accessCode);
 			submitform(0, caramelApple, "changeColor", accessCode);
 			submitform(0, caramelApple, "changeColorStrip", accessCode);
 
-			document.getElementById("Modes").innerHTML = " " + currLEDState; 
-
 			if (LEDIndex == 0){
 				inputLEDStateReg.style.display = "";
 
 				for (i = 0; i <3;i++){
-					inputLEDStateRGB.style.display = "none";
+					inputLEDStateRGB[i].style.display = "none";
 				}
 
 				inputLEDStateStrip.style.display ="none";
@@ -350,7 +351,7 @@
 
 				for (i = 0; i <3;i++)
 				{
-					inputLEDStateRGB.style.display = "";
+					inputLEDStateRGB[i].style.display = "";
 				}
 
 				inputLEDStateStrip.style.display = "none";
@@ -359,7 +360,7 @@
 				inputLEDStateReg.style.display = "none";
 
 				for (i = 0; i <3;i++){
-					inputLEDStateRGB.style.display = "none";
+					inputLEDStateRGB[i].style.display = "none";
 				}
 
 				inputLEDStateStrip.style.display = "";
