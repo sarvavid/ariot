@@ -265,39 +265,39 @@
 				//change the display 
 
 
-				inputLEDStateReg.style.display = "";
+				inputLEDStateRegDisplay.style.display = "";
 
 				for (i = 0; i <3;i++){
-					inputLEDStateRGB[i].style.display = "none";
+					inputLEDStateRGBDisplay[i].style.display = "none";
 				}
 
-				inputLEDStateStrip.style.display ="none";
+				inputLEDStateStripDisplay.style.display ="none";
 
 			}
 			else if (currLEDState == "RGB"){
 				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
 
 				//change the display
-				inputLEDStateReg.style.display = "none";
+				inputLEDStateRegDisplay.style.display = "none";
 
 				for (i = 0; i <3;i++)
 				{
-					inputLEDStateRGB[i].style.display = "";
+					inputLEDStateRGBDisplay[i].style.display = "";
 				}
 
-				inputLEDStateStrip.style.display = "none";
+				inputLEDStateStripDisplay.style.display = "none";
 			}
 			else if (currLEDState == "Strip"){
 				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
 
 				//change the display
-				inputLEDStateReg.style.display = "none";
+				inputLEDStateRegDisplay.style.display = "none";
 
 				for (i = 0; i <3;i++){
-					inputLEDStateRGB[i].style.display = "none";
+					inputLEDStateRGBDisplay[i].style.display = "none";
 				}
 
-				inputLEDStateStrip.style.display = "";
+				inputLEDStateStripDisplay.style.display = "";
 			}
 		}, 100);
 
