@@ -21,15 +21,15 @@
 			var dataObj = {};
 			dataObj.args = formNum;
 
-			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
-			$.post( link, dataObj );
+			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+			$.post( requestURL, dataObj );
 			return false;
 		}
 
 		function getLight( photonID, funcName, accessToken )
 			{
-				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
-				$.getJSON(link, function(json) {
+				let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+				$.getJSON(requestURL, function(json) {
           photoVal = json.result;
         });
 				return false;
@@ -37,8 +37,8 @@
 
 		function getTemp( photonID, funcName, accessToken )
 		{
-			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
-			$.getJSON(link, function(json) {
+			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(requestURL, function(json) {
         tempVal = json.result;
       });
 			return false;
