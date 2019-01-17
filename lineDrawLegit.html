@@ -221,9 +221,7 @@
 		window.onmousemove = window.ontouchmove = function(){
 			if (down){
 				line.attr('x2',event.clientX||event.touches[0].clientX).attr('y2',event.clientY||event.touches[0].clientY);
-
 			}
-
 		}
 
 		document.onkeydown = function (){
@@ -231,9 +229,11 @@
 				movingDiv.style.top = (movingDiv.offsetTop + 1) + "px";
 			}
 			if (placed){
-				line.attr('x1', square0.getBoundingClientRect().x + square0.getBoundingClientRect().width/2).attr('y1',square0.getBoundingClientRect().y + square0.getBoundingClientRect().height/2).attr('x2',square1.getBoundingClientRect().x + square1.getBoundingClientRect().width/2).attr('y2',square1.getBoundingClientRect().y+ square0.getBoundingClientRect().height/2);
+				line.attr('x1', square0.getBoundingClientRect().x + square0.getBoundingClientRect().width/2)
+					  .attr('y1',square0.getBoundingClientRect().y + square0.getBoundingClientRect().height/2)
+					  .attr('x2',square1.getBoundingClientRect().x + square1.getBoundingClientRect().width/2)
+					  .attr('y2',square1.getBoundingClientRect().y+ square0.getBoundingClientRect().height/2);
 			}
-
 		}
 
 		window.onmouseup = window.ontouchend = function(){
