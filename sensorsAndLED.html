@@ -312,12 +312,14 @@
 			if (markerRoot2.visible === true){
 				if (currPhotoTempState == "photo"){
 					light = getData(friedOnion, "getVal", accessCode);
+					photoDisplay.innerHTML = light;
 					//change the display 
 					photoDisplay.style.display = "";
 					tempDisplay.style.display = "none";
 				}
 				else if (currPhotoTempState == "temp"){
 					temp = getData(friedOnion, "getTemp", accessCode);
+					tempDisplay.innerHTML = temp;
 					//change the display 
 					photoDisplay.style.display = "none";
 					tempDisplay.style.display = "";
