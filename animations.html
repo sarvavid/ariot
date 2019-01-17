@@ -37,11 +37,13 @@
 		}
 
 		.inputDiv {
+			width: 300px;
+			height: 60px;
 		  border-style: solid;
 		  border-width: 5px;
+		 
 		  border-color: white;
-			width: 200px;
-			height: 200px;
+			
 			position: absolute;
 		}
 
@@ -53,7 +55,7 @@
 		    -o-transition: all 0.5s ease-in-out;
 		    transition: all 0.5s ease-in-out;
 		}
-
+		
 
 		/* Standard syntax */
 		@keyframes spin {
@@ -113,9 +115,21 @@
 		</div>
 	
 
-		<div class="inputDiv" style="z-index: 1; position: absolute; width: 130px; height: 28px;">
-			<input style="position:absolute; width: 50px;" class="inputClass" type="text" value="Hello">
-			<button style="position:absolute; left: 100px; top: 100px" class="buttonClass" onclick="print()">get input</button>
+		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; background: white; opacity: .75">
+
+			<h12 style="color:black;"> Mode: <span id = "Modes">RGB</span> </h12> 
+			<br>
+			<input style="width: 75px; auto; display: none" class="inputClass" type="number" value="0">
+
+
+			<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
+			<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
+			<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
+
+			<input style="width: 75px; auto; display:none" class="inputClass3" type="number" value="0">
+			<br>
+			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+
 		</div>
 		<!-- <div class="containerDiv" style="opacity: .75;">
 			<div class="spinDiv" style="animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;"></div>
@@ -124,6 +138,8 @@
 	</div>
 
 	<script>
+		var states = ["changeIntensity", "changeColor", "changeColorStrip"]
+
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
 		movingDiv.style.top = window.innerHeight/2 - movingDiv.offsetHeight/2 + "px";
@@ -167,9 +183,15 @@
 		button.style.left = input.offsetWidth + 10 + "px";
 		button.style.top = input.style.top;
 
-		canDrag = false
-		canRotate = false
-
+		var canDrag = false
+		var canRotate = false
+		var angleRad = 0
+		var angleDeg = 0
+		
+		var states = ["Intensity", "RGB", "Strip"]
+		var index = 0;
+		var currState = "RGB";
+		var input;
 
 		movingDiv.onmousedown = function(){
 			startX = event.clientX;
@@ -219,7 +241,7 @@
 		}
 
 		document.onmouseup = function(){
-			alert("up")
+			
 			canDrag = false;
 			canRotate = false;
 			// canRotate = false;
@@ -253,24 +275,88 @@
 
 				costheta = dotp/magP;
 
-				angleRad = Math.acos(costheta);
+				angleRad = Math.acos(costheta) - angleRad;
 
-				R2D = 180/2* Math.PI;
+				R2D = 360/(2* Math.PI);
 
-				angleDeg = angleRad*R2D
+				angleDeg = Math.abs(angleRad*R2D)
 
 				dial.style.webkitTransform = 'rotate('+angleDeg+'deg)'; 
 			    dial.style.mozTransform    = 'rotate('+angleDeg+'deg)'; 
 			    dial.style.msTransform     = 'rotate('+angleDeg+'deg)'; 
 			    dial.style.oTransform      = 'rotate('+angleDeg+'deg)'; 
 			    dial.style.transform       = 'rotate('+angleDeg+'5deg)'; 
-				document.getElementById("myText").innerHTML = " distance: "+distance+" yay "+" | "+ angleDeg;
+				document.getElementById("myText").innerHTML = " distance: "+distance+" yay "+" | "+ "deg: "+ angleDeg+" | rad: "+angleRad;
 				 
 				// find the slope of first line between center to click then slope of second line between center and click
 				// find angle between the lines 
 		}
 
+function changeState(){
+			var input = document.getElementsByClassName("inputClass")[0];
+			input.value = "0";
+			// submitform(0, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+			// submitform(0, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+			// submitform(0, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 
+
+			currState = states[index]
+			document.getElementById("Modes").innerHTML = " "+currState 
+			if (index == 0)
+			{
+				input = document.getElementsByClassName("inputClass")[0];
+				input.style.display = "";
+
+				for (i = 0; i <3;i++)
+					{
+					input = document.getElementsByClassName("inputClass2")[i];
+					input.style.display = "none";
+					}
+
+				input = document.getElementsByClassName("inputClass3")[0];
+				input.style.display ="none";
+
+			}
+			else if (index == 1)
+			{
+					input = document.getElementsByClassName("inputClass")[0];
+					input.style.display = "none";
+
+					for (i = 0; i <3;i++)
+						{
+						input = document.getElementsByClassName("inputClass2")[i];
+						input.style.display = "";
+						}
+
+					input = document.getElementsByClassName("inputClass3")[0];
+					input.style.display = "none";
+			}
+			else if (index ==2)
+			{
+				input = document.getElementsByClassName("inputClass")[0];
+				input.style.display = "none";
+
+				for (i = 0; i <3;i++)
+					{
+					input = document.getElementsByClassName("inputClass2")[i];
+					input.style.display = "none";
+					}
+
+				input = document.getElementsByClassName("inputClass3")[0];
+				input.style.display = "";
+			}
+			
+			if (index < states.length - 1){
+				index += 1;
+			}
+			else{
+				index = 0;
+			}
+				
+			
+
+			// document.getElementById("text").innerHTML = index;
+		}
 			
 		
 	</script>
