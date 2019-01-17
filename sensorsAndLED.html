@@ -113,7 +113,7 @@
 <body style="margin: 0px; overflow: hidden; position: fixed; font-family: Monospace; z-index: -1;">
 
 	<div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; color: #333; line-height: 30px;">
-		<p id="text">[state]</p>
+		<p id="text"></p>
 	</div>
 
 	<div class="movingDiv" style="z-index: 1; position: absolute; width: 300px; height: 300px;">
@@ -266,27 +266,34 @@
 			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
 			var inputLEDStateStripDisplay = document.getElementsByClassName("inputDiv3")[0];
 
-			if (currLEDState == "Intensity"){
-				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
-				//change the display 
-				inputLEDStateBrightnessDisplay.style.display = "";
-				inputLEDStateRGBDisplay.style.display = "none";
-				inputLEDStateStripDisplay.style.display ="none";
+			if (markerRoot1.visible === true){
+				try{
+					if (currLEDState == "Intensity"){
+						submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
+						//change the display 
+						inputLEDStateBrightnessDisplay.style.display = "";
+						inputLEDStateRGBDisplay.style.display = "none";
+						inputLEDStateStripDisplay.style.display ="none";
 
-			}
-			else if (currLEDState == "RGB"){
-				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
-				//change the display
-				inputLEDStateBrightnessDisplay.style.display = "none";
-				inputLEDStateRGBDisplay.style.display = "";
-				inputLEDStateStripDisplay.style.display = "none";
-			}
-			else if (currLEDState == "Strip"){
-				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
-				//change the display
-				inputLEDStateBrightnessDisplay.style.display = "none";
-				inputLEDStateRGBDisplay.style.display = "none";
-				inputLEDStateStripDisplay.style.display = "";
+					}
+					else if (currLEDState == "RGB"){
+						submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
+						//change the display
+						inputLEDStateBrightnessDisplay.style.display = "none";
+						inputLEDStateRGBDisplay.style.display = "";
+						inputLEDStateStripDisplay.style.display = "none";
+					}
+					else if (currLEDState == "Strip"){
+						submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
+						//change the display
+						inputLEDStateBrightnessDisplay.style.display = "none";
+						inputLEDStateRGBDisplay.style.display = "none";
+						inputLEDStateStripDisplay.style.display = "";
+					}
+				}
+				catch(err){
+					document.getElementById("text").innerHeight = "Hardware Error";
+				}
 			}
 		}, 100);
 
