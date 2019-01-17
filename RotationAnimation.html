@@ -37,8 +37,8 @@
 		}
 
 		.inputDiv {
-			width: 150px;
-			height: 30px;
+			width: 300px;
+			height: 60px;
 		  border-style: solid;
 		  border-width: 5px;
 		 
@@ -92,15 +92,17 @@
 		position: absolute;
 		
 	}
-</style>
+	
 
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>    
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+<script src="RotationJs.js"></script>
 </head>
 <body>
+
 	<h1>"the value for number is: " <span id="myText"></span></h1>
-	<div class="movingDiv" style="background: black;z-index: 1; position: absolute; width: 300px; height: 300px;">
-		<div class = "dial" style="opacity: 0.75; width:300px;height:310px;">
-			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
-		</div>
+	<div class="movingDiv" style="background: black;z-index: 1; position: absolute; width: 300px; height: 300px; ">
 		<div class = "rings" style="opacity: 0.75;width:300px;height:310px;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
 			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
 		</div>
@@ -113,7 +115,9 @@
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
 			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-	
+		<div class = "dial" style="opacity: 0.75; width:300px;height:310px;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
 
 		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; background: white; opacity: .75">
 
@@ -139,14 +143,11 @@
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
 
 		</div>
-		<!-- <div class="containerDiv" style="opacity: .75;">
-			<div class="spinDiv" style="animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;"></div>
-			<div class="spinDiv"></div>
-		</div> -->
 	</div>
 
 	<script>
-		var states = ["changeIntensity", "changeColor", "changeColorStrip"]
+
+		//formatting for the target icon
 
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
@@ -160,24 +161,10 @@
 		rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
 		rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
 		}
-		
 
 		var dial = document.getElementsByClassName("dial")[0];
 		dial.style.left = dial.parentElement.offsetWidth/2 - dial.offsetWidth/2 + "px";
 		dial.style.top = dial.parentElement.offsetHeight/2 - dial.offsetHeight/2 + "px";
-
-
-		// var div = document.getElementsByClassName("containerDiv")[0];
-		// div.style.left = div.parentElement.offsetWidth/2 - div.offsetWidth/2 + "px";
-		// div.style.top = div.parentElement.offsetHeight/2 - div.offsetHeight/2 + "px";
-
-		// var spinDiv1 = document.getElementsByClassName("spinDiv")[0];
-		// spinDiv1.style.left = spinDiv1.parentElement.offsetWidth/2 - spinDiv1.offsetWidth/2 + "px";
-		// spinDiv1.style.top = spinDiv1.parentElement.offsetHeight/2 - spinDiv1.offsetHeight/2 + "px";
-
-		// var spinDiv2 = document.getElementsByClassName("spinDiv")[1];
-		// spinDiv2.style.left = spinDiv2.parentElement.offsetWidth/2 - spinDiv2.offsetWidth/2 + "px";
-		// spinDiv2.style.top = spinDiv2.parentElement.offsetHeight/2 - spinDiv2.offsetHeight/2 + "px";
 
 		var inputDiv = document.getElementsByClassName("inputDiv")[0];
 		inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
@@ -191,30 +178,20 @@
 		button.style.left = input.offsetWidth + 10 + "px";
 		button.style.top = input.style.top;
 
-		var canDrag = false
+		//initial variables for rotation
 		var canRotate = false
 		var angleRad = 0
 		var angleDeg = 0
 		
+		//initial variables for changing states
 		var states = ["Intensity", "RGB", "Strip"]
 		var index = 0;
 		var currState = "RGB";
 		var input;
 
+		//mouse stuff for rotation
 		movingDiv.onmousedown = function(){
-			startX = event.clientX;
-			startY = event.clientY;
-
-			distance = ((centerX-startX)**2+(centerY-startY)**2)**.5;
-			if (distance < 115)
-			{
-			canDrag = true;
-		}
-			//if the coordinates of the mouse click are in some range of radii from the center point 
-			//then canRotate = true
-		}
-
-		document.onmousedown = function(){
+			var anglePrev= 0;
 			startX = event.clientX;
 			startY = event.clientY;
 
@@ -229,43 +206,24 @@
 		}
 
 		document.onmousemove = function(){
-			if (canDrag){
-				movingDiv.style.left = event.clientX - movingDiv.offsetWidth/2 + "px";
-				movingDiv.style.top = event.clientY - movingDiv.offsetHeight/2 + "px";
-				centerX = event.clientX 
-				centerY = event.clientY
-
-			}
 			if (canRotate)
 			{
 				document.getElementById("myText").innerHTML = centerX +", " + centerY+"  |  " + startX+", "+ startY+"  |  "+" distance: "+distance+"yay";
 				currentX = event.clientX;
 				currentY = event.clientY;
 				rotate()
-				
-
 
 			}
+		
 		}
 
 		document.onmouseup = function(){
 			
-			canDrag = false;
 			canRotate = false;
-			// canRotate = false;
 
 		}
 
-
-
-		function isClose(p1, p2) {
-			return abs(p1 - p1) <= 100;
-		}
-
-		function print(){
-			alert(input.value);
-		}
-
+		var totalAngle = 0;
 
 		function rotate(){
 				slopeAX = currentX-centerX;
@@ -283,18 +241,34 @@
 
 				costheta = dotp/magP;
 
-				angleRad = Math.acos(costheta) - angleRad;
+				angleRad= Math.acos(costheta);
+				angleDeg = (angleRad * (180 / Math.PI));
 
-				R2D = 360/(2* Math.PI);
+				crossP = (slopeBX*slopeAY)-(slopeAX*slopeBY)//B cross A
 
-				angleDeg = Math.abs(angleRad*R2D)
+				//if you go clockwise, cross should be negative
+				//if you go counter cross should be positive
+				//if you get to where you started or at 180 should be 0
+				if (crossP > 0)
+				{
+					angleDeg = 360-angleDeg;
 
-				dial.style.webkitTransform = 'rotate('+angleDeg+'deg)'; 
-			    dial.style.mozTransform    = 'rotate('+angleDeg+'deg)'; 
-			    dial.style.msTransform     = 'rotate('+angleDeg+'deg)'; 
-			    dial.style.oTransform      = 'rotate('+angleDeg+'deg)'; 
-			    dial.style.transform       = 'rotate('+angleDeg+'5deg)'; 
-				document.getElementById("myText").innerHTML = " distance: "+distance+" yay "+" | "+ "deg: "+ angleDeg+" | rad: "+angleRad;
+				}
+
+				totalAngle += angleDeg
+
+		
+				// anglePrev = angleRad -anglePrev ;
+
+				 //angle compared to starting. point 
+
+
+				dial.style.webkitTransform = 'rotate('+totalAngle+'deg)'; 
+			    dial.style.mozTransform    = 'rotate('+totalAngle+'deg)'; 
+			    dial.style.msTransform     = 'rotate('+totalAngle+'deg)'; 
+			    dial.style.oTransform      = 'rotate('+totalAngle+'deg)'; 
+			    dial.style.transform       = 'rotate('+totalAngle+'5deg)'; 
+				document.getElementById("myText").innerHTML = " distance: "+distance+" yay "+" | "+ "deg: "+ totalAngle+" | rad: "+angleRad;
 				 
 				// find the slope of first line between center to click then slope of second line between center and click
 				// find angle between the lines 
@@ -368,5 +342,7 @@ function changeState(){
 			
 		
 	</script>
+
+
 </body>
 </html>

@@ -117,14 +117,14 @@
 
 		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; background: white; opacity: .75">
 
-			<h12 style="color:black;"> Mode: <span id = "Modes">temp</span> </h12> 
+			<h12 style="color:black;"> Mode: <span id = "Modes">Clock</span> </h12> 
 			<br>
-			<div class = "temp">
-			<span class = "temp">temp</span> <!-- edit the inner html -->
+			<div class = "clock">
+			<span class = "clock">clock</span> <!-- edit the inner html -->
 			</div>
 
-			<div class = "light" style = "display: none">
-			<span class = "light">light</span>
+			<div class = "pot" style = "display: none">
+			<span class = "pot">pot</span>
 			</div>
 
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
@@ -137,7 +137,7 @@
 	</div>
 
 	<script>
-		var states = ["Temperature", "Light"]
+		var states = ["Clock", "Potentiometer"]
 
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
@@ -163,7 +163,7 @@
 		button.style.left = inputDiv.offsetWidth/2+ "px";
 		button.style.top = inputDiv.offsetHeight/2+ "px"
 		
-		var currState = "Temperature"
+		var currState = "Clock"
 		var index = 0
 
 function changeState(){
@@ -171,23 +171,23 @@ function changeState(){
 			document.getElementById("Modes").innerHTML = " "+currState 
 			if (index == 0)
 			{
-				input = document.getElementsByClassName("temp")[0]
+				input = document.getElementsByClassName("clock")[0]
 				input.style.display = "";
-				input.innerHTML = "temp variable"//here you can add your variable
+				input.innerHTML = "clock variable"//here you can add your variable
 
-				input = document.getElementsByClassName("light")[0]
+				input = document.getElementsByClassName("pot")[0]
 				input.style.display = "none";
 
 
 			}
 			else if (index == 1)
 			{
-				input = document.getElementsByClassName("temp")[0]
+				input = document.getElementsByClassName("clock")[0]
 				input.style.display = "none";
 
 
-				input = document.getElementsByClassName("light")[0]
-				input.innerHTML = "light variable"  //here you can add your variable
+				input = document.getElementsByClassName("pot")[0]
+				input.innerHTML = "pot variable"  //here you can add your variable
 				input.style.display = "";
 
 			}
@@ -197,8 +197,6 @@ function changeState(){
 			else{
 				index = 0;
 			}
-				
-			
 
 			// document.getElementById("text").innerHTML = index;
 		}
