@@ -56,6 +56,11 @@
 		  border-color: black;
 		  border-radius: 25px;
 			position: absolute;
+			z-index: 1; 
+			position: absolute; 
+			text-align: center; 
+			align-items: center; 
+			color: #585858
 		}
 
 		.dial{
@@ -103,7 +108,7 @@
 		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
 			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; color: #585858;">
+		<div class="inputDiv">
 
 			<h12> Mode: <span id = "Modes">Intensity</span> </h12> 
 			<br>
@@ -141,12 +146,12 @@
 		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
 			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
-		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; background: white; opacity: .75">
+		<div class="inputDiv">
 
-			<h12 style="color:black;"> Mode: <span id = "Modes">temp</span> </h12> 
+			<h12> Mode: <span id = "Modes">temp</span> </h12> 
 			<br>
-			<span id = "temp">temp</span> <!-- edit the inner html -->
-			<span id = "light" style = "display:none">light</span>
+			Light: <span id = "lightLabel">light</span>
+			Temperature: <span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
 			<br>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
 
@@ -169,6 +174,9 @@
 		var LEDIndex = 0;
 		var photoTemIndex = 0;
 
+		var light;
+		var temperature;
+
 		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
 
@@ -177,6 +185,7 @@
 		var angleDeg = 0;
 
 		var caramelApple = "3f0039000b47363330353437";
+		var friedOnion = "3f0035000547363332363639";
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
 
 		// ========================================== Run Main Functions =========================================== //
@@ -271,6 +280,9 @@
 			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
 			var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
 
+			var photoDisplay = document.getElementsByClassName("photoLabel")[0];
+			var tempDisplay = document.getElementsByClassName("tempLabel")[0];
+
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
 					submitform(parseInt(inputLEDStateReg.value), caramelApple, "changeIntensity", accessCode);
@@ -295,6 +307,20 @@
 					inputLEDStateBrightnessDisplay.style.display = "none";
 					inputLEDStateRGBDisplay.style.display = "none";
 					inputLEDStateStripDisplay.style.display = "";
+				}
+			}
+			if (markerRoot2.visible === true){
+				if (currPhotoTempState == "photo"){
+					light = getData(friedOnion, "getVal", accessCode);
+					//change the display 
+					photoDisplay.style.display = "";
+					tempDisplay.style.display = "none";
+				}
+				else if (currPhotoTempState == "temp"){
+					temp = getData(friedOnion, "getTemp", accessCode);
+					//change the display 
+					photoDisplay.style.display = "none";
+					tempDisplay.style.display = "";
 				}
 			}
 		}, 100);
