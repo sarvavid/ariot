@@ -5,7 +5,7 @@
 		<script type="text/javascript">
 			function getData( photonID, funcName, accessToken )
 			{
-				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
 				$.getJSON(link, function(json) {
           currData = json.result;
         });
