@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>line drawing</title>
+	<title>line drawing!!</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
@@ -242,15 +242,15 @@
 				line.attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',0);
 			}
 
+			var changedTouch = event.changedTouches[0];
+    	var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
+    	if (elem == square1 || elem == square0){
+    		placed = true;
+    	}
 		}
 
 		square1.onmouseup = square0.onmouseup = function (){
 			placed = true;
-			alert("ijjijc")
-		}
-		square1.ontouchend = square0.ontouchend = function (){
-			placed = true;
-			alert("HI")
 		}
 		
 	</script>
