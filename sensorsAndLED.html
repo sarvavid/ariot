@@ -26,10 +26,10 @@
 			return false;
 		}
 
-		function getData( photonID, funcName, accessToken )
+		function getData( photonID, varName, accessToken )
 			{
 				var data;
-				let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+				let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + varName + "?access_token=" + accessToken;
 				$.getJSON(requestURL, function(json) {
           data = json.result;
         });
