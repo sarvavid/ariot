@@ -332,8 +332,6 @@
 			for (var i = 0; i < movingDivs.length; i++){
 				movingDiv[i].style.left = window.innerWidth/2 - movingDiv[i].offsetWidth/2 + "px";
 				movingDiv[i].style.top = window.innerHeight/2 - movingDiv[i].offsetHeight/2 + "px";
-				centerX = window.innerWidth/2;
-				centerY = window.innerHeight/2;
 
 				for (var j = 0; j < 4; j++)
 				{
@@ -362,7 +360,7 @@
 				movingDivs[0].style.top = proj.y - movingDivs[0].offsetHeight/2 + 'px';
 				movingDivs[1].style.display = "none"
 			}
-			else if (markerRoot2.visible === true){
+			if (markerRoot2.visible === true){
 				movingDivs[1].style.display = ""
 				var proj = toScreenPosition(markerRoot1, camera);
 				movingDivs[1].style.left = proj.x - movingDivs[1].offsetWidth/2 + 'px';
