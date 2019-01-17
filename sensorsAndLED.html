@@ -136,17 +136,17 @@
 
 			<h12 style="color:black;"> Mode: <span id = "Modes">Intensity</span> </h12> 
 			<br>
-			<div class = "inputClass">
+			<div class = "inputDiv">
 			Brightness: <input style="width: 75px;" class="inputClass" type="number" value="0">
 			</div>
 
-			<div class = "inputClass2" style = "display:none">
+			<div class = "inputDiv2" style = "display:none">
 			Red: <input style="width: 25px;" class="inputClass2" type="number" value="0">
 			Green: <input style="width: 25px;" class="inputClass2" type="number" value="0">
 			Blue: <input style="width: 25px;" class="inputClass2" type="number" value="0">
 			</div>
 
-			<div class = "inputClass3" style = "display:none">
+			<div class = "inputDiv3" style = "display:none">
 			Hue: <input style="width: 75px;" class="inputClass3" type="number" value="0">
 			</div>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
@@ -262,15 +262,13 @@
 			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
-			inputLEDStateRegDisplay = document.getElementsByClassName("inputClass")[0];
-			inputLEDStateRGBDisplay = document.getElementsByClassName("inputClass2");
-			inputLEDStateStripDisplay = document.getElementsByClassName("inputClass3")[0];
+			var inputLEDStateRegDisplay = document.getElementsByClassName("inputDiv")[0];
+			var inputLEDStateRGBDisplay = document.getElementsByClassName("inputDiv2");
+			var inputLEDStateStripDisplay = document.getElementsByClassName("inputDiv3")[0];
 
 			if (currLEDState == "Intensity"){
 				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
 				//change the display 
-
-
 				inputLEDStateRegDisplay.style.display = "";
 
 				for (i = 0; i <3;i++){
