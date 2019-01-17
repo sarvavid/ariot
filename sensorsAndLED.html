@@ -110,7 +110,7 @@
 		</div>
 		<div class="inputDiv">
 
-			<h12> Mode: <span id = "Modes">Intensity</span> </h12> 
+			<h12> Mode: <span id = "LEDModes">Intensity</span> </h12> 
 			<br>
 			<div class = "brightnessDiv">
 				Brightness: <input style="width: 35px; height: 10px" class="inputClass" type="number" value="0">
@@ -148,9 +148,9 @@
 		</div>
 		<div class="inputDiv">
 
-			<h12> Mode: <span id = "Modes">temp</span> </h12> 
+			<h12> Mode: <span id = "PhotoTempModes">temp</span> </h12> 
 			<br>
-			Light: <span id = "lightLabel">light</span>
+			Light: <span id = "photoLabel">light</span>
 			Temperature: <span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
 			<br>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
@@ -270,7 +270,8 @@
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
 
-			document.getElementById("Modes").innerHTML = " " + currLEDState; 
+			document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
+			document.getElementById("PhotoTempModes").innerHTML = " " + currPhotoTempState;
 
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
 			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
@@ -281,6 +282,7 @@
 			var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
 
 			var photoDisplay = document.getElementsByClassName("photoLabel")[0];
+			photoDisplay.innerHTML = "o"
 			var tempDisplay = document.getElementsByClassName("tempLabel")[0];
 
 			if (markerRoot1.visible === true){
@@ -345,8 +347,8 @@
 				inputDiv.style.top = inputDiv.parentElement.offsetHeight/2 - inputDiv.offsetHeight/2 + "px";
 
 				var button = document.getElementsByClassName("buttonClass")[i];
-				button.style.left = input.offsetWidth + 10 + "px";
-				button.style.top = input.style.top;
+				button.style.left = inputDiv.offsetWidth + 10 + "px";
+				button.style.top = inputDiv.style.top;
 			}
 
 			if (markerRoot1.visible === true){
