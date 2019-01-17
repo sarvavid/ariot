@@ -8,7 +8,7 @@
 				var dataObj = {};
 				dataObj.args = formNum;
 
-				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
 				$.post( link, dataObj, function( dataObj ) {
 			  		$( "#result" ).html( JSON.stringify(dataObj) );
 				});
@@ -17,7 +17,7 @@
 
 			function getData( photonID, funcName, accessToken )
 			{
-				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
 				$.getJSON(link, function(json) {
           document.getElementById("label").innerHTML = json.result;
         });
