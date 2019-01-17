@@ -44,7 +44,7 @@
 			}
 	</script>
 
-	<title>Led && PhotoTemp Sensor</title>
+	<title>Led and PhotoTemp Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -325,9 +325,9 @@
 		};
 
 		function changeState(){
-			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
-			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
-			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
+			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
+			var inputLEDStateRGB = document.getElementsByClassName("inputClass2")[0];
+			var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
 
 			submitform(0, caramelApple, "changeIntensity", accessCode);
 			submitform(0, caramelApple, "changeColor", accessCode);
