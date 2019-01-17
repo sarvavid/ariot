@@ -222,37 +222,24 @@
 		// line.attr('x1',0).attr('y1',115).attr('x2',0).attr('y2',0);
 		// console.log (line.attr("x1"), line.attr("y1"));
 		// console.log (square0.offsetLeft, square0.offsetTop);
-var i = 0;
-		for ( j = 0; i < squareArr.length; i++) {
-			i = j;
-			squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
-			down = true;
-			placed = false;
-			line.attr('x1', squareArr[i].getBoundingClientRect().x + squareArr[i].getBoundingClientRect().width/2).attr('y1',squareArr[i].getBoundingClientRect().y + squareArr[i].getBoundingClientRect().height/2).attr('x2',squareArr[i].getBoundingClientRect().x + squareArr[i].getBoundingClientRect().width/2).attr('y2',squareArr[i].getBoundingClientRect().y+ squareArr[i].getBoundingClientRect().height/2);
-			}
-			squareArr[i].onmouseup = squareArr[i].ontouchend = function(){
-				placed = true;
-			}
-			
 
-			
+		for (i = 0; i < squareArr.length; i++) {
+			squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
+				down = true;
+				placed = false;
+				x1 = event.clientX;
+				y1 = event.clientY;
+				line.attr('x1',x1).attr('y1',y1).attr('x2',x1).attr('y2',y1);
+			}
 		}
 
-		window.onmousemove  = function(){
+		window.onmousemove = window.ontouchmove = function(){
 			if (down){
 				line.attr('x2',event.clientX).attr('y2',event.clientY);
 				console.log(line.attr("x1"));
 				console.log(line.attr("x2"), "line");
 			}
 
-		}
-
-		window.ontouchmove = function(){
-			if (down){
-				line.attr('x2',event.touches[0].clientX).attr('y2',event.event.touches[0].clientY);
-				console.log(line.attr("x1"));
-				console.log(line.attr("x2"), "line");
-			}
 		}
 
 //same shit as when you move
@@ -268,17 +255,20 @@ var i = 0;
 
 		}
 
-		window.onmouseup = window.ontouchend = function(){
+		window.onmouseup = window.ontouchend= function(){
 			down = false;
 			if (!placed) {
 				line.attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',0);
-				console.log(09900990);
 			}
 
 		}
 
-
-		
+		square1.onmouseup = function (){
+			placed = true;
+		}
+		square0.onmouseup = function (){
+			placed = true;
+		}
 		
 	</script>
 </body>
