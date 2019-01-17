@@ -5,12 +5,11 @@
 		<script type="text/javascript">
 			function getData( photonID, funcName, accessToken )
 			{
-				var currData = "loading...";
 				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
 				$.getJSON(link, function(json) {
           currData = json.result;
         });
-				return currData;
+				return false;
 			}
 		</script>
 	</head>
@@ -27,6 +26,7 @@
 			var index = 0;
 			var currState = states[index];
 
+			var currData = 0;
 			var photoVal;
 			var tempVal;
 
@@ -36,16 +36,19 @@
 
 
 				if (currState == "photo"){
-					photoVal = getData("3f0035000547363332363639", "getVal", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					getData("3f0035000547363332363639", "getVal", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					photoVal = currData;
 					document.getElementById("result").innerHTML = photoVal;
 				}
 				else if (currState == "temp"){
-					tempVal = getData("3f0035000547363332363639", "getTemp", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					getData("3f0035000547363332363639", "getTemp", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					tempVal = currData;
 					document.getElementById("result").innerHTML = tempVal;
 				}
 			}, 100);
 
 			function changeState(){
+				currData = "loading";
 				if (index < states.length - 1){
 					index += 1
 				}
