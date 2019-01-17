@@ -35,7 +35,7 @@
 		}
 	</script>
 
-	<title>Led & PhotoTemp Sensorzzz</title>
+	<title>Led & PhotoTemp Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -358,17 +358,17 @@
 				var proj = toScreenPosition(markerRoot1, camera);
 				movingDivs[0].style.left = proj.x - movingDivs[0].offsetWidth/2 + 'px';
 				movingDivs[0].style.top = proj.y - movingDivs[0].offsetHeight/2 + 'px';
-				movingDivs[1].style.display = "none"
+			}
+			else{
+				movingDivs[0].style.display = "none"
 			}
 			if (markerRoot2.visible === true){
 				movingDivs[1].style.display = ""
 				var proj = toScreenPosition(markerRoot1, camera);
 				movingDivs[1].style.left = proj.x - movingDivs[1].offsetWidth/2 + 'px';
 				movingDivs[1].style.top = proj.y - movingDivs[1].offsetHeight/2 + 'px';
-				movingDivs[0].style.display = "none"
 			}
 			else {
-				movingDivs[0].style.display = "none"
 				movingDivs[1].style.display = "none"
 			}
 		});
