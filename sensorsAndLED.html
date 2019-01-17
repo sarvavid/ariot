@@ -24,6 +24,7 @@
 			$.post( link, dataObj );
 			return false;
 		}
+
 		function getLight( photonID, funcName, accessToken )
 			{
 				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
@@ -191,6 +192,9 @@
 		var angleRad = 0
 		var angleDeg = 0
 
+		var caramelApple = "3f0039000b47363330353437";
+		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
+
 		init();
 		animate();
 
@@ -267,13 +271,13 @@
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
 			if (currLEDState == "Intensity"){
-				submitform(inputLEDStateReg, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
 			}
 			else if (currLEDState == "RGB"){
-				submitform(inputLEDStateRGB, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
 			}
 			else if (currLEDState == "Strip"){
-				submitform(inputLEDStateStrip, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
 			}
 		}, 100);
 
@@ -342,9 +346,9 @@
 			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
-			submitform(0, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-			submitform(0, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-			submitform(0, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+			submitform(0, caramelApple, "changeIntensity", accessCode);
+			submitform(0, caramelApple, "changeColor", accessCode);
+			submitform(0, caramelApple, "changeColorStrip", accessCode);
 
 			currLEDState = LEDStates[LEDIndex]
 
