@@ -16,8 +16,7 @@
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
-		function submitform( formNum, photonID, funcName, accessToken )
-		{
+		function submitform( formNum, photonID, funcName, accessToken ){
 			var dataObj = {};
 			dataObj.args = formNum;
 
@@ -26,15 +25,14 @@
 			return false;
 		}
 
-		function getData( photonID, varName, accessToken )
-			{
-				var data;
-				let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + varName + "?access_token=" + accessToken;
-				$.getJSON(requestURL, function(json) {
-          data = json.result;
-        });
-				return data;
-			}
+		function getData( photonID, varName, accessToken ){
+			var data;
+			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + varName + "?access_token=" + accessToken;
+			$.getJSON(requestURL, function(json) {
+        data = json.result;
+      });
+			return data;
+		}
 	</script>
 
 	<title>Led & PhotoTemp Sensor</title>
