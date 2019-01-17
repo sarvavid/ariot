@@ -153,6 +153,7 @@
 	</div>
 
 	<script>
+		// ====================================== Initialize Global Variables ====================================== //
 		var scene, camera, renderer;
 		var arToolkitSource, arToolkitContext;
 
@@ -160,11 +161,6 @@
 
 		// array of all functions that update the view
 		var updateFuncs = [];
-
-		var mouse = new THREE.Vector2();
-
-		// measurementContainer consists of a lineMesh and a sprite to display the length
-		var measurementContainer, lineMesh, canvas, context, texture, sprite;
 
 		var LEDStates = ["Intensity", "RGB", "Strip"];
 		var photoTempStates = ["photo", "temp"];
@@ -182,9 +178,11 @@
 		var caramelApple = "3f0039000b47363330353437";
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
 
+		// ========================================== Run Main Functions =========================================== //
 		init();
 		animate();
 
+		// ============================================ Init Function ============================================== //
 		function init(){
 			scene = new THREE.Scene();
 			camera = new THREE.Camera();
@@ -238,6 +236,7 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		}
 
+		// ============================= Functions that Update States/Modes ========================================= //
 		updateFuncs.push(function updateScanner(){
 			if (document.querySelector(".scanningSpinner") != null){
 				if (markerRoot1.visible === true){
@@ -391,6 +390,7 @@
 			}
 		}
 
+		// ======================================= Mouse and Touch Events ========================================== //
 		function onMouseDown(event){
 			onMouseMove(event);
 		}
@@ -411,6 +411,7 @@
 			// document.getElementById("text").innerHTML = mouse.x + ", " + mouse.y;
 		}
 
+		// ========================================== Animate and Render =========================================== //
 		function render(){
 			renderer.render( scene, camera );
 		}
@@ -423,7 +424,6 @@
 
 			render();
 		}
-
 	</script>
 
 	<!-- Scanning animation when the marker are not visible -->
