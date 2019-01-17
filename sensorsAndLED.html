@@ -250,11 +250,11 @@
 			currPhotoTempState = photoTempStates[photoTemIndex];
 			document.getElementById("Modes").innerHTML = " " + currLEDState +" "+  LEDIndex; 
 
-			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
-			var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
-			var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
-			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
-			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
+			// var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
+			// var inputLEDStateRGB = parseInt(document.getElementsByClassName("inputClass2")[0].value);
+			// var inputLEDStateRGB1 = parseInt(document.getElementsByClassName("inputClass2")[1].value);
+			// var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
+			// var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
 			if (currLEDState == "Intensity"){
 				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
