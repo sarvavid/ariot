@@ -246,7 +246,7 @@
 
 		}
 
-		window.onmouseup = window.ontouchend= function(){
+		window.onmouseup = window.ontouchend = function(){
 			down = false;
 			if (!placed) {
 				line.attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',0);
@@ -254,10 +254,7 @@
 
 		}
 
-		square1.onmouseup = function (){
-			placed = true;
-		}
-		square0.onmouseup = function (){
+		square1.onmouseup = square1.ontouchend = square0.onmouseup = square0.ontouchend =function (){
 			placed = true;
 		}
 		
