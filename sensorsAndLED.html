@@ -171,9 +171,9 @@
 		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
 
-		var canRotate = false
-		var angleRad = 0
-		var angleDeg = 0
+		var canRotate = false;
+		var angleRad = 0;
+		var angleDeg = 0;
 
 		var caramelApple = "3f0039000b47363330353437";
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
@@ -333,22 +333,17 @@
 			submitform(0, caramelApple, "changeColor", accessCode);
 			submitform(0, caramelApple, "changeColorStrip", accessCode);
 
-			currLEDState = LEDStates[LEDIndex]
-
-			if (LEDIndex == 0)
-			{
+			if (LEDIndex == 0){
 				inputLEDStateReg.style.display = "";
 
-				for (i = 0; i <3;i++)
-				{
+				for (i = 0; i <3;i++){
 					inputLEDStateRGB.style.display = "none";
 				}
-				
+
 				inputLEDStateStrip.style.display ="none";
 
 			}
-			else if (LEDIndex == 1)
-			{
+			else if (LEDIndex == 1){
 				inputLEDStateReg.style.display = "none";
 
 				for (i = 0; i <3;i++)
@@ -358,12 +353,10 @@
 
 				inputLEDStateStrip.style.display = "none";
 			}
-			else if (LEDIndex == 2)
-			{
+			else if (LEDIndex == 2){
 				inputLEDStateReg.style.display = "none";
 
-				for (i = 0; i <3;i++)
-				{
+				for (i = 0; i <3;i++){
 					inputLEDStateRGB.style.display = "none";
 				}
 
