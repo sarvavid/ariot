@@ -26,23 +26,15 @@
 			return false;
 		}
 
-		function getLight( photonID, funcName, accessToken )
+		function getData( photonID, funcName, accessToken )
 			{
+				var data;
 				let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
 				$.getJSON(requestURL, function(json) {
-          photoVal = json.result;
+          data = json.result;
         });
-				return false;
+				return data;
 			}
-
-		function getTemp( photonID, funcName, accessToken )
-		{
-			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
-			$.getJSON(requestURL, function(json) {
-        tempVal = json.result;
-      });
-			return false;
-		}
 	</script>
 
 	<title>Led & PhotoTemp Sensor</title>
