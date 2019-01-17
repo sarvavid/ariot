@@ -44,7 +44,7 @@
 			}
 	</script>
 
-	<title>Led and PhotoTemp Sensor</title>
+	<title>Led & PhotoTemp Sensor</title>
 
 	<style>
 		.containerDiv {
@@ -332,6 +332,8 @@
 			submitform(0, caramelApple, "changeIntensity", accessCode);
 			submitform(0, caramelApple, "changeColor", accessCode);
 			submitform(0, caramelApple, "changeColorStrip", accessCode);
+
+			document.getElementById("Modes").innerHTML = " "+currState 
 
 			if (LEDIndex == 0){
 				inputLEDStateReg.style.display = "";
