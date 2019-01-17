@@ -158,31 +158,66 @@
 		</div>
 	</div>
 
+	<div class="ClockPot movingDiv" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class = "dial" style="opacity: 0.5; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.5;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "ClockPotModes">temp</span> </h12> 
+			<br>
+			<div class = "clock">
+				<span class = "clock">clock</span> <!-- edit the inner html -->
+			</div>
+
+			<div class = "pot" style = "display:none">
+				Pot Val: <input style="width: 35px; height: 10px" id="potInput" type="number" value="0">
+			</div>
+
+			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+
+		</div>
+	</div>
+
 	<script>
 		// ====================================== Initialize Global Variables ====================================== //
 		var scene, camera, renderer;
 		var arToolkitSource, arToolkitContext;
 
-		var markerRoot1, markerRoot2;
+		var markerRoot1, markerRoot2, markerRoot3;
 
 		// array of all functions that update the view
 		var updateFuncs = [];
 
 		var LEDStates = ["Intensity", "RGB", "Strip"];
 		var photoTempStates = ["photo", "temp"];
+		var clockPotStates = ["clock", "poten"];
 
 		var LEDIndex = 0;
 		var photoTemIndex = 0;
+		var clockPotIndex = 0;
 
 		var light;
 		var temperature;
 
+		var potVal = 0;
+		var time = 0;
+
 		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
-
-		var canRotate = false;
-		var angleRad = 0;
-		var angleDeg = 0;
+		var currClockPotState = "clock";
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
@@ -241,6 +276,14 @@
 				patternUrl: "modulAR-iot-images/Heat&Light.patt"
 			})
 
+			// build markerControls for marker3
+			markerRoot3 = new THREE.Group
+			scene.add(markerRoot3)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot3, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/Potentiometer&Clock.patt"
+			})
+
 			// event handlers
 			window.addEventListener("resize", onResize)
 			window.addEventListener("mousedown", onMouseDown)
@@ -269,9 +312,11 @@
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
+			currClockPotState = clockPotStates[clockPotIndex];
 
 			document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
 			document.getElementById("PhotoTempModes").innerHTML = " " + currPhotoTempState;
+			document.getElementById("ClockPotModes").innerHTML = " " + currClockPotState;
 
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
 			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
@@ -283,6 +328,10 @@
 
 			var photoDisplay = document.getElementById("photoLabel");
 			var tempDisplay = document.getElementById("tempLabel");
+
+			var clockDisplay = document.getElementById("clock");
+			var potInput = document.getElementById("potInput");
+			var potDisplay = document.getElementById("pot");
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
@@ -326,6 +375,22 @@
 					tempDisplay.style.display = "";
 				}
 			}
+			if (markerRoot3.visible === true){
+				if (currClockPotState == "clock"){
+					var date = new Date();
+					clockDisplay.innerHTML = "Time: " + date.getTime();
+					//change the display 
+					photoDisplay.style.display = "";
+					tempDisplay.style.display = "none";
+				}
+				else if (currClockPotState == "pot"){
+					temp = getData(friedOnion, "getTemp", accessCode);
+					tempDisplay.innerHTML = "Temp: " + temp;
+					//change the display 
+					photoDisplay.style.display = "none";
+					tempDisplay.style.display = "";
+				}
+			}
 		}, 100);
 
 		updateFuncs.push(function updateDivs(){
@@ -361,12 +426,21 @@
 			}
 			if (markerRoot2.visible === true){
 				movingDivs[1].style.display = ""
-				var proj = toScreenPosition(markerRoot1, camera);
+				var proj = toScreenPosition(markerRoot2, camera);
 				movingDivs[1].style.left = proj.x - movingDivs[1].offsetWidth/2 + 'px';
 				movingDivs[1].style.top = proj.y - movingDivs[1].offsetHeight/2 + 'px';
 			}
 			else {
 				movingDivs[1].style.display = "none"
+			}
+			if (markerRoot3.visible === true){
+				movingDivs[2].style.display = ""
+				var proj = toScreenPosition(markerRoot3, camera);
+				movingDivs[2].style.left = proj.x - movingDivs[2].offsetWidth/2 + 'px';
+				movingDivs[2].style.top = proj.y - movingDivs[2].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[2].style.display = "none"
 			}
 		});
 
@@ -404,6 +478,14 @@
 				}
 				else{
 					photoTemIndex = 0;
+				}
+			}
+			if (markerRoot3.visible === true){
+				if (clockPotIndex < clockPotStates.length - 1){
+					clockPotIndex += 1;
+				}
+				else{
+					clockPotIndex = 0;
 				}
 			}
 		}
