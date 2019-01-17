@@ -330,11 +330,7 @@
 		updateFuncs.push(function updateDivs(){
 			var movingDivs = document.getElementsByClassName("movingDiv");
 			for (var i = 0; i < movingDivs.length; i++){
-				movingDiv[i].style.left = window.innerWidth/2 - movingDiv[i].offsetWidth/2 + "px";
-				movingDiv[i].style.top = window.innerHeight/2 - movingDiv[i].offsetHeight/2 + "px";
-
-				for (var j = 0; j < 4; j++)
-				{
+				for (var j = 0; j < 4; j++){
 					var rings = document.getElementsByClassName("rings")[j];
 					rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
 					rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
