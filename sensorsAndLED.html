@@ -35,7 +35,7 @@
 		}
 	</script>
 
-	<title>Led & PhotoTemp Sensor</title>
+	<title>Led & PhotoTemp Sensors</title>
 
 	<style>
 		.containerDiv {
@@ -150,8 +150,8 @@
 
 			<h12> Mode: <span id = "PhotoTempModes">temp</span> </h12> 
 			<br>
-			Light: <span id = "photoLabel">light</span>
-			Temperature: <span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
+			<span id = "photoLabel">light</span>
+			<span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
 			<br>
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
 
@@ -236,7 +236,7 @@
 			// build markerControls for marker2
 			markerRoot2 = new THREE.Group
 			scene.add(markerRoot2)
-			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
 				type: "pattern",
 				patternUrl: "modulAR-iot-images/Heat&Light.patt"
 			})
@@ -281,9 +281,8 @@
 			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
 			var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
 
-			var photoDisplay = document.getElementsByClassName("photoLabel")[0];
-			photoDisplay.innerHTML = "o"
-			var tempDisplay = document.getElementsByClassName("tempLabel")[0];
+			var photoDisplay = document.getElementById("photoLabel");
+			var tempDisplay = document.getElementById("tempLabel");
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
@@ -314,14 +313,14 @@
 			if (markerRoot2.visible === true){
 				if (currPhotoTempState == "photo"){
 					light = getData(friedOnion, "getVal", accessCode);
-					photoDisplay.innerHTML = light;
+					photoDisplay.innerHTML = "Light: " + light;
 					//change the display 
 					photoDisplay.style.display = "";
 					tempDisplay.style.display = "none";
 				}
 				else if (currPhotoTempState == "temp"){
 					temp = getData(friedOnion, "getTemp", accessCode);
-					tempDisplay.innerHTML = temp;
+					tempDisplay.innerHTML = "Temp: " + temp;
 					//change the display 
 					photoDisplay.style.display = "none";
 					tempDisplay.style.display = "";
@@ -332,7 +331,7 @@
 		updateFuncs.push(function updateDivs(){
 			var movingDivs = document.getElementsByClassName("movingDiv");
 			for (var i = 0; i < movingDivs.length; i++){
-				for (var j = 0; j < 4; j++){
+				for (var j = 0; j < 4*movingDivs.length; j++){
 					var rings = document.getElementsByClassName("rings")[j];
 					rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
 					rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
@@ -385,8 +384,8 @@
 	    vector.y = - ( vector.y * heightHalf ) + heightHalf; // 100 to 400
 
 	    return { 
-	        x: vector.x,
-	        y: vector.y
+        x: vector.x,
+        y: vector.y
 	    };
 		};
 
