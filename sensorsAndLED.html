@@ -262,8 +262,9 @@
 					inputLEDStateStripDisplay.style.display ="none";
 				}
 				else if (currLEDState == "RGB"){
+					var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"]
 					for (var i = 0; i < 3; i++){
-						submitform(inputLEDStateRGBArray[i], caramelApple, "changeColor", accessCode);
+						submitform(inputLEDStateRGBArray[i], caramelApple, rbgFuncs[i], accessCode);
 					}
 					//change the display
 					inputLEDStateBrightnessDisplay.style.display = "none";
