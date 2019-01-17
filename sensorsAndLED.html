@@ -262,14 +262,14 @@
 			var inputLEDStateRGB2 = parseInt(document.getElementsByClassName("inputClass2")[2].value);
 			var inputLEDStateStrip = parseInt(document.getElementsByClassName("inputClass3")[0].value);
 
-			var inputLEDStateRegDisplay = document.getElementsByClassName("brightnessDiv")[0];
+			var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
 			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
 			var inputLEDStateStripDisplay = document.getElementsByClassName("inputDiv3")[0];
 
 			if (currLEDState == "Intensity"){
 				submitform(inputLEDStateReg, caramelApple, "changeIntensity", accessCode);
 				//change the display 
-				inputLEDStateRegDisplay.style.display = "";
+				inputLEDStateBrightnessDisplay.style.display = "";
 				inputLEDStateRGBDisplay.style.display = "none";
 				inputLEDStateStripDisplay.style.display ="none";
 
@@ -277,14 +277,14 @@
 			else if (currLEDState == "RGB"){
 				submitform(inputLEDStateRGB, caramelApple, "changeColor", accessCode);
 				//change the display
-				inputLEDStateRegDisplay.style.display = "none";
+				inputLEDStateBrightnessDisplay.style.display = "none";
 				inputLEDStateRGBDisplay.style.display = "";
 				inputLEDStateStripDisplay.style.display = "none";
 			}
 			else if (currLEDState == "Strip"){
 				submitform(inputLEDStateStrip, caramelApple, "changeColorStrip", accessCode);
 				//change the display
-				inputLEDStateRegDisplay.style.display = "none";
+				inputLEDStateBrightnessDisplay.style.display = "none";
 				inputLEDStateRGBDisplay.style.display = "none";
 				inputLEDStateStripDisplay.style.display = "";
 			}
