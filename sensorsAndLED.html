@@ -62,9 +62,7 @@
 			height: 60px;
 		  border-style: solid;
 		  border-width: 5px;
-		 
 		  border-color: white;
-			
 			position: absolute;
 		}
 
@@ -254,7 +252,7 @@
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
-			
+
 			document.getElementById("Modes").innerHTML = " " + currLEDState + " " + LEDIndex; 
 
 			var inputLEDStateReg = parseInt(document.getElementsByClassName("inputClass")[0].value);
