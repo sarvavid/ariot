@@ -325,10 +325,6 @@
 
 			// event handlers
 			window.addEventListener("resize", onResize)
-			window.addEventListener("mousedown", onMouseDown)
-			window.addEventListener("touchstart", onTouchStart)
-			window.addEventListener("mousemove", onMouseMove)
-			window.addEventListener("touchmove", onTouchMove)
 			window.addEventListener("orientationchange", changeOrientation);
 		}
 
@@ -488,6 +484,23 @@
 			}
 		});
 
+		updateFuncs.push(function(){
+			var squareArr = document.getElementsByClassName("square");
+			for (i = 0; i < squareArr.length; i++) {
+				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
+					down = true;
+					placed = false;
+					x1 = event.clientX || event.touches[0].clientX;
+					y1 = event.clientY || event.touches[0].clientY;
+					line.attr('x1',x1).attr('y1',y1).attr('x2',x1).attr('y2',y1);
+				}
+
+				square[i].onmouseup = function (){
+					placed = true;
+				}
+			}
+		});
+
 		function toScreenPosition(obj, camera) {
 	    var vector = new THREE.Vector3();
 
@@ -550,24 +563,17 @@
 		}
 
 		// ======================================= Mouse and Touch Events ========================================== //
-		function onMouseDown(event){
-			onMouseMove(event);
+		window.onmousemove = window.ontouchmove = function(){
+			if (down){
+				line.attr('x2',event.clientX||event.touches[0].clientX).attr('y2',event.clientY||event.touches[0].clientY);
+			}
 		}
 
-		function onTouchStart(event){
-			onTouchMove(event);
-		}
-
-		function onMouseMove(event){
-			// mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			// mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			// document.getElementById("text").innerHTML = mouse.x + ", " + mouse.y;
-		}
-
-		function onTouchMove(event){
-			// mouse.x = event.touches[0].clientX;
-			// mouse.y = event.touches[0].clientY;
-			// document.getElementById("text").innerHTML = mouse.x + ", " + mouse.y;
+		window.onmouseup = window.ontouchend = function(){
+			down = false;
+			if (!placed) {
+				line.attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',0);
+			}
 		}
 
 		// ========================================== Animate and Render =========================================== //
