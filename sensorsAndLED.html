@@ -337,9 +337,9 @@
 			var photoDisplay = document.getElementById("photoLabel");
 			var tempDisplay = document.getElementById("tempLabel");
 
-			var clockDisplay = document.getElementById("clock");
+			var clockDisplay = document.getElementsByClassName("clock")[0];
 			var potInput = document.getElementById("potInput");
-			var potDisplay = document.getElementById("pot");
+			var potDisplay = document.getElementsByClassName("pot")[0];
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
