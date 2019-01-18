@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensors</title>
+	<title>LED and Sensorsjieijic</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -570,13 +570,23 @@
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
 					down = true;
 					placed = false;
-					selectedSquare = squareArr[i];
+					if (markerRoot1.visible === true){
+						selectedSquare = squareArr[0];
+					}
+					if (markerRoot2.visible === true){
+						selectedSquare = squareArr[1];
+					}
+					if (markerRoot3.visible === true){
+						selectedSquare = squareArr[2];
+					}
 					alert(selectedSquare)
 				}
 
-				// squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
-				// 	placed = true;
-				// }
+				if(squareArr[i] != selectedSquare &&
+					 isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
+					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
+					placed = true;
+				}
 			}
 		}
 
