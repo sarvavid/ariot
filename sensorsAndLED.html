@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensors</title>
+	<title>LED and Sensor1</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -270,8 +270,7 @@
 		var down = false;
 		var line = $('#line');
 
-		var x1;
-		var y1;
+		var selectedSquare;
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
@@ -507,17 +506,12 @@
 				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
 					down = true;
 					placed = false;
-					x1 = event.clientX || event.touches[0].clientX;
-					y1 = event.clientY || event.touches[0].clientY;
-					line.attr('x1',x1)
-							.attr('y1',y1)
-							.attr('x2',x1)
-							.attr('y2',y1);
+					selectedSquare = squareArr[i];
 				}
 
-				squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
-					placed = true;
-				}
+				// squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
+				// 	placed = true;
+				// }
 			}
 		});
 
@@ -583,12 +577,6 @@
 		}
 
 		// ======================================= Mouse and Touch Events ========================================== //
-		window.onmousemove = window.ontouchmove = function(){
-			if (down){
-				line.attr('x2',event.clientX||event.touches[0].clientX).attr('y2',event.clientY||event.touches[0].clientY);
-			}
-		}
-
 		window.onmouseup = window.ontouchend = function(){
 			down = false;
 			if (!placed) {
@@ -596,6 +584,15 @@
 						.attr('y1',0)
 						.attr('x2',0)
 						.attr('y2',0);
+			}
+		}
+
+		window.ontouchmove = function(event){
+			if (down){
+				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
+						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
+						.attr('x2',event.clientX||event.touches[0].clientX)
+						.attr('y2',event.clientY||event.touches[0].clientY);
 			}
 		}
 
