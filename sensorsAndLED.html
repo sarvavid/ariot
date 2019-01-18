@@ -117,8 +117,8 @@
 		.square {
 			z-index: 1; 
 			position: absolute; 
-			width: 20px; 
-			height: 20px; 
+			width: 50px; 
+			height: 50px; 
 			background: white; 
 		}
 	</style>
@@ -500,21 +500,6 @@
 			}
 		});
 
-		updateFuncs.push(function(){
-			var squareArr = document.getElementsByClassName("square");
-			for (var i = 0; i < squareArr.length; i++) {
-				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
-					down = true;
-					placed = false;
-					selectedSquare = squareArr[i];
-				}
-
-				// squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
-				// 	placed = true;
-				// }
-			}
-		});
-
 		function toScreenPosition(obj, camera) {
 	    var vector = new THREE.Vector3();
 
@@ -575,6 +560,21 @@
 				arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
 			}
 		}
+
+		updateFuncs.push(function(){
+			var squareArr = document.getElementsByClassName("square");
+			for (var i = 0; i < squareArr.length; i++) {
+				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
+					down = true;
+					placed = false;
+					selectedSquare = squareArr[i];
+				}
+
+				// squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
+				// 	placed = true;
+				// }
+			}
+		});
 
 		// ======================================= Mouse and Touch Events ========================================== //
 		window.onmouseup = window.ontouchend = function(){
