@@ -546,7 +546,7 @@
 
 				var square = document.getElementsByClassName("square")[i];
 				square.style.left = square.parentElement.offsetWidth/2 - square.offsetWidth/2 + "px";;
-				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + inputDiv.offsetHeight/2 + "px";
+				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + inputDiv.offsetHeight + "px";
 			}
 			if (markerRoot1.visible === true){
 				movingDivs[0].style.display = ""
@@ -664,7 +664,7 @@
 			for (var i = 0; i < squareArr.length; i++) {
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
-					if (squareArr[i] != selectedSquare){
+					if (squareArr[i] != selectedSquare && selectedSquare == null){
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
 					}
@@ -673,10 +673,15 @@
 						squareArr[i].style.background = "white";
 					}
 
-					if (selectedSquare != null && squareArr[i] != selectedSquare){
+					if (!placed && selectedSquare != null && selectedSquare1 != null && squareArr[i] != selectedSquare){
 						selectedSquare1 = squareArr[i];
 						selectedSquare1.style.background = "green";
 						placed = true;
+					}
+
+					if (squareArr[i] == selectedSquare1){
+						squareArr[i].style.background = "white";
+						selectedSquare1 = null;
 					}
 				}
 			}
