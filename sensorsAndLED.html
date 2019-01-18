@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensors</title>
+	<title>LED and Sensors!</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -595,6 +595,7 @@
 
 		window.onmouseup = window.ontouchend = function(){
 			down = false;
+			selectedSquare = null;
 			if (!placed) {
 				line.attr('x1',0)
 						.attr('y1',0)
