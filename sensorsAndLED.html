@@ -234,6 +234,42 @@
 		</div>
 	</div>
 
+	<div class="LCDBuzz movingDiv outputDevice" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "LCDBuzzModes">Intensity</span> </h12> 
+			<br>
+			<div class = "LCDDiv">
+				Number: <input style="width: 35px; height: 10px" class="inputLCD" type="number" value="0">
+			</div>
+
+			<div class = "buzzDiv" style = "display:none">
+				Pitch: <input style="width: 35px; height: 10px" class="buzzInput" type="number" value="0">
+	
+			</div>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+
+		</div>
+	</div>
+
+
 	<svg id="svg" style= " height: 100%;width:100%; position: fixed; top:0;" >
 	  <line id="line"/>
 	</svg>
@@ -243,7 +279,7 @@
 		var scene, camera, renderer;
 		var arToolkitSource, arToolkitContext;
 
-		var markerRoot1, markerRoot2, markerRoot3;
+		var markerRoot1, markerRoot2, markerRoot3, markerRoot4;
 
 		// array of all functions that update the view
 		var updateFuncs = [];
@@ -251,10 +287,12 @@
 		var LEDStates = ["Intensity", "RGB", "Strip"];
 		var photoTempStates = ["photo", "temp"];
 		var clockPotStates = ["clock", "pot"];
+		var LCDBuzzStates = ["LCD", "Buzzer"];
 
 		var LEDIndex = 0;
 		var photoTemIndex = 0;
 		var clockPotIndex = 0;
+		var LCDBuzzIndex = 0;
 
 		var light;
 		var temperature;
@@ -262,9 +300,13 @@
 		var potVal = 0;
 		var time = 0;
 
+		var LCDval = 0;
+		var buzzVal = 0;
+
 		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
 		var currClockPotState = "clock";
+		var currLCDBuzzState = "LCD";
 
 		var placed = false;
 		var down = false;
@@ -277,6 +319,7 @@
 		var friedOnion = "3f0035000547363332363639";
 		var cuteStation = "330017000b47363330353437"
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
+		//carolyn add lemon
 
 		// ========================================== Run Main Functions =========================================== //
 		init();
@@ -339,6 +382,13 @@
 				patternUrl: "modulAR-iot-images/Potentiometer&Clock.patt"
 			})
 
+			markerRoot4 = new FOUR.Group
+			scene.add(markerRoot4)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot4, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/LEDs.patt"//change this url
+			})
+
 			// event handlers
 			window.addEventListener("resize", onResize)
 			window.addEventListener("orientationchange", changeOrientation);
@@ -363,12 +413,15 @@
 
 		window.setInterval(function(){
 			currLEDState = LEDStates[LEDIndex];
+			currLCDBuzzState = LCDBuzzStates[LCDBuzzIndex];
 			currPhotoTempState = photoTempStates[photoTemIndex];
 			currClockPotState = clockPotStates[clockPotIndex];
+
 
 			document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
 			document.getElementById("PhotoTempModes").innerHTML = " " + currPhotoTempState;
 			document.getElementById("ClockPotModes").innerHTML = " " + currClockPotState;
+			document.getElementById("LCDBuzzModes").innerHTML = " " + currLCDBuzzState; 
 
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
 			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
@@ -385,6 +438,11 @@
 			var clockLabel = document.getElementById("clockLabel");
 			var potDisplay = document.getElementsByClassName("potDiv")[0];
 			var potInput = document.getElementsByClassName("potInput")[0];
+
+			var inputLCDState = document.getElementsByClassName("inputLCD")[0];
+			var inputBuzzState = document.getElementsByClassName("buzzInput")[0];
+			var inputLCDStateDisplay = document.getElementsByClassName("LCDDiv")[0];
+			var inputLEDStateRGBDisplay = document.getElementsByClassName("buzzDiv")[0];
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
@@ -444,6 +502,24 @@
 					potDisplay.style.display = "";
 				}
 			}
+
+			if (markerRoot4.visible === true){
+				if (currLCDBuzzState == "LCD"){
+					submitform(parseInt(inputLCDState.value), lemon, "changeText", accessCode);
+					//change the display 
+					inputLCDStateDisplay.style.display = "";
+					inputBuzzStateDisplay.style.display = "none";
+				}
+				else if (currLCDBuzzState == "Buzzer"){
+					submitform(parseInt(inputBuzzState.value), lemon, "changeIntensity", accessCode);
+					
+					//change the display
+					inputLCDStateDisplay.style.display = "none";
+					inputBuzzStateDisplay.style.display = "";
+				}
+				
+			}
+
 			if (placed){
 				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
 						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
@@ -506,6 +582,16 @@
 			else {
 				movingDivs[2].style.display = "none"
 			}
+
+			if (markerRoot4.visible === true){
+				movingDivs[3].style.display = ""
+				var proj = toScreenPosition(markerRoot4, camera);
+				movingDivs[3].style.left = proj.x - movingDivs[3].offsetWidth/2 + 'px';
+				movingDivs[3].style.top = proj.y - movingDivs[3].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[3].style.display = "none"
+			}
 		});
 
 		function toScreenPosition(obj, camera) {
@@ -552,6 +638,15 @@
 					clockPotIndex = 0;
 				}
 			}
+			if (markerRoot4.visible === true){
+				if (LCDBuzzIndex < LCDBuzzStates.length - 1){
+					LCDBuzzIndex += 1;
+				}
+				else{
+					LCDIndex = 0;
+				}
+			}
+
 		}
 
 		updateFuncs.push(function updateARtoolkit(){
@@ -587,8 +682,7 @@
 		}
 
 		window.onmouseup = window.ontouchend = function(){
-			down = false;
-			selectedSquare = null;
+			
 
 			for (var i = 0; i < squareArr.length; i++) {
 				if(down && squareArr[i] != selectedSquare &&
@@ -598,7 +692,8 @@
 					selectedSquare1 = squareArr[i];
 				}
 			}
-
+			down = false;
+			selectedSquare = null;
 			if (!placed) {
 				line.attr('x1',0)
 						.attr('y1',0)

@@ -1,0 +1,55 @@
+
+<script>
+
+var currLEDState = "Intensity";
+var currPhotoTempState = "photo";
+var currClockPotState = "clock";
+
+currLEDState = LEDStates[LEDIndex];
+document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
+
+var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
+var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
+var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
+
+var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
+var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
+var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
+
+if (markerRoot1.visible === true){
+	if (currLEDState == "Intensity"){
+		submitform(parseInt(inputLEDStateReg.value), caramelApple, "changeIntensity", accessCode);
+		//change the display 
+		inputLEDStateBrightnessDisplay.style.display = "";
+		inputLEDStateRGBDisplay.style.display = "none";
+		inputLEDStateStripDisplay.style.display ="none";
+	}
+	else if (currLEDState == "RGB"){
+		var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"];
+		for (var i = 0; i < 3; i++){
+			submitform(parseInt(inputLEDStateRGBArray[i].value), caramelApple, rbgFuncs[i], accessCode);
+		}
+		//change the display
+		inputLEDStateBrightnessDisplay.style.display = "none";
+		inputLEDStateRGBDisplay.style.display = "";
+		inputLEDStateStripDisplay.style.display = "none";
+	}
+	else if (currLEDState == "Strip"){
+		submitform(parseInt(inputLEDStateStrip.value), caramelApple, "changeColorStrip", accessCode);
+		//change the display
+		inputLEDStateBrightnessDisplay.style.display = "none";
+		inputLEDStateRGBDisplay.style.display = "none";
+		inputLEDStateStripDisplay.style.display = "";
+	}
+}
+
+function changeState(){
+			if (markerRoot1.visible === true){
+				if (LEDIndex < LEDStates.length - 1){
+					LEDIndex += 1;
+				}
+				else{
+					LEDIndex = 0;
+				}
+			}
+</script>

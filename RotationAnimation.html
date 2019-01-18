@@ -240,6 +240,8 @@ div.rings
 
 		var totalAngle;
 		var frozen = false;
+		var scale = 0;
+
 
 		function rotate(){
 			slopeAX = currentX-centerX;
@@ -308,7 +310,7 @@ div.rings
 						}
 					}
 				
-				
+				scale = 5*totalAngle;
 				
 //angleDeg becomes 0, then totalAngle becomes -360
 
