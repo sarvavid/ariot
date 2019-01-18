@@ -437,7 +437,7 @@
 				}
 				else if (currClockPotState == "pot"){
 					submitform(parseInt(potInput.value), cuteStation, "setPot", accessCode);
-					potVal = getData(cuteStation, "getPot", accessCode);
+					potVal = getPot(cuteStation, "getPot", accessCode);
 					//change the display 
 					clockDisplay.style.display = "none";
 					potDisplay.style.display = "";
