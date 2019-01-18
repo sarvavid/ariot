@@ -581,20 +581,40 @@
 						}
 					}
 				}
-				else if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
-					if (currLCDBuzzState == "LCD"){
-						inputLCDState.value = light;
+				else if (selectedDevice == document.getElementsByClassName("clockPot movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
+					if (currClockPotState == "clock"){
+						if (currLCDBuzzState == "LCD"){
+							inputLCDState.value = date.getSeconds();
+						}
+						else if (currLCDBuzzState == "Buzzer"){
+							inputBuzzState.value = date.getSeconds();
+						}
 					}
-					else if (currLCDBuzzState == "Buzzer"){
-						inputBuzzState.value = temperature;
+					else if (currClockPotState == "pot"){
+						if (currLEDState == "Intensity"){
+							inputLCDState.value = parseInt(potInput.value);
+						}
+						else if (currLEDState == "Strip"){
+							inputBuzzState.value = parseInt(potInput.value);
+						}
 					}
 				}
-				else if (selectedDevice == document.getElementsByClassName("ClockPot movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
-					if (currLCDBuzzState == "LCD"){
-						inputLCDState.value = parseInt(potInput.value);
+				else if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
+					if (currClockPotState == "photo"){
+						if (currLCDBuzzState == "LCD"){
+							inputLCDState.value = light;
+						}
+						else if (currLCDBuzzState == "Buzzer"){
+							inputBuzzState.value = light;
+						}
 					}
-					else if (currLCDBuzzState == "Buzzer"){
-						inputBuzzState.value = parseInt(potInput.value);
+					else if (currClockPotState == "clock"){
+						if (currLEDState == "Intensity"){
+							inputLCDState.value = temperature;
+						}
+						else if (currLEDState == "Strip"){
+							inputBuzzState.value = temperature;
+						}
 					}
 				}
 			}
