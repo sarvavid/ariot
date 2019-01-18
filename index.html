@@ -591,10 +591,10 @@
 						}
 					}
 					else if (currClockPotState == "pot"){
-						if (currLEDState == "Intensity"){
+						if (currLCDBuzzState == "LCD"){
 							inputLCDState.value = parseInt(potInput.value);
 						}
-						else if (currLEDState == "Strip"){
+						else if (currLCDBuzzState == "Buzzer"){
 							inputBuzzState.value = parseInt(potInput.value);
 						}
 					}
@@ -609,10 +609,10 @@
 						}
 					}
 					else if (currClockPotState == "clock"){
-						if (currLEDState == "Intensity"){
+						if (currLCDBuzzState == "LCD"){
 							inputLCDState.value = temperature;
 						}
-						else if (currLEDState == "Strip"){
+						else if (currLCDBuzzState == "Buzzer"){
 							inputBuzzState.value = temperature;
 						}
 					}
