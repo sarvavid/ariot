@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensor1</title>
+	<title>LED and Sensors</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -270,7 +270,7 @@
 		var down = false;
 		var line = $('#line');
 
-		var selectedSquare;
+		var selectedSquare = null;
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
@@ -584,11 +584,12 @@
 						.attr('y1',0)
 						.attr('x2',0)
 						.attr('y2',0);
+				selectedSquare = null;
 			}
 		}
 
 		window.ontouchmove = function(event){
-			if (down){
+			if (down && selectedSquare != null){
 				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
 						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
 						.attr('x2',event.clientX||event.touches[0].clientX)
