@@ -4,95 +4,95 @@
 	<title></title>
 
 	<style>
-		body {
-		  background-color: black;
-		  position: relative;
-		 	/* Safari 4.0 - 8.0 */
-			-webkit-animation: changeBGcolor 5s linear infinite alternate;
-			/* Standard syntax */
-			animation: changeBGcolor 5s linear infinite alternate;
-		}
-		.containerDiv {
-		  border-radius: 50%;
-		  border-style: solid;
-		  border-width: 5px;
-		  border-color: #33b5e5;
-		  position: absolute;
-	      height: 110px;
-	      width: 110px;
-		}
-
-		.spinDiv {
-			border-radius: 50px;
-			border-style: solid;
-			border-width: 10px;
-			border-color: blue;
-			width: 200px;
-			height: 200px;
-			position: absolute;
-			/* Safari 4.0 - 8.0 */
-			-webkit-animation: spin 5s linear infinite alternate;
-			/* Standard syntax */
-			animation: spin 5s linear infinite alternate;
-		}
-
-		.inputDiv {
-			width: 300px;
-			height: 60px;
-		  border-style: solid;
-		  border-width: 5px;
-		 
-		  border-color: white;
-			
-			position: absolute;
-		}
-
-		.dial
-
-		{
-		    -webkit-transition: all 0.5s ease-in-out;
-		    -moz-transition: all 0.5s ease-in-out;
-		    -o-transition: all 0.5s ease-in-out;
-		    transition: all 0.5s ease-in-out;
-		}
-		
-
-		/* Standard syntax */
-		@keyframes spin {
-		  from {
-		    transform: rotate(0deg);
-		  }
-		  to {
-		    transform: rotate(360deg);
-		  }
-		}
-
+	body {
+		background-color: black;
+		position: relative;
 		/* Safari 4.0 - 8.0 */
-		@-webkit-keyframes changeBGcolor {
-		  0%   {background-color:black;}
-		  25%  {background-color:red;}
-		  50%  {background-color:yellow;}
-		  75%  {background-color:green;}
-		  100% {background-color:black;}
-		}
-
+		-webkit-animation: changeBGcolor 5s linear infinite alternate;
 		/* Standard syntax */
-		@keyframes changeBGcolor {
-		  0%   {background-color:black;}
-		  25%  {background-color:red;}
-		  50%  {background-color:yellow;}
-		  75%  {background-color:green;}
-		  100% {background-color:black;}
-		}
-
-	</style>
-	<style>
-	div.rings
-	{
-		position: absolute;
-		
+		animation: changeBGcolor 5s linear infinite alternate;
 	}
-	
+	.containerDiv {
+		border-radius: 50%;
+		border-style: solid;
+		border-width: 5px;
+		border-color: #33b5e5;
+		position: absolute;
+		height: 110px;
+		width: 110px;
+	}
+
+	.spinDiv {
+		border-radius: 50px;
+		border-style: solid;
+		border-width: 10px;
+		border-color: blue;
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		/* Safari 4.0 - 8.0 */
+		-webkit-animation: spin 5s linear infinite alternate;
+		/* Standard syntax */
+		animation: spin 5s linear infinite alternate;
+	}
+
+	.inputDiv {
+		width: 300px;
+		height: 60px;
+		border-style: solid;
+		border-width: 5px;
+
+		border-color: white;
+
+		position: absolute;
+	}
+
+	.dial
+
+	{
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;
+	}
+
+
+	/* Standard syntax */
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Safari 4.0 - 8.0 */
+	@-webkit-keyframes changeBGcolor {
+		0%   {background-color:black;}
+		25%  {background-color:red;}
+		50%  {background-color:yellow;}
+		75%  {background-color:green;}
+		100% {background-color:black;}
+	}
+
+	/* Standard syntax */
+	@keyframes changeBGcolor {
+		0%   {background-color:black;}
+		25%  {background-color:red;}
+		50%  {background-color:yellow;}
+		75%  {background-color:green;}
+		100% {background-color:black;}
+	}
+
+</style>
+<style>
+div.rings
+{
+	position: absolute;
+
+}
+
 
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>    
@@ -125,27 +125,27 @@
 			<br>
 
 			<div class = "inputClass" style = "display:none">
-			Intensity:
-			<input style="width: 75px; auto;" class="inputClass" type="number" value="0">
+				Intensity:
+				<input style="width: 75px; auto;" class="inputClass" type="number" value="0">
 			</div>
 
 			<div class ="inputClass2">
-			Red:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
-			Green:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
-			Blue:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0"></div>
+				Red:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
+				Green:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0">
+				Blue:<input style="width: 25px; auto;" class="inputClass2" type="number" value="0"></div>
 
-			<div class = "inputClass3" style = "display:none">
-			Hue:
-			<input style="width: 75px; auto;" class="inputClass3" type="number" value="0">
+				<div class = "inputClass3" style = "display:none">
+					Hue:
+					<input style="width: 75px; auto;" class="inputClass3" type="number" value="0">
+				</div>
+
+
+				<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+
 			</div>
-
-			
-			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
-
 		</div>
-	</div>
 
-	<script>
+		<script>
 
 		//formatting for the target icon
 
@@ -157,9 +157,9 @@
 
 		for (i = 0; i < 4; i++)
 		{
-		var rings = document.getElementsByClassName("rings")[i];
-		rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
-		rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
+			var rings = document.getElementsByClassName("rings")[i];
+			rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
+			rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
 		}
 
 		var dial = document.getElementsByClassName("dial")[0];
@@ -188,10 +188,21 @@
 		var index = 0;
 		var currState = "RGB";
 		var input;
+		var canRotate = false;
 
+
+		window.setInterval(function(){
+			if (canRotate)
+			{
+				rotate();
+
+			}
+
+		}, 100);
+
+		setInterval(function(){document.onmousemove }, 1);
 		//mouse stuff for rotation
 		movingDiv.onmousedown = function(){
-			var anglePrev= 0;
 			startX = event.clientX;
 			startY = event.clientY;
 
@@ -200,50 +211,54 @@
 			if (distance >= 115 && distance <= 175)
 			{
 				canRotate = true;
+
 			}
-			document.getElementById("myText").innerHTML = centerX +", " + centerY+"  |  " + startX+", "+ startY+"  |  "+" distance: "+distance;
+			document.getElementById("myText").innerHTML = totalAngle + " down";
 
 		}
 
 		document.onmousemove = function(){
+
 			if (canRotate)
 			{
-				document.getElementById("myText").innerHTML = centerX +", " + centerY+"  |  " + startX+", "+ startY+"  |  "+" distance: "+distance+"yay";
+				document.getElementById("myText").innerHTML = totalAngle;
 				currentX = event.clientX;
 				currentY = event.clientY;
-				rotate()
+				
 
 			}
-		
+
 		}
 
 		document.onmouseup = function(){
 			
 			canRotate = false;
+			document.getElementById("myText").innerHTML = totalAngle + " off";
+
 
 		}
 
-		var totalAngle = 0;
-		var prevAngle = 0;
+		var totalAngle;
+		var frozen = false;
 
 		function rotate(){
-				slopeAX = currentX-centerX;
-				slopeAY = centerY-currentY;
+			slopeAX = currentX-centerX;
+			slopeAY = centerY-currentY;
 
-				slopeBX = startX-centerX;
-				slopeBY = centerY-startY;
+			slopeBX = startX-centerX;
+			slopeBY = centerY-startY;
 
-				dotp = slopeAX*slopeBX+slopeAY*slopeBY;
+			dotp = slopeAX*slopeBX+slopeAY*slopeBY;
 
-				magA = (slopeAX**2+slopeAY**2)**.5;
-				magB = (slopeBX**2+slopeBY**2)**.5;
+			magA = (slopeAX**2+slopeAY**2)**.5;
+			magB = (slopeBX**2+slopeBY**2)**.5;
 
-				magP = magA*magB;
+			magP = magA*magB;
 
-				costheta = dotp/magP;
+			costheta = dotp/magP;
 
-				angleRad= Math.acos(costheta);
-				angleDeg = (angleRad * (180 / Math.PI));
+			angleRad= Math.acos(costheta);
+			angleDeg = (angleRad * (180 / Math.PI));
 
 				crossP = (slopeBX*slopeAY)-(slopeAX*slopeBY)//B cross A
 
@@ -256,43 +271,66 @@
 
 				}
 
-				add = angleDeg-prevAngle
 				
 
-				if (totalAngle >= 350)
-				{
-					prevAngle = 350;
-					totalAngle = 360;
+				if (frozen){
+					if (totalAngle >= 355 && angleDeg > 180)
+					{
+						frozen = false;
+						totalAngle = angleDeg;
+
+					}
+					else if (totalAngle<=5 && angleDeg <180)
+					{
+						frozen = false;
+						totalAngle = angleDeg;
+
+					}
 				}
 				else
-				{
-					prevAngle = angleDeg;
-					totalAngle += add;
+					{
 
+						if (angleDeg >= 355)
+						{
+							totalAngle = angleDeg;
+							frozen = true;
 
-				}
+						}
+						else if (angleDeg<=5)
+						{
+							frozen = true;
+							totalAngle = angleDeg;
+						}
+						else
+						{
+							totalAngle = angleDeg;
+
+						}
+					}
+				
+				
 				
 //angleDeg becomes 0, then totalAngle becomes -360
-		
+
 				// anglePrev = angleRad -anglePrev ;
 
 				 //angle compared to starting. point 
 
 
-				dial.style.webkitTransform = 'rotate('+totalAngle+'deg)'; 
-			    dial.style.mozTransform    = 'rotate('+totalAngle+'deg)'; 
-			    dial.style.msTransform     = 'rotate('+totalAngle+'deg)'; 
-			    dial.style.oTransform      = 'rotate('+totalAngle+'deg)'; 
-			    dial.style.transform       = 'rotate('+totalAngle+'5deg)'; 
-				document.getElementById("myText").innerHTML = " distance: "+distance+" yay "+" | "+ "deg: "+ totalAngle+" | rad: "+angleRad;
+				 dial.style.webkitTransform = 'rotate('+totalAngle+'deg)'; 
+				 dial.style.mozTransform    = 'rotate('+totalAngle+'deg)'; 
+				 dial.style.msTransform     = 'rotate('+totalAngle+'deg)'; 
+				 dial.style.oTransform      = 'rotate('+totalAngle+'deg)'; 
+				 dial.style.transform       = 'rotate('+totalAngle+'deg)'; 
+				 document.getElementById("myText").innerHTML = totalAngle;
 				 
 				// find the slope of first line between center to click then slope of second line between center and click
 				// find angle between the lines 
-		}
+			}
 
-function changeState(){
-			var input = document.getElementsByClassName("inputClass")[0];
-			input.value = "0";
+			function changeState(){
+				var input = document.getElementsByClassName("inputClass")[0];
+				input.value = "0";
 			// submitform(0, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 			// submitform(0, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
 			// submitform(0, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
@@ -306,10 +344,10 @@ function changeState(){
 				input.style.display = "";
 
 				for (i = 0; i <3;i++)
-					{
+				{
 					input = document.getElementsByClassName("inputClass2")[i];
 					input.style.display = "none";
-					}
+				}
 
 				input = document.getElementsByClassName("inputClass3")[0];
 				input.style.display ="none";
@@ -317,17 +355,17 @@ function changeState(){
 			}
 			else if (index == 1)
 			{
-					input = document.getElementsByClassName("inputClass")[0];
-					input.style.display = "none";
+				input = document.getElementsByClassName("inputClass")[0];
+				input.style.display = "none";
 
-					for (i = 0; i <3;i++)
-						{
-						input = document.getElementsByClassName("inputClass2")[i];
-						input.style.display = "";
-						}
+				for (i = 0; i <3;i++)
+				{
+					input = document.getElementsByClassName("inputClass2")[i];
+					input.style.display = "";
+				}
 
-					input = document.getElementsByClassName("inputClass3")[0];
-					input.style.display = "none";
+				input = document.getElementsByClassName("inputClass3")[0];
+				input.style.display = "none";
 			}
 			else if (index ==2)
 			{
@@ -335,10 +373,10 @@ function changeState(){
 				input.style.display = "none";
 
 				for (i = 0; i <3;i++)
-					{
+				{
 					input = document.getElementsByClassName("inputClass2")[i];
 					input.style.display = "none";
-					}
+				}
 
 				input = document.getElementsByClassName("inputClass3")[0];
 				input.style.display = "";
@@ -350,12 +388,12 @@ function changeState(){
 			else{
 				index = 0;
 			}
-				
+
 			
 
 			// document.getElementById("text").innerHTML = index;
 		}
-			
+
 		
 	</script>
 
