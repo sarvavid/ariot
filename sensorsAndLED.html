@@ -165,7 +165,7 @@
 				Hue: <input style="width: 35px; height: 10px" class="inputClass3" type="number" value="0">
 			</div>
 
-			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
 	</div>
@@ -194,7 +194,7 @@
 			<span id = "photoLabel">light</span>
 			<span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
 
-			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
 	</div>
@@ -229,7 +229,7 @@
 				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
 
-			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
 	</div>
@@ -264,7 +264,7 @@
 	
 			</div>
 
-			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
 	</div>
@@ -552,8 +552,8 @@
 				button.style.top = inputDiv.style.top;
 
 				var square = document.getElementsByClassName("square")[i];
-				square.style.left = "-25px";
-				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + "px";
+				square.style.left = square.parentElement.offsetWidth/2 - square.offsetWidth/2 + "px";;
+				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + inputDiv.offsetHeight/2 + "px";
 			}
 			if (markerRoot1.visible === true){
 				movingDivs[0].style.display = ""
