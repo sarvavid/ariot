@@ -224,6 +224,7 @@
 		}
 
 		var totalAngle = 0;
+		var prevAngle = 0;
 
 		function rotate(){
 				slopeAX = currentX-centerX;
@@ -255,8 +256,23 @@
 
 				}
 
-				totalAngle += angleDeg
+				add = angleDeg-prevAngle
+				
 
+				if (totalAngle >= 350)
+				{
+					prevAngle = 350;
+					totalAngle = 360;
+				}
+				else
+				{
+					prevAngle = angleDeg;
+					totalAngle += add;
+
+
+				}
+				
+//angleDeg becomes 0, then totalAngle becomes -360
 		
 				// anglePrev = angleRad -anglePrev ;
 
