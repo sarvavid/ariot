@@ -525,6 +525,8 @@
 			}
 
 			if (placed){
+				selectedSquare.style.background = "blue";
+				selectedSquare1.style.background = "blue";
 				if (selectedDevice == document.getElementsByClassName("ClockPot movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
 					if (currClockPotState == "pot"){
 						if (currLEDState == "Intensity"){
