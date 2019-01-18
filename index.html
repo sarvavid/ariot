@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!-- three.js library -->
+	<script src="AR-Toolkit.js/three.js/build/three.js"></script>
+	<!-- jsartookit -->
+	<script src="AR-Toolkit.js/vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+	<script src="AR-Toolkit.js/vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+	<!-- include threex.artoolkit -->
+	<script src="AR-Toolkit.js/src/threex/threex-artoolkitsource.js"></script>
+	<script src="AR-Toolkit.js/src/threex/threex-artoolkitcontext.js"></script>
+	<script src="AR-Toolkit.js/src/threex/threex-arbasecontrols.js"></script>
+	<script src="AR-Toolkit.js/src/threex/threex-armarkercontrols.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+	<title>LED and Sensors</title>
+
+	<script type="text/javascript">
+		// ==================================== Photon Sending/Getting Functions ==================================== //
+		function submitform( formNum, photonID, funcName, accessToken ){
+			var dataObj = {};
+			dataObj.args = formNum;
+
+			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken
+			$.post( requestURL, dataObj );
+			return false;
+		}
+
+		function getLight( photonID, funcName, accessToken ){
+			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(link, function(json) {
+        light = json.result;
+      });
+			return false;
+		}
+
+		function getTemp( photonID, funcName, accessToken ){
+			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(link, function(json) {
+        temperature = json.result;
+      });
+			return false;
+		}
+
+		function getPot( photonID, funcName, accessToken ){
+			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(link, function(json) {
+        potVal = json.result;
+      });
+			return false;
+		}
+	</script>
+
+	<style>
+		.containerDiv {
+		  border-radius: 50%;
+		  border-style: solid;
+		  border-width: 5px;
+		  border-color: #33b5e5;
+		  position: absolute;
+      height: 110px;
+      width: 110px;
+		}
+
+		.inputDiv {
+			width: 110%;
+			height: 30%;
+		  border-style: solid;
+		  border-width: 5px;
+		  border-color: black;
+		  border-radius: 25px;
+			position: absolute;
+			z-index: 1; 
+			position: absolute; 
+			text-align: center; 
+			align-items: center; 
+			color: #585858
+		}
+
+		.dial{
+	    -webkit-transition: all 0.5s ease-in-out;
+	    -moz-transition: all 0.5s ease-in-out;
+	    -o-transition: all 0.5s ease-in-out;
+	    transition: all 0.5s ease-in-out;
+		}
+		
+		.rings{
+			position: absolute;
+		}
+
+		@keyframes spin {
+		  from {
+		    transform: rotate(0deg);
+		  }
+		  to {
+		    transform: rotate(360deg);
+		  }
+		}
+
+		@-webkit-keyframes spin {
+		  from {
+		    transform: rotate(0deg);
+		  }
+		  to {
+		    transform: rotate(360deg);
+		  }
+		}
+
+		#line{
+		  stroke-width:2px;
+		  stroke:rgb(255,255,255);
+		  position: absolute;
+		  z-index: 9;
+		}
+
+		.square {
+			z-index: 1; 
+			position: absolute; 
+			width: 30px; 
+			height: 30px; 
+			background: white; 
+		}
+	</style>
+</head>
+
+<body style="margin: 0px; overflow: hidden; position: fixed; font-family: Monospace; z-index: -1;">
+
+	<div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; color: #333; line-height: 30px;">
+		<p id="text"></p>
+	</div>
+
+	<div class="LEDDiv movingDiv outputDevice" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "LEDModes">Intensity</span> </h12> 
+			<br>
+			<div class = "brightnessDiv">
+				Brightness: <input style="width: 35px; height: 10px" class="inputClass" type="number" value="0">
+			</div>
+
+			<div class = "rgbDiv" style = "display:none">
+				Red: <input style="width: 35px; height: 10px" class="inputClass2" type="number" value="0">
+				Green: <input style="width: 35px; height: 10px" class="inputClass2" type="number" value="0">
+				Blue: <input style="width: 35px; height: 10px" class="inputClass2" type="number" value="0">
+			</div>
+
+			<div class = "stripDiv" style = "display:none">
+				Hue: <input style="width: 35px; height: 10px" class="inputClass3" type="number" value="0">
+			</div>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
+
+		</div>
+	</div>
+
+	<div class="PhotoTempDiv movingDiv sensor" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "PhotoTempModes">temp</span> </h12> 
+			<br>
+			<span id = "photoLabel">light</span>
+			<span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
+
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
+
+		</div>
+	</div>
+
+	<div class="ClockPot movingDiv sensor" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRin
+			g2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "ClockPotModes">temp</span> </h12> 
+			<br>
+			<div class = "clockDiv">
+				<span id = "clockLabel">clock</span> <!-- edit the inner html -->
+			</div>
+
+			<div class = "potDiv" style = "display:none">
+				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
+			</div>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
+
+		</div>
+	</div>
+
+	<div class="LCDBuzz movingDiv outputDevice" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "LCDBuzzModes">Intensity</span> </h12> 
+			<br>
+			<div class = "LCDDiv">
+				Number: <input style="width: 35px; height: 10px" class="inputLCD" type="number" value="0">
+			</div>
+
+			<div class = "buzzDiv" style = "display:none">
+				Pitch: <input style="width: 35px; height: 10px" class="buzzInput" type="number" value="0">
+	
+			</div>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
+
+		</div>
+	</div>
+
+
+	<svg id="svg" style= " height: 100%;width:100%; position: fixed; top:0;" >
+	  <line id="line"/>
+	</svg>
+
+	<script>
+		// ====================================== Initialize Global Variables ====================================== //
+		var scene, camera, renderer;
+		var arToolkitSource, arToolkitContext;
+
+		var markerRoot1, markerRoot2, markerRoot3, markerRoot4;
+
+		// array of all functions that update the view
+		var updateFuncs = [];
+
+		var LEDStates = ["Intensity", "RGB", "Strip"];
+		var photoTempStates = ["photo", "temp"];
+		var clockPotStates = ["clock", "pot"];
+		var LCDBuzzStates = ["LCD", "Buzzer"];
+
+		var LEDIndex = 0;
+		var photoTemIndex = 0;
+		var clockPotIndex = 0;
+		var LCDBuzzIndex = 0;
+
+		var light;
+		var temperature;
+
+		var potVal = 0;
+		var time = 0;
+
+		var LCDval = 0;
+		var buzzVal = 0;
+
+		var currLEDState = "Intensity";
+		var currPhotoTempState = "photo";
+		var currClockPotState = "clock";
+		var currLCDBuzzState = "LCD";
+
+		var placed = false;
+		var down = false;
+		var line = $('#line');
+
+		var selectedSquare = null;
+		var selectedSquare1 = null;
+
+		var caramelApple = "3f0039000b47363330353437";
+		var friedOnion = "3f0035000547363332363639";
+		var cuteStation = "330017000b47363330353437"
+		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
+		var accessCode1 = "572441bc2be60abbcf8467e346129a5e9622f881"
+		var lemon = "360026000547363332363639"
+		//carolyn add lemon
+
+		// ========================================== Run Main Functions =========================================== //
+		init();
+		animate();
+
+		// ============================================ Init Function ============================================== //
+		function init(){
+			scene = new THREE.Scene();
+			camera = new THREE.Camera();
+			scene.add(camera);
+			renderer = new THREE.WebGLRenderer( {antialias : true, alpha: true} );
+			renderer.setClearColor(new THREE.Color("lightgrey"), 0)
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.domElement.style.position = "absolute"
+			renderer.domElement.style.top = "0px"
+			renderer.domElement.style.left = "0px"
+			document.body.appendChild( renderer.domElement );
+			
+			// setup arToolkitSource
+			arToolkitSource = new THREEx.ArToolkitSource({
+				sourceType : "webcam",
+			});
+
+			arToolkitSource.init(function onReady(){
+				onResize()
+			});
+			
+			// create atToolkitContext
+			arToolkitContext = new THREEx.ArToolkitContext({
+				cameraParametersUrl: "AR-Toolkit.js/data/data/camera_para.dat",
+				detectionMode: "mono"
+			})
+			
+			// copy projection matrix to camera when initialization complete
+			arToolkitContext.init(function onCompleted(){
+				camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+			});
+
+			// build markerControls for marker1
+			markerRoot1 = new THREE.Group
+			scene.add(markerRoot1)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/LEDs.patt"
+			})
+
+			// build markerControls for marker2
+			markerRoot2 = new THREE.Group
+			scene.add(markerRoot2)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/Heat&Light.patt"
+			})
+
+			// build markerControls for marker3
+			markerRoot3 = new THREE.Group
+			scene.add(markerRoot3)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot3, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/Potentiometer&Clock.patt"
+			})
+
+			markerRoot4 = new THREE.Group
+			scene.add(markerRoot4)
+			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot4, {
+				type: "pattern",
+				patternUrl: "modulAR-iot-images/Display&Speaker.patt"//change this url
+			})
+
+			// event handlers
+			window.addEventListener("resize", onResize)
+			window.addEventListener("orientationchange", changeOrientation);
+			window.addEventListener('touchstart', preventZoom);
+		}
+
+		function changeOrientation () {
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		}
+
+		// ============================= Functions that Update States/Modes ========================================= //
+		updateFuncs.push(function updateScanner(){
+			if (document.querySelector(".scanningSpinner") != null){
+				if (markerRoot1.visible === true || markerRoot2.visible === true || markerRoot3.visible === true || markerRoot4.visible === true){
+					document.querySelector(".scanningSpinner").style.display = "none"
+				}
+				else {
+					document.querySelector(".scanningSpinner").style.display = ""
+				}
+			}
+		});
+
+		window.setInterval(function(){
+			currLEDState = LEDStates[LEDIndex];
+			currLCDBuzzState = LCDBuzzStates[LCDBuzzIndex];
+			currPhotoTempState = photoTempStates[photoTemIndex];
+			currClockPotState = clockPotStates[clockPotIndex];
+
+
+			document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
+			document.getElementById("PhotoTempModes").innerHTML = " " + currPhotoTempState;
+			document.getElementById("ClockPotModes").innerHTML = " " + currClockPotState;
+			document.getElementById("LCDBuzzModes").innerHTML = " " + currLCDBuzzState; 
+
+			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
+			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
+			var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
+
+			var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
+			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
+			var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
+
+			var photoDisplay = document.getElementById("photoLabel");
+			var tempDisplay = document.getElementById("tempLabel");
+
+			var clockDisplay = document.getElementsByClassName("clockDiv")[0];
+			var clockLabel = document.getElementById("clockLabel");
+			var potDisplay = document.getElementsByClassName("potDiv")[0];
+			var potInput = document.getElementsByClassName("potInput")[0];
+
+			var inputLCDState = document.getElementsByClassName("inputLCD")[0];
+			var inputBuzzState = document.getElementsByClassName("buzzInput")[0];
+			var inputLCDStateDisplay = document.getElementsByClassName("LCDDiv")[0];
+			var inputBuzzStateDisplay = document.getElementsByClassName("buzzDiv")[0];
+
+			if (markerRoot1.visible === true){
+				if (currLEDState == "Intensity"){
+					submitform(parseInt(inputLEDStateReg.value), caramelApple, "changeIntensity", accessCode);
+					//change the display 
+					inputLEDStateBrightnessDisplay.style.display = "";
+					inputLEDStateRGBDisplay.style.display = "none";
+					inputLEDStateStripDisplay.style.display ="none";
+				}
+				else if (currLEDState == "RGB"){
+					var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"];
+					for (var i = 0; i < 3; i++){
+						submitform(parseInt(inputLEDStateRGBArray[i].value), caramelApple, rbgFuncs[i], accessCode);
+					}
+					//change the display
+					inputLEDStateBrightnessDisplay.style.display = "none";
+					inputLEDStateRGBDisplay.style.display = "";
+					inputLEDStateStripDisplay.style.display = "none";
+				}
+				else if (currLEDState == "Strip"){
+					submitform(parseInt(inputLEDStateStrip.value), caramelApple, "changeColorStrip", accessCode);
+					//change the display
+					inputLEDStateBrightnessDisplay.style.display = "none";
+					inputLEDStateRGBDisplay.style.display = "none";
+					inputLEDStateStripDisplay.style.display = "";
+				}
+			}
+			if (markerRoot2.visible === true){
+				if (currPhotoTempState == "photo"){
+					getLight(friedOnion, "getVal", accessCode);
+					photoDisplay.innerHTML = "Light: " + light;
+					//change the display 
+					photoDisplay.style.display = "";
+					tempDisplay.style.display = "none";
+				}
+				else if (currPhotoTempState == "temp"){
+					getTemp(friedOnion, "getTemp", accessCode);
+					tempDisplay.innerHTML = "Temp: " + temp;
+					//change the display 
+					photoDisplay.style.display = "none";
+					tempDisplay.style.display = "";
+				}
+			}
+			if (markerRoot3.visible === true){
+				if (currClockPotState == "clock"){
+					var date = new Date();
+					clockLabel.innerHTML = "Seconds: " + date.getSeconds();
+					//change the display 
+					clockDisplay.style.display = "";
+					potDisplay.style.display = "none";
+				}
+				else if (currClockPotState == "pot"){
+					submitform(parseInt(potInput.value), cuteStation, "setPot", accessCode);
+					potVal = getPot(cuteStation, "getPot", accessCode);
+					//change the display 
+					clockDisplay.style.display = "none";
+					potDisplay.style.display = "";
+				}
+			}
+
+			if (markerRoot4.visible === true){
+				if (currLCDBuzzState == "LCD"){
+					submitform(parseInt(inputLCDState.value), lemon, "changeText", accessCode1);
+					//change the display 
+					inputLCDStateDisplay.style.display = "";
+					inputBuzzStateDisplay.style.display = "none";
+				}
+				else if (currLCDBuzzState == "Buzzer"){
+					submitform(parseInt(inputBuzzState.value), lemon, "changeIntensity", accessCode1);
+					
+					//change the display
+					inputLCDStateDisplay.style.display = "none";
+					inputBuzzStateDisplay.style.display = "";
+				}
+				
+			}
+
+			if (placed){
+				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
+						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
+						.attr('x2',selectedSquare1.getBoundingClientRect().x+selectedSquare1.getBoundingClientRect().width/2)
+						.attr('y2',selectedSquare1.getBoundingClientRect().y+selectedSquare1.getBoundingClientRect().height/2);
+			}
+		}, 100);
+
+		updateFuncs.push(function updateDivs(){
+			var movingDivs = document.getElementsByClassName("movingDiv");
+			for (var i = 0; i < movingDivs.length; i++){
+				for (var j = 0; j < 4*movingDivs.length; j++){
+					var rings = document.getElementsByClassName("rings")[j];
+					rings.style.left = rings.parentElement.offsetWidth/2 - rings.offsetWidth/2 + "px";
+					rings.style.top = rings.parentElement.offsetHeight/2 - rings.offsetHeight/2 + "px";
+				}
+
+				var dial = document.getElementsByClassName("dial")[i];
+				dial.style.left = dial.parentElement.offsetWidth/2 - dial.offsetWidth/2 + "px";
+				dial.style.top = dial.parentElement.offsetHeight/2 - dial.offsetHeight/2 + "px";
+
+				var inputDiv = document.getElementsByClassName("inputDiv")[i];
+				inputDiv.style.left = inputDiv.parentElement.offsetWidth/2 - inputDiv.offsetWidth/2 + "px";
+				inputDiv.style.top = inputDiv.parentElement.offsetHeight/2 - inputDiv.offsetHeight/2 + "px";
+
+				var button = document.getElementsByClassName("buttonClass")[i];
+				button.style.left = inputDiv.offsetWidth + 10 + "px";
+				button.style.top = inputDiv.style.top;
+
+				var square = document.getElementsByClassName("square")[i];
+				square.style.left = square.parentElement.offsetWidth/2 - square.offsetWidth/2 + "px";;
+				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + inputDiv.offsetHeight/2 + "px";
+			}
+			if (markerRoot1.visible === true){
+				movingDivs[0].style.display = ""
+				var proj = toScreenPosition(markerRoot1, camera);
+				movingDivs[0].style.left = proj.x - movingDivs[0].offsetWidth/2 + 'px';
+				movingDivs[0].style.top = proj.y - movingDivs[0].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[0].style.display = "none"
+			}
+			if (markerRoot2.visible === true){
+				movingDivs[1].style.display = ""
+				var proj = toScreenPosition(markerRoot2, camera);
+				movingDivs[1].style.left = proj.x - movingDivs[1].offsetWidth/2 + 'px';
+				movingDivs[1].style.top = proj.y - movingDivs[1].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[1].style.display = "none"
+			}
+
+			if (markerRoot3.visible === true){
+				movingDivs[2].style.display = ""
+				var proj = toScreenPosition(markerRoot3, camera);
+				movingDivs[2].style.left = proj.x - movingDivs[2].offsetWidth/2 + 'px';
+				movingDivs[2].style.top = proj.y - movingDivs[2].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[2].style.display = "none"
+			}
+
+			if (markerRoot4.visible === true){
+				movingDivs[3].style.display = ""
+				var proj = toScreenPosition(markerRoot4, camera);
+				movingDivs[3].style.left = proj.x - movingDivs[3].offsetWidth/2 + 'px';
+				movingDivs[3].style.top = proj.y - movingDivs[3].offsetHeight/2 + 'px';
+			}
+			else {
+				movingDivs[3].style.display = "none"
+			}
+		});
+
+		function toScreenPosition(obj, camera) {
+	    var vector = new THREE.Vector3();
+
+	    var widthHalf = 0.5*renderer.context.canvas.width;
+	    var heightHalf = 0.5*renderer.context.canvas.height;
+
+	    obj.updateMatrixWorld();
+	    vector.setFromMatrixPosition(obj.matrixWorld);
+	    vector.project(camera);
+
+	    vector.x = ( vector.x * widthHalf ) + widthHalf; // 200 to 400
+	    vector.y = - ( vector.y * heightHalf ) + heightHalf; // 100 to 400
+
+	    return { 
+        x: vector.x,
+        y: vector.y
+	    };
+		};
+
+		function changeState(){
+			if (markerRoot1.visible === true){
+				if (LEDIndex < LEDStates.length - 1){
+					LEDIndex += 1;
+				}
+				else{
+					LEDIndex = 0;
+				}
+			}
+			if (markerRoot2.visible === true){
+				if (photoTemIndex < photoTempStates.length - 1){
+					photoTemIndex += 1;
+				}
+				else{
+					photoTemIndex = 0;
+				}
+			}
+			if (markerRoot3.visible === true){
+				if (clockPotIndex < clockPotStates.length - 1){
+					clockPotIndex += 1;
+				}
+				else{
+					clockPotIndex = 0;
+				}
+			}
+			if (markerRoot4.visible === true){
+				if (LCDBuzzIndex < LCDBuzzStates.length - 1){
+					LCDBuzzIndex += 1;
+				}
+				else{
+					LCDBuzzIndex = 0;
+				}
+			}
+
+		}
+
+		updateFuncs.push(function updateARtoolkit(){
+			// update artoolkit on every frame
+			if (arToolkitSource.ready !== false){
+				arToolkitContext.update( arToolkitSource.domElement );
+			}
+		});
+
+		function onResize(){
+			arToolkitSource.onResizeElement()
+			arToolkitSource.copyElementSizeTo(renderer.domElement)	
+			if (arToolkitContext.arController !== null){
+				arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
+			}
+		}
+
+		// ======================================= Mouse and Touch Events ========================================== //
+		window.onmousedown = window.ontouchstart = function(){
+			var squareArr = document.getElementsByClassName("square");
+			for (var i = 0; i < squareArr.length; i++) {
+				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
+					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
+					down = true;
+					placed = false;
+					selectedSquare = squareArr[i];
+				}
+			}
+		}
+
+		function isClose(p1, p2, len) {
+			return Math.abs(p1 - p2) <= len;
+		}
+
+		window.onmouseup = window.ontouchend = function(){
+			
+			var squareArr = document.getElementsByClassName("square");
+			for (var i = 0; i < squareArr.length; i++) {
+				if(down && squareArr[i] != selectedSquare &&
+					 isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
+					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
+					placed = true;
+					selectedSquare1 = squareArr[i];
+				}
+			}
+			down = false;
+			selectedSquare = null;
+			if (!placed) {
+				line.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',0)
+						.attr('y2',0);
+
+			}
+		}
+
+		window.onmousemove = window.ontouchmove = function(){
+			if (down && selectedSquare != null){
+				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
+						.attr('y1',0)
+						.attr('x2',event.clientX||event.touches[0].clientX)
+						.attr('y2',event.clientY||event.touches[0].clientY);
+			}
+		}
+		//selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2
+
+		function preventZoom(e) {
+		  var t2 = e.timeStamp;
+		  var t1 = e.currentTarget.dataset.lastTouch || t2;
+		  var dt = t2 - t1;
+		  var fingers = e.touches.length;
+		  e.currentTarget.dataset.lastTouch = t2;
+
+		  if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+		  e.preventDefault();
+		  e.target.click();
+		}
+
+		// ========================================== Animate and Render =========================================== //
+		function render(){
+			renderer.render( scene, camera );
+		}
+
+		function animate(){
+			requestAnimationFrame(animate);
+
+			// runs all update functions 
+			updateFuncs.forEach(function(func){ func(); });
+
+			render();
+		}
+	</script>
+
+	<!-- Scanning animation when the marker are not visible -->
+	<div class="scanningSpinner">
+		<label>
+			Scanning
+		</label>
+		<div class="rect1"></div>
+		<div class="rect2"></div>
+		<div class="rect3"></div>
+	</div>
+	<style>
+	.scanningSpinner {
+		margin: 100px auto;
+		height: 40px;
+		text-align: center;
+		position: fixed;
+		width:100%;
+	}
+
+	.scanningSpinner label {
+		display: block;
+		color: #333;
+		font-size: 200%;
+	}
+
+	.scanningSpinner > div {
+		background-color: #333;
+		height: 100%;
+		width: 6px;
+		display: inline-block;
+		
+		-webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+		animation: sk-stretchdelay 1.2s infinite ease-in-out;
+	}
+
+	.scanningSpinner .rect2 {
+		-webkit-animation-delay: -1.1s;
+		animation-delay: -1.1s;
+	}
+
+	.scanningSpinner .rect3 {
+		-webkit-animation-delay: -1.0s;
+		animation-delay: -1.0s;
+	}
+
+	@-webkit-keyframes sk-stretchdelay {
+		0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+		20% { -webkit-transform: scaleY(1.0) }
+	}
+
+	@keyframes sk-stretchdelay {
+		0%, 40%, 100% { 
+			transform: scaleY(0.4);
+			-webkit-transform: scaleY(0.4);
+			}
+		20% { 
+			transform: scaleY(1.0);
+			-webkit-transform: scaleY(1.0);
+		}
+	}
+	</style>
+</body>
