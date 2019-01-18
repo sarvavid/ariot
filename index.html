@@ -673,7 +673,7 @@
 						squareArr[i].style.background = "white";
 					}
 
-					if (!placed && selectedSquare != null && selectedSquare1 != null && squareArr[i] != selectedSquare){
+					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare){
 						selectedSquare1 = squareArr[i];
 						selectedSquare1.style.background = "green";
 						placed = true;
