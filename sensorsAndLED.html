@@ -90,6 +90,21 @@
 		    transform: rotate(360deg);
 		  }
 		}
+
+		#line{
+		  stroke-width:2px;
+		  stroke:rgb(0,0,0);
+		  position: absolute;
+		  z-index: 9;
+		}
+
+		.square {
+			z-index: 1; 
+			position: absolute; 
+			width: 20px; 
+			height: 20px; 
+			background: black; 
+		}
 	</style>
 </head>
 
@@ -100,6 +115,7 @@
 	</div>
 
 	<div class="LEDDiv movingDiv" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
 		<div class = "dial" style="opacity: 0.5; width:100%;height:100%;">
 			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
 		</div>
@@ -187,7 +203,7 @@
 			<h12> Mode: <span id = "ClockPotModes">temp</span> </h12> 
 			<br>
 			<div class = "clockDiv">
-				<span class = "clock">clock</span> <!-- edit the inner html -->
+				<span class = "clockLabel">clock</span> <!-- edit the inner html -->
 			</div>
 
 			<div class = "potDiv" style = "display:none">
@@ -198,6 +214,10 @@
 
 		</div>
 	</div>
+
+	<svg id="svg" style= " height: 100%;width:100%; position: fixed; top:0;" >
+	  <line id="line"/>
+	</svg>
 
 	<script>
 		// ====================================== Initialize Global Variables ====================================== //
