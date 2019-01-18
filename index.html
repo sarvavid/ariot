@@ -767,12 +767,11 @@
 						selectedDevice = selectedSquare.parentElement;
 					}
 
-					else if(squareArr[i] == selectedSquare){
+					if(squareArr[i] == selectedSquare){
 						selectedSquare = null;
 						selectedDevice = null;
 						squareArr[i].style.background = "white";
 						placed = false;
-						alert(selectedSquare)
 					}
 
 					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare && squareArr[i].parentElement.className.endsWith("outputDevice")){
