@@ -668,10 +668,11 @@
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
 					}
-					
+
 					if(squareArr[i] == selectedSquare){
 						selectedSquare = null;
 						squareArr[i].style.background = "white";
+						placed = false;
 					}
 
 					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare){
@@ -683,6 +684,7 @@
 					if (squareArr[i] == selectedSquare1){
 						squareArr[i].style.background = "white";
 						selectedSquare1 = null;
+						placed = false;
 					}
 				}
 			}
