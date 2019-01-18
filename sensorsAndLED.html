@@ -50,7 +50,7 @@
 		}
 	</script>
 
-	<title>testing</title>
+	<title>LED and Sensors</title>
 
 	<style>
 		.containerDiv {
@@ -342,6 +342,7 @@
 			// event handlers
 			window.addEventListener("resize", onResize)
 			window.addEventListener("orientationchange", changeOrientation);
+			window.addEventListener('touchstart', preventZoom);
 		}
 
 		function changeOrientation () {
@@ -519,8 +520,6 @@
 			}
 		});
 
-
-
 		function toScreenPosition(obj, camera) {
 	    var vector = new THREE.Vector3();
 
@@ -583,10 +582,6 @@
 		}
 
 		// ======================================= Mouse and Touch Events ========================================== //
-		window.onmousedown = window.ontouchstart = function(){
-			event.preventDefault();
-		}
-
 		window.onmousemove = window.ontouchmove = function(){
 			if (down){
 				line.attr('x2',event.clientX||event.touches[0].clientX).attr('y2',event.clientY||event.touches[0].clientY);
@@ -598,6 +593,19 @@
 			if (!placed) {
 				line.attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',0);
 			}
+		}
+
+		function preventZoom(e) {
+		  var t2 = e.timeStamp;
+		  var t1 = e.currentTarget.dataset.lastTouch || t2;
+		  var dt = t2 - t1;
+		  var fingers = e.touches.length;
+		  e.currentTarget.dataset.lastTouch = t2;
+
+		  if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+
+		  e.preventDefault();
+		  e.target.click();
 		}
 
 		// ========================================== Animate and Render =========================================== //
