@@ -319,6 +319,8 @@
 		var friedOnion = "3f0035000547363332363639";
 		var cuteStation = "330017000b47363330353437"
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
+		var accessCode1 = "572441bc2be60abbcf8467e346129a5e9622f881"
+		var lemon = "360026000547363332363639"
 		//carolyn add lemon
 
 		// ========================================== Run Main Functions =========================================== //
@@ -386,7 +388,7 @@
 			scene.add(markerRoot4)
 			var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot4, {
 				type: "pattern",
-				patternUrl: "modulAR-iot-images/LEDs.patt"//change this url
+				patternUrl: "modulAR-iot-images/Display&Speaker.patt"//change this url
 			})
 
 			// event handlers
@@ -511,7 +513,7 @@
 					inputBuzzStateDisplay.style.display = "none";
 				}
 				else if (currLCDBuzzState == "Buzzer"){
-					submitform(parseInt(inputBuzzState.value), lemon, "changeIntensity", accessCode);
+					submitform(parseInt(inputBuzzState.value), lemon, "changeIntensity", accessCode1);
 					
 					//change the display
 					inputLCDStateDisplay.style.display = "none";
