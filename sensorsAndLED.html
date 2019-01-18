@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensors69</title>
+	<title>LED and Sensors</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -271,6 +271,7 @@
 		var line = $('#line');
 
 		var selectedSquare = null;
+		var selectedSquare1 = null;
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
@@ -443,6 +444,12 @@
 					potDisplay.style.display = "";
 				}
 			}
+			if (placed){
+				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
+						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
+						.attr('x1',selectedSquare1.getBoundingClientRect().x+selectedSquare1.getBoundingClientRect().width/2)
+						.attr('y2',selectedSquare1.getBoundingClientRect().y+selectedSquare1.getBoundingClientRect().height/2);
+			}
 		}, 100);
 
 		updateFuncs.push(function updateDivs(){
@@ -577,6 +584,7 @@
 					 isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
 					placed = true;
+					selectedSquare1 = squareArr[i];
 				}
 			}
 		}
@@ -595,7 +603,7 @@
 			}
 		}
 
-		window.ontouchmove = function(event){
+		window.onmousemove = window.ontouchmove = function(){
 			if (down && selectedSquare != null){
 				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
 						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
