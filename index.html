@@ -668,7 +668,7 @@
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
 					}
-					else{
+					if(squareArr[i] == selectedSquare){
 						selectedSquare = null;
 						squareArr[i].style.background = "white";
 					}
