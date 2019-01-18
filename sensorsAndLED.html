@@ -103,7 +103,7 @@
 			position: absolute; 
 			width: 20px; 
 			height: 20px; 
-			background: black; 
+			background: gray; 
 		}
 	</style>
 </head>
@@ -360,8 +360,8 @@
 
 			var clockDisplay = document.getElementsByClassName("clockDiv")[0];
 			var clockLabel = document.getElementsByClassName("clockLabel")[0];
-			var potInput = document.getElementsByClassName("potInput")[0];
 			var potDisplay = document.getElementsByClassName("potDiv")[0];
+			var potInput = document.getElementsByClassName("potInput")[0];
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
@@ -443,6 +443,10 @@
 				var button = document.getElementsByClassName("buttonClass")[i];
 				button.style.left = inputDiv.offsetWidth + 10 + "px";
 				button.style.top = inputDiv.style.top;
+
+				var square = document.getElementsByClassName("square")[i];
+				square.style.left = square.offsetWidth/2 + "px";
+				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + "px";
 			}
 
 			if (markerRoot1.visible === true){
