@@ -444,6 +444,8 @@
 			var potDisplay = document.getElementsByClassName("potDiv")[0];
 			var potInput = document.getElementsByClassName("potInput")[0];
 
+			var date = new Date();
+
 			var inputLCDState = document.getElementsByClassName("inputLCD")[0];
 			var inputBuzzState = document.getElementsByClassName("buzzInput")[0];
 			var inputLCDStateDisplay = document.getElementsByClassName("LCDDiv")[0];
@@ -493,7 +495,6 @@
 			}
 			if (markerRoot3.visible === true){
 				if (currClockPotState == "clock"){
-					var date = new Date();
 					clockLabel.innerHTML = "Seconds: " + date.getSeconds();
 					//change the display 
 					clockDisplay.style.display = "";
@@ -525,8 +526,33 @@
 			}
 
 			if (placed){
-				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
-
+				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
+					if (currClockPotState == "pot"){
+						if (currLEDState == "Intensity"){
+							inputLEDStateReg.value = parseInt(potInput.value);
+						}
+						else if (currLEDState == "RGB"){
+							for (var i = 0; i < 3; i++){
+								inputLEDStateRGBArray[i].value = parseInt(potInput.value);
+							}
+						}
+						else if (currLEDState == "Strip"){
+							inputLEDStateStrip.value = parseInt(potInput.value);
+						}
+					}
+					else if (currClockPotState == "clock"){
+						if (currLEDState == "Intensity"){
+							inputLEDStateReg.value = date.getSeconds();
+						}
+						else if (currLEDState == "RGB"){
+							for (var i = 0; i < 3; i++){
+								inputLEDStateRGBArray[i].value = date.getSeconds();
+							}
+						}
+						else if (currLEDState == "Strip"){
+							inputLEDStateStrip.value = date.getSeconds();
+						}
+					}
 				}
 			}
 		}, 100);
