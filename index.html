@@ -525,7 +525,7 @@
 			}
 
 			if (placed){
-				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor")){
+				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
 
 				}
 			}
@@ -672,10 +672,10 @@
 			for (var i = 0; i < squareArr.length; i++) {
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
-					if (selectedSquare == null){
+					if (selectedSquare == null && squareArr[i].parentElement.className.endsWith("sensor")){
 						alert (selectedSquare);
 						selectedSquare = squareArr[i];
-						selectedSquare.style.background = "green";
+						selectedSquare.style.background = "red";
 						selectedDevice = selectedSquare.parentElement;
 					}
 
@@ -686,7 +686,7 @@
 						placed = false;
 					}
 
-					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare){
+					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare && squareArr[i].parentElement.className.endsWith("outputDevice")){
 						selectedSquare1 = squareArr[i];
 						selectedDevice1 = selectedSquare1.parentElement;
 						selectedSquare1.style.background = "green";
