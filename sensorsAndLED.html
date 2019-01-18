@@ -444,7 +444,7 @@
 			var inputLCDState = document.getElementsByClassName("inputLCD")[0];
 			var inputBuzzState = document.getElementsByClassName("buzzInput")[0];
 			var inputLCDStateDisplay = document.getElementsByClassName("LCDDiv")[0];
-			var inputLEDStateRGBDisplay = document.getElementsByClassName("buzzDiv")[0];
+			var inputBuzzStateDisplay = document.getElementsByClassName("buzzDiv")[0];
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
@@ -507,7 +507,7 @@
 
 			if (markerRoot4.visible === true){
 				if (currLCDBuzzState == "LCD"){
-					submitform(parseInt(inputLCDState.value), lemon, "changeText", accessCode);
+					submitform(parseInt(inputLCDState.value), lemon, "changeText", accessCode1);
 					//change the display 
 					inputLCDStateDisplay.style.display = "";
 					inputBuzzStateDisplay.style.display = "none";
