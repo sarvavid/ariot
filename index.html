@@ -315,6 +315,9 @@
 		var selectedSquare = null;
 		var selectedSquare1 = null;
 
+		var selectedDevice = null;
+		var selectedDevice1 = null;
+
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
 		var cuteStation = "330017000b47363330353437"
@@ -665,18 +668,22 @@
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
 					if (selectedSquare == null){
+						alert (999);
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
+						selectedDevice = selectedSquare.parentElement;
 					}
 
 					if(squareArr[i] == selectedSquare){
 						selectedSquare = null;
+						selectedDevice = null;
 						squareArr[i].style.background = "white";
 						placed = false;
 					}
 
 					if (!placed && selectedSquare != null && selectedSquare1 == null && squareArr[i] != selectedSquare){
 						selectedSquare1 = squareArr[i];
+						selectedDevice1 = selectedSquare1.parentElement;
 						selectedSquare1.style.background = "green";
 						placed = true;
 					}
@@ -684,6 +691,7 @@
 					if (squareArr[i] == selectedSquare1){
 						squareArr[i].style.background = "white";
 						selectedSquare1 = null;
+						selectedDevice1 = null;
 						placed = false;
 					}
 				}
