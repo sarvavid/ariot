@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<title>ultra and mic sensors</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			function getUltra( photonID, funcName, accessToken )
+			{
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+				$.getJSON(link, function(json) {
+         			ultraVal = json.result;
+        		});
+				return false;
+			}
+
+			function getMic( photonID, funcName, accessToken )
+			{
+				let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+				$.getJSON(link, function(json) {
+		         	micVal = json.result;
+		        });
+				return false;
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<div id="state"></div><br/>
+			<button type="button" onclick="changeState();">click me</button>
+			<div id="result">0</div>
+			<div id="label"></div>
+		</center>
+		<script type="text/javascript">
+			var stateLabel = document.getElementById("state");
+			var states = ["ultra", "mic"]
+			var index = 0;
+			var currState = states[index];
+
+			var currData = 0;
+			var ultraVal;
+			var micVal;
+
+			window.setInterval(function(){
+				currState = states[index];
+				stateLabel.innerHTML = currState;
+
+
+				if (currState == "ultra"){
+					getUltra("200043000447363332363639", "getUltra", "572441bc2be60abbcf8467e346129a5e9622f881");
+					document.getElementById("result").innerHTML = ultraVal;
+				}
+				else if (currState == "mic"){
+					getMic("200043000447363332363639", "getMic", "572441bc2be60abbcf8467e346129a5e9622f881");
+					document.getElementById("result").innerHTML = micVal;
+				}
+			}, 100);
+
+			function changeState(){
+				currData = "loading";
+				if (index < states.length - 1){
+					index += 1
+				}
+				else{
+					index = 0
+				}
+			}
+		</script>
+	</body>
+</html>

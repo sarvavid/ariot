@@ -555,7 +555,6 @@
 				square.style.left = "-25px";
 				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + "px";
 			}
-
 			if (markerRoot1.visible === true){
 				movingDivs[0].style.display = ""
 				var proj = toScreenPosition(markerRoot1, camera);
@@ -565,7 +564,6 @@
 			else {
 				movingDivs[0].style.display = "none"
 			}
-
 			if (markerRoot2.visible === true){
 				movingDivs[1].style.display = ""
 				var proj = toScreenPosition(markerRoot2, camera);
@@ -575,6 +573,7 @@
 			else {
 				movingDivs[1].style.display = "none"
 			}
+
 			if (markerRoot3.visible === true){
 				movingDivs[2].style.display = ""
 				var proj = toScreenPosition(markerRoot3, camera);
@@ -645,7 +644,7 @@
 					LCDBuzzIndex += 1;
 				}
 				else{
-					LCDIndex = 0;
+					LCDBuzzIndex = 0;
 				}
 			}
 
@@ -703,7 +702,6 @@
 						.attr('y2',0);
 
 			}
-			alert (line.attr ('x1'));
 		}
 
 		window.onmousemove = window.ontouchmove = function(){
