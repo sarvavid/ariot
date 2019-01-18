@@ -206,7 +206,7 @@
 			<h12> Mode: <span id = "ClockPotModes">temp</span> </h12> 
 			<br>
 			<div class = "clockDiv">
-				<span class = "clockLabel">clock</span> <!-- edit the inner html -->
+				<span id = "clockLabel">clock</span> <!-- edit the inner html -->
 			</div>
 
 			<div class = "potDiv" style = "display:none">
@@ -369,7 +369,7 @@
 			var tempDisplay = document.getElementById("tempLabel");
 
 			var clockDisplay = document.getElementsByClassName("clockDiv")[0];
-			var clockLabel = document.getElementsByClassName("clockLabel")[0];
+			var clockLabel = document.getElementById("clockLabel")[0];
 			var potDisplay = document.getElementsByClassName("potDiv")[0];
 			var potInput = document.getElementsByClassName("potInput")[0];
 
