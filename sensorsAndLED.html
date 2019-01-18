@@ -191,7 +191,7 @@
 			</div>
 
 			<div class = "pot" style = "display:none">
-				Pot Val: <input style="width: 35px; height: 10px" id="potInput" type="number" value="0">
+				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
 
 			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
@@ -339,7 +339,7 @@
 			var tempDisplay = document.getElementById("tempLabel");
 
 			var clockDisplay = document.getElementsByClassName("clock")[0];
-			var potInput = document.getElementById("potInput");
+			var potInput = document.getElementsByClassName("potInput")[0];
 			var potDisplay = document.getElementsByClassName("pot")[0];
 
 			if (markerRoot1.visible === true){
