@@ -425,7 +425,7 @@
 				}
 				else if (currClockPotState == "pot"){
 					submitform(parseInt(potInput.value), cuteStation, "setPot", accessCode);
-					potVal = getData(cuteStation, "getPot", accessCode)
+					potVal = getData(cuteStation, "getPot", accessCode);
 					//change the display 
 					clockDisplay.style.display = "none";
 					potDisplay.style.display = "";
@@ -455,7 +455,7 @@
 				button.style.top = inputDiv.style.top;
 
 				var square = document.getElementsByClassName("square")[i];
-				square.style.left = square.offsetWidth/2 + "px";
+				square.style.left = "0px";
 				square.style.top = square.parentElement.offsetHeight/2 - square.offsetHeight/2 + "px";
 			}
 
