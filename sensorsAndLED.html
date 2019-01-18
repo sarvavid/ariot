@@ -221,6 +221,7 @@
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
+		var cuteStation = "330017000b47363330353437"
 		var accessCode = "3217c92c98c9e40168c4bb6c44ddd546fc307d32";
 
 		// ========================================== Run Main Functions =========================================== //
@@ -300,7 +301,7 @@
 		// ============================= Functions that Update States/Modes ========================================= //
 		updateFuncs.push(function updateScanner(){
 			if (document.querySelector(".scanningSpinner") != null){
-				if (markerRoot1.visible === true && markerRoot2.visible === true){
+				if (markerRoot1.visible === true || markerRoot2.visible === true || markerRoot3.visible === true){
 					document.querySelector(".scanningSpinner").style.display = "none"
 				}
 				else {
@@ -320,7 +321,7 @@
 
 			var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
 			var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
-			var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0].value;
+			var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
 
 			var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
 			var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
@@ -380,15 +381,15 @@
 					var date = new Date();
 					clockDisplay.innerHTML = "Time: " + date.getTime();
 					//change the display 
-					photoDisplay.style.display = "";
-					tempDisplay.style.display = "none";
+					clockDisplay.style.display = "";
+					potDisplay.style.display = "none";
 				}
 				else if (currClockPotState == "pot"){
-					temp = getData(friedOnion, "getTemp", accessCode);
-					tempDisplay.innerHTML = "Temp: " + temp;
+					submitform(parseInt(inputLEDStateRGBArray[i].value), cuteStation, "setPot", accessCode);
+					potVal = getData(cuteStation, "getPot", accessCode)
 					//change the display 
-					photoDisplay.style.display = "none";
-					tempDisplay.style.display = "";
+					clockDisplay.style.display = "none";
+					potDisplay.style.display = "";
 				}
 			}
 		}, 100);
