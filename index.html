@@ -769,7 +769,7 @@
 						placed = false;
 					}
 
-					if (selectedSquare == null && squareArr[i].parentElement.className.endsWith("sensor")){
+					if (squareArr[i].parentElement.className.endsWith("sensor")){
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "red";
 						selectedDevice = selectedSquare.parentElement;
