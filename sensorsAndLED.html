@@ -148,7 +148,8 @@
 			<div class = "stripDiv" style = "display:none">
 				Hue: <input style="width: 35px; height: 10px" class="inputClass3" type="number" value="0">
 			</div>
-			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
 
 		</div>
 	</div>
@@ -176,7 +177,7 @@
 			<span id = "photoLabel">light</span>
 			<span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
 
-			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
 
 		</div>
 	</div>
@@ -210,7 +211,7 @@
 				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
 
-			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
 
 		</div>
 	</div>
@@ -246,6 +247,13 @@
 		var currLEDState = "Intensity";
 		var currPhotoTempState = "photo";
 		var currClockPotState = "clock";
+
+		var placed = false;
+		var down = false;
+		var line = $('#line');
+
+		var x1;
+		var y1;
 
 		var caramelApple = "3f0039000b47363330353437";
 		var friedOnion = "3f0035000547363332363639";
