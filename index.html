@@ -664,10 +664,11 @@
 			for (var i = 0; i < squareArr.length; i++) {
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
-					if (squareArr[i] != selectedSquare && selectedSquare == null){
+					if (selectedSquare == null){
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
 					}
+					
 					if(squareArr[i] == selectedSquare){
 						selectedSquare = null;
 						squareArr[i].style.background = "white";
