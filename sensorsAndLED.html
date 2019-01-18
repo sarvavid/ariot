@@ -186,11 +186,11 @@
 
 			<h12> Mode: <span id = "ClockPotModes">temp</span> </h12> 
 			<br>
-			<div class = "clockLabel">
+			<div class = "clockDiv">
 				<span class = "clock">clock</span> <!-- edit the inner html -->
 			</div>
 
-			<div class = "potLabel" style = "display:none">
+			<div class = "potDiv" style = "display:none">
 				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
 
@@ -338,9 +338,10 @@
 			var photoDisplay = document.getElementById("photoLabel");
 			var tempDisplay = document.getElementById("tempLabel");
 
-			var clockDisplay = document.getElementsByClassName("clockLabel")[0];
+			var clockDisplay = document.getElementsByClassName("clockDiv")[0];
+			var clockLabel = document.getElementsByClassName("clockLabel")[0];
 			var potInput = document.getElementsByClassName("potInput")[0];
-			var potDisplay = document.getElementsByClassName("potLabel")[0];
+			var potDisplay = document.getElementsByClassName("potDiv")[0];
 
 			if (markerRoot1.visible === true){
 				if (currLEDState == "Intensity"){
