@@ -14,7 +14,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-	<title>LED and Sensors</title>
+	<title>LED and Sensors1</title>
 
 	<script type="text/javascript">
 		// ==================================== Photon Sending/Getting Functions ==================================== //
@@ -505,6 +505,7 @@
 			var squareArr = document.getElementsByClassName("square");
 			for (i = 0; i < squareArr.length; i++) {
 				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
+					alert("njcencjnen");
 						down = true;
 						placed = false;
 						x1 = event.clientX || event.touches[0].clientX;
