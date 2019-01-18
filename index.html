@@ -75,7 +75,7 @@
 			position: absolute; 
 			text-align: center; 
 			align-items: center; 
-			color: #585858
+			color: #333;
 		}
 
 		.dial{
@@ -521,13 +521,6 @@
 				}
 				
 			}
-
-			if (placed){
-				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
-						.attr('y1',selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2)
-						.attr('x2',selectedSquare1.getBoundingClientRect().x+selectedSquare1.getBoundingClientRect().width/2)
-						.attr('y2',selectedSquare1.getBoundingClientRect().y+selectedSquare1.getBoundingClientRect().height/2);
-			}
 		}, 100);
 
 		updateFuncs.push(function updateDivs(){
@@ -671,9 +664,14 @@
 			for (var i = 0; i < squareArr.length; i++) {
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
-					down = true;
-					placed = false;
-					selectedSquare = squareArr[i];
+					if (squareArr[i] != selectedSquare){
+						selectedSquare = squareArr[i];
+						selectedSquare.style.background = "green";
+					}
+					else{
+						selectedSquare = null;
+						squareArr[i].style.background = "white";
+					}
 				}
 			}
 		}
@@ -683,7 +681,6 @@
 		}
 
 		window.onmouseup = window.ontouchend = function(){
-			
 			var squareArr = document.getElementsByClassName("square");
 			for (var i = 0; i < squareArr.length; i++) {
 				if(down && squareArr[i] != selectedSquare &&
@@ -701,15 +698,6 @@
 						.attr('x2',0)
 						.attr('y2',0);
 
-			}
-		}
-
-		window.onmousemove = window.ontouchmove = function(){
-			if (down && selectedSquare != null){
-				line.attr('x1',selectedSquare.getBoundingClientRect().x+selectedSquare.getBoundingClientRect().width/2)
-						.attr('y1',0)
-						.attr('x2',event.clientX||event.touches[0].clientX)
-						.attr('y2',event.clientY||event.touches[0].clientY);
 			}
 		}
 		//selectedSquare.getBoundingClientRect().y+selectedSquare.getBoundingClientRect().height/2
