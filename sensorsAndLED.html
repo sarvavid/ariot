@@ -42,7 +42,7 @@
 		}
 	</script>
 
-	<title>hi</title>
+	<title>test</title>
 
 	<style>
 		.containerDiv {
@@ -496,18 +496,22 @@
 			var squareArr = document.getElementsByClassName("square");
 			for (i = 0; i < squareArr.length; i++) {
 				squareArr[i].onmousedown = squareArr[i].ontouchstart = function(){
-					down = true;
-					placed = false;
-					x1 = event.clientX || event.touches[0].clientX;
-					y1 = event.clientY || event.touches[0].clientY;
-					line.attr('x1',x1).attr('y1',y1).attr('x2',x1).attr('y2',y1);
+					if (squareArr[i].parentElement.className == "sensor"){
+						down = true;
+						placed = false;
+						x1 = event.clientX || event.touches[0].clientX;
+						y1 = event.clientY || event.touches[0].clientY;
+						line.attr('x1',x1).attr('y1',y1).attr('x2',x1).attr('y2',y1);
+					}
 				}
 
-				squareArr[i].onmouseup = function (){
+				squareArr[i].onmouseup = squareArr[i].ontouchend = function (){
 					placed = true;
 				}
 			}
 		});
+
+
 
 		function toScreenPosition(obj, camera) {
 	    var vector = new THREE.Vector3();
