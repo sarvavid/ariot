@@ -522,7 +522,12 @@
 					inputLCDStateDisplay.style.display = "none";
 					inputBuzzStateDisplay.style.display = "";
 				}
-				
+			}
+
+			if (placed){
+				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor")){
+
+				}
 			}
 		}, 100);
 
@@ -668,7 +673,7 @@
 				if(isClose(event.clientX||event.touches[0].clientX, squareArr[i].getBoundingClientRect().x+squareArr[i].getBoundingClientRect().width/2, squareArr[i].getBoundingClientRect().width) &&
 					 isClose(event.clientY||event.touches[0].clientY, squareArr[i].getBoundingClientRect().y+squareArr[i].getBoundingClientRect().height/2, squareArr[i].getBoundingClientRect().height)){
 					if (selectedSquare == null){
-						alert (999);
+						alert (selectedSquare);
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "green";
 						selectedDevice = selectedSquare.parentElement;
