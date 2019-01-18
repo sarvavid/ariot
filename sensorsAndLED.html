@@ -25,13 +25,20 @@
 			return false;
 		}
 
-		function getData( photonID, varName, accessToken ){
-			var data;
-			let requestURL = "https://api.particle.io/v1/devices/" + photonID + "/" + varName + "?access_token=" + accessToken;
-			$.getJSON(requestURL, function(json) {
-        data = json.result;
+		function getLight( photonID, funcName, accessToken ){
+			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(link, function(json) {
+        light = json.result;
       });
-			return data;
+			return false;
+		}
+
+		function getTemp( photonID, funcName, accessToken ){
+			let link = "https://api.particle.io/v1/devices/" + photonID + "/" + funcName + "?access_token=" + accessToken;
+			$.getJSON(link, function(json) {
+        temperature = json.result;
+      });
+			return false;
 		}
 	</script>
 
@@ -362,14 +369,14 @@
 			}
 			if (markerRoot2.visible === true){
 				if (currPhotoTempState == "photo"){
-					light = getData(friedOnion, "getVal", accessCode);
+					getLight(friedOnion, "getVal", accessCode);
 					photoDisplay.innerHTML = "Light: " + light;
 					//change the display 
 					photoDisplay.style.display = "";
 					tempDisplay.style.display = "none";
 				}
 				else if (currPhotoTempState == "temp"){
-					temp = getData(friedOnion, "getTemp", accessCode);
+					getTemp(friedOnion, "getTemp", accessCode);
 					tempDisplay.innerHTML = "Temp: " + temp;
 					//change the display 
 					photoDisplay.style.display = "none";
