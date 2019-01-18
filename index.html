@@ -164,7 +164,7 @@
 			<div class = "stripDiv" style = "display:none">
 				Hue: <input style="width: 35px; height: 10px" class="inputClass3" type="number" value="0">
 			</div>
-
+			<br>
 			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
@@ -193,7 +193,7 @@
 			<br>
 			<span id = "photoLabel">light</span>
 			<span id = "tempLabel" style = "display:none">temp</span> <!-- edit the inner html -->
-
+			<br>
 			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
@@ -228,7 +228,7 @@
 			<div class = "potDiv" style = "display:none">
 				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
-
+			<br>
 			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
@@ -261,9 +261,8 @@
 
 			<div class = "buzzDiv" style = "display:none">
 				Pitch: <input style="width: 35px; height: 10px" class="buzzInput" type="number" value="0">
-	
 			</div>
-
+			<br>
 			<button type="button" class="buttonClass" onclick="changeState()" >Δ</button>
 
 		</div>
@@ -526,7 +525,7 @@
 			}
 
 			if (placed){
-				if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
+				if (selectedDevice == document.getElementsByClassName("ClockPot movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
 					if (currClockPotState == "pot"){
 						if (currLEDState == "Intensity"){
 							inputLEDStateReg.value = parseInt(potInput.value);
@@ -552,6 +551,50 @@
 						else if (currLEDState == "Strip"){
 							inputLEDStateStrip.value = date.getSeconds();
 						}
+					}
+				}
+				else if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LEDDiv movingDiv outputDevice")){
+					if (currClockPotState == "photo"){
+						if (currLEDState == "Intensity"){
+							inputLEDStateReg.value = light;
+						}
+						else if (currLEDState == "RGB"){
+							for (var i = 0; i < 3; i++){
+								inputLEDStateRGBArray[i].value = light;
+							}
+						}
+						else if (currLEDState == "Strip"){
+							inputLEDStateStrip.value = light;
+						}
+					}
+					else if (currClockPotState == "clock"){
+						if (currLEDState == "Intensity"){
+							inputLEDStateReg.value = temperature;
+						}
+						else if (currLEDState == "RGB"){
+							for (var i = 0; i < 3; i++){
+								inputLEDStateRGBArray[i].value = temperature;
+							}
+						}
+						else if (currLEDState == "Strip"){
+							inputLEDStateStrip.value = temperature;
+						}
+					}
+				}
+				else if (selectedDevice == document.getElementsByClassName("PhotoTempDiv movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
+					if (currLCDBuzzState == "LCD"){
+						inputLCDState.value = light;
+					}
+					else if (currLCDBuzzState == "Buzzer"){
+						inputBuzzState.value = temperature;
+					}
+				}
+				else if (selectedDevice == document.getElementsByClassName("ClockPot movingDiv sensor") && selectedDevice1 == document.getElementsByClassName("LCDBuzz movingDiv outputDevice")){
+					if (currLCDBuzzState == "LCD"){
+						inputLCDState.value = parseInt(potInput.value);
+					}
+					else if (currLCDBuzzState == "Buzzer"){
+						inputBuzzState.value = parseInt(potInput.value);
 					}
 				}
 			}
@@ -702,7 +745,6 @@
 						selectedSquare = squareArr[i];
 						selectedSquare.style.background = "red";
 						selectedDevice = selectedSquare.parentElement;
-						alert (selectedSquare);
 					}
 
 					else if(squareArr[i] == selectedSquare){
