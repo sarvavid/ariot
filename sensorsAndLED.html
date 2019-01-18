@@ -42,7 +42,7 @@
 		}
 	</script>
 
-	<title>Led & PhotoTemp & PotClock Sensor</title>
+	<title>hi</title>
 
 	<style>
 		.containerDiv {
@@ -551,6 +551,15 @@
 			// update artoolkit on every frame
 			if (arToolkitSource.ready !== false){
 				arToolkitContext.update( arToolkitSource.domElement );
+			}
+		});
+
+		updateFuncs.push(function(){
+			if (placed){
+				line.attr('x1', square0.getBoundingClientRect().x + square0.getBoundingClientRect().width/2)
+					  .attr('y1',square0.getBoundingClientRect().y + square0.getBoundingClientRect().height/2)
+					  .attr('x2',square1.getBoundingClientRect().x + square1.getBoundingClientRect().width/2)
+					  .attr('y2',square1.getBoundingClientRect().y+ square0.getBoundingClientRect().height/2);
 			}
 		});
 
