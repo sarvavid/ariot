@@ -1,55 +1,92 @@
 
+<div class="LCDBuzz movingDiv outputDevice" style="z-index: 1; position: absolute; width: 200px; height: 210px;">
+		<div class="square"></div>
+		<div class = "dial" style="opacity: 0.75; width:100%;height:100%;">
+			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
+			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
+			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
+			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class = "rings" style="opacity: 0.75;width:100%;height:100%;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
+			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+		</div>
+		<div class="inputDiv">
+
+			<h12> Mode: <span id = "LCDBuzzModes">Intensity</span> </h12> 
+			<br>
+			<div class = "LCDDiv">
+				Number: <input style="width: 35px; height: 10px" class="inputLCD" type="number" value="0">
+			</div>
+
+			<div class = "buzzDiv" style = "display:none">
+				Pitch: <input style="width: 35px; height: 10px" class="buzzInput" type="number" value="0">
+	
+			</div>
+
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
+
+		</div>
+	</div>
+
 <script>
+var markerRoot1, markerRoot2, markerRoot3; markerRoot4; // addm markerRoot4
 
-var currLEDState = "Intensity";
-var currPhotoTempState = "photo";
-var currClockPotState = "clock";
+var LCDBuzzStates = ["LCD", "Buzzer"];
 
-currLEDState = LEDStates[LEDIndex];
-document.getElementById("LEDModes").innerHTML = " " + currLEDState; 
+var LCDBuzzIndex = 0;
 
-var inputLEDStateReg = document.getElementsByClassName("inputClass")[0];
-var inputLEDStateRGBArray = document.getElementsByClassName("inputClass2");
-var inputLEDStateStrip = document.getElementsByClassName("inputClass3")[0];
+var LCDval = 0;
+var buzzVal = 0;
 
-var inputLEDStateBrightnessDisplay = document.getElementsByClassName("brightnessDiv")[0];
-var inputLEDStateRGBDisplay = document.getElementsByClassName("rgbDiv")[0];
-var inputLEDStateStripDisplay = document.getElementsByClassName("stripDiv")[0];
+var currLCDBuzzState = "LCD";
 
-if (markerRoot1.visible === true){
-	if (currLEDState == "Intensity"){
-		submitform(parseInt(inputLEDStateReg.value), caramelApple, "changeIntensity", accessCode);
+markerRoot4 = new FOUR.Group
+scene.add(markerRoot4)
+var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot4, {
+	type: "pattern",
+	patternUrl: "modulAR-iot-images/LEDs.patt"//change this url
+})
+
+currLCDBuzzState = LCDBuzzStates[LCDIndex];
+document.getElementById("LCDBuzzModes").innerHTML = " " + currLCDBuzzState; 
+
+var inputLCDState = document.getElementsByClassName("inputLCD")[0];
+var inputBuzzState = document.getElementsByClassName("buzzInput");
+
+var inputLCDStateDisplay = document.getElementsByClassName("LCDDiv")[0];
+var inputLEDStateRGBDisplay = document.getElementsByClassName("buzzDiv")[0];
+
+
+if (markerRoot4.visible === true){
+	if (currLCDBuzzState == "LCD"){
+		submitform(parseInt(inputLCDState.value), lemon, "changeText", accessCode);
 		//change the display 
-		inputLEDStateBrightnessDisplay.style.display = "";
-		inputLEDStateRGBDisplay.style.display = "none";
-		inputLEDStateStripDisplay.style.display ="none";
+		inputLCDStateDisplay.style.display = "";
+		inputBuzzStateDisplay.style.display = "none";
 	}
-	else if (currLEDState == "RGB"){
-		var rbgFuncs = ["changeRed", "changeBlue", "changeGreen"];
-		for (var i = 0; i < 3; i++){
-			submitform(parseInt(inputLEDStateRGBArray[i].value), caramelApple, rbgFuncs[i], accessCode);
-		}
+	else if (currLCDBuzzState == "Buzzer"){
+		submitform(parseInt(inputBuzzState.value), lemon, "changeIntensity", accessCode);
+		
 		//change the display
-		inputLEDStateBrightnessDisplay.style.display = "none";
-		inputLEDStateRGBDisplay.style.display = "";
-		inputLEDStateStripDisplay.style.display = "none";
+		inputLCDStateDisplay.style.display = "none";
+		inputBuzzStateDisplay.style.display = "";
 	}
-	else if (currLEDState == "Strip"){
-		submitform(parseInt(inputLEDStateStrip.value), caramelApple, "changeColorStrip", accessCode);
-		//change the display
-		inputLEDStateBrightnessDisplay.style.display = "none";
-		inputLEDStateRGBDisplay.style.display = "none";
-		inputLEDStateStripDisplay.style.display = "";
-	}
+	
 }
 
 function changeState(){
-			if (markerRoot1.visible === true){
-				if (LEDIndex < LEDStates.length - 1){
-					LEDIndex += 1;
+			if (markerRoot4.visible === true){
+				if (LCDBuzzIndex < LCDBuzzStates.length - 1){
+					LCDBuzzIndex += 1;
 				}
 				else{
-					LEDIndex = 0;
+					LCDIndex = 0;
 				}
 			}
 </script>
