@@ -2,6 +2,8 @@
 
 http://www.build18.org/garage/project/485/
 
+[image!](images/pic.png)
+
 ## Description
 
 A more intuitive way to understand, control, and visualize connections. Uses augmented reality to draw visuals showing the communication and data flow between various IoT devices/modules.
