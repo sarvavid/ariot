@@ -2,7 +2,7 @@
 
 http://www.build18.org/garage/project/485/
 
-[image!](https://github.com/EdwardLu2018/modulAR-iot/blob/master/images/pic.jpg)
+![image](https://github.com/EdwardLu2018/modulAR-iot/blob/master/images/pic.jpg)
 
 ## Description
 
