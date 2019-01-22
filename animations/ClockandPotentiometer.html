@@ -99,35 +99,47 @@
 	<h1>"the value for number is: " <span id="myText"></span></h1>
 	<div class="movingDiv" style="z-index: 1; position: absolute; width: 300px; height: 300px;">
 		<div class = "dial" style="opacity: 0.75; width:300px;height:310px;">
-			<img src = "divImages/OuterRing3.png" style="width:100%;height:100%;">
+			<img src = "../divImages/OuterRing3.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:310px;animation: spin 7s linear infinite alternate-reverse; -webkit-animation: spin 7s linear infinite alternate-reverse;">
-			<img src = "divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "../divImages/SecondInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 5s linear infinite alternate-reverse; -webkit-animation: spin 5s linear infinite alternate-reverse;">
-			<img src = "divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "../divImages/ThirdInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 4s linear infinite alternate-reverse; -webkit-animation: spin 4s linear infinite alternate-reverse;">
-			<img src = "divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "../divImages/FourthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 		<div class = "rings" style="opacity: 0.75;width:300px;height:300px;animation: spin 8s linear infinite alternate-reverse; -webkit-animation: spin 8s linear infinite alternate-reverse;">
-			<img src = "divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
+			<img src = "../divImages/FifthInnerRing2.png" style="width:100%;height:100%;">
 		</div>
 	
 
 		<div class="inputDiv" style="z-index: 1; position: absolute; text-align: center; align-items: center; background: white; opacity: .75">
 
-			<h12 style="color:black;"> Mode: <span id = "Modes">temp</span> </h12> 
+	<!-- 		<h12 style="color:black;"> Mode: <span id = "Modes">Clock</span> </h12> 
 			<br>
-			<div class = "temp">
-			<span class = "temp">temp</span> <!-- edit the inner html -->
+			<div class = "clock">
+			<span class = "clock">clock</span> 
+			</div>
+ 			
+ 			<div class = "pot" style = "display:none">
+				Pot Val: <input style="width: 35px; height: 10px" class="pot" type="number" value="0">
+			</div> -->
+	
+			<!-- <button type="button"class="buttonClass" onclick="changeState()" >change</button> -->
+
+			<h12> Mode: <span id = "ClockPotModes">Clock</span> </h12> 
+			<br>
+			<div class = "clockDiv">
+				<span id = "clockLabel">clock</span> 
 			</div>
 
-			<div class = "light" style = "display: none">
-			<span class = "light">light</span>
+			<div class = "potDiv" style = "display:none">
+				Pot Val: <input style="width: 35px; height: 10px" class="potInput" type="number" value="0">
 			</div>
 
-			<button type="button"class="buttonClass" onclick="changeState()" >change</button>
+			<button type="button" class="buttonClass" onclick="changeState()" >change</button>
 
 		</div>
 		<!-- <div class="containerDiv" style="opacity: .75;">
@@ -137,7 +149,7 @@
 	</div>
 
 	<script>
-		var states = ["Temperature", "Light"]
+		var states = ["Clock", "Potentiometer"]
 
 		var movingDiv = document.getElementsByClassName("movingDiv")[0];
 		movingDiv.style.left = window.innerWidth/2 - movingDiv.offsetWidth/2 + "px";
@@ -163,32 +175,32 @@
 		button.style.left = inputDiv.offsetWidth/2+ "px";
 		button.style.top = inputDiv.offsetHeight/2+ "px"
 		
-		var currState = "Temperature"
+		var currState = "Clock"
 		var index = 0
+			
+			var clockDisplay = document.getElementsByClassName("clockDiv")[0];
+			var clockLabelVar = document.getElementById("clockLabel");
+			var potDisplay = document.getElementsByClassName("potDiv")[0];
+			var potInput = document.getElementsByClassName("potInput")[0];
 
 function changeState(){
 			currState = states[index]
-			document.getElementById("Modes").innerHTML = " "+currState 
+			document.getElementById("ClockPotModes").innerHTML = " "+currState 
 			if (index == 0)
 			{
-				input = document.getElementsByClassName("temp")[0]
-				input.style.display = "";
-				input.innerHTML = "temp variable"//here you can add your variable
-
-				input = document.getElementsByClassName("light")[0]
-				input.style.display = "none";
-
+					var date = new Date();
+					clockLabelVar.innerHTML = "Seconds: "+ date.getSeconds();
+					//change the display 
+					clockDisplay.style.display = "";
+					potDisplay.style.display = "none";
 
 			}
 			else if (index == 1)
 			{
-				input = document.getElementsByClassName("temp")[0]
-				input.style.display = "none";
-
-
-				input = document.getElementsByClassName("light")[0]
-				input.innerHTML = "light variable"  //here you can add your variable
-				input.style.display = "";
+				
+					//change the display 
+					clockDisplay.style.display = "none";
+					potDisplay.style.display = "";
 
 			}
 			if (index < states.length - 1){
@@ -197,8 +209,7 @@ function changeState(){
 			else{
 				index = 0;
 			}
-				
-			
+
 
 			// document.getElementById("text").innerHTML = index;
 		}
