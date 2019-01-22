@@ -2,7 +2,7 @@
 
 http://www.build18.org/garage/project/485/
 
-[image!](images/pic.jpg)
+[image!](../images/pic.jpg)
 
 ## Description
 
