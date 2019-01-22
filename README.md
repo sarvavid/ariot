@@ -9,5 +9,5 @@ A more intuitive way to understand, control, and visualize connections. Uses aug
 [Build18 2018](http://www.build18.org/garage/project/485/) project at Carngenie Mellon Univeristy.
 
 ## Modules Used
-1. AR.js and three.js
+1. [AR.js](https://github.com/jeromeetienne/AR.js) and [three.js](https://threejs.org/)
 2. JQuery AJAX API
