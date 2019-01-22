@@ -1,6 +1,6 @@
 # ModulAR-IoT
 
-![image](https://github.com/EdwardLu2018/modulAR-iot/blob/master/images/pic.jpg)
+![image](https://github.com/EdwardLu2018/modulAR-iot/blob/master/readme-images/pic.jpg)<br>
 (Image courtesy of Larry Rippel)
 
 ## Description
