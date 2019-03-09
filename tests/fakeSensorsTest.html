@@ -48,11 +48,11 @@
 				var inp = parseInt(input.value);
 
 				if (currState == "pot"){
-					submitform(inp, "330017000b47363330353437", "setPot", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-					getData("330017000b47363330353437", "getPot", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(inp, "", "setPot", "");
+					getData("", "getPot", "");
 				}
 				else if (currState == "clck"){
-					submitform(inp, "330017000b47363330353437", "getTime", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(inp, "", "getTime", "");
 					var date = new Date();
 					label.innerHTML = date.getTime();
 					// getSeconds()
@@ -61,7 +61,7 @@
 
 			function changeState(){
 				input.value = "0";
-				submitform(0, "330017000b47363330353437", "setPot", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "", "setPot", "");
 				if (index < states.length - 1){
 					index += 1
 				}

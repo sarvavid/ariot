@@ -40,17 +40,17 @@
 				hi.innerHTML = n;
 
 				if (currState == "buzzer"){
-					submitform(n, "360026000547363332363639", "changeIntensity", "572441bc2be60abbcf8467e346129a5e9622f881");
+					submitform(n, "", "changeIntensity", "");
 				}
 				else if (currState == "lcd"){
-					submitform(n, "360026000547363332363639", "changeText", "572441bc2be60abbcf8467e346129a5e9622f881");
+					submitform(n, "", "changeText", "");
 				}
 			}, 100);
 
 			function changeState(){
 				input.value = "0";
-				submitform(0, "3f0035000547363332363639", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				submitform(0, "3f0035000547363332363639", "changeText", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "", "changeIntensity", "");
+				submitform(0, "", "changeText", "");
 				if (index < states.length - 1){
 					index += 1
 				}

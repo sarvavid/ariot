@@ -40,21 +40,21 @@
 				hi.innerHTML = n;
 
 				if (currState == "reg"){
-					submitform(n, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(n, "", "changeIntensity", "");
 				}
 				else if (currState == "rgb"){
-					submitform(n, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(n, "", "changeColor", "");
 				}
 				else if (currState == "strip"){
-					submitform(n, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(n, "", "changeColorStrip", "");
 				}
 			}, 100);
 
 			function changeState(){
 				ledVal.value = "0";
-				submitform(0, "3f0039000b47363330353437", "changeIntensity", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				submitform(0, "3f0039000b47363330353437", "changeColor", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
-				submitform(0, "3f0039000b47363330353437", "changeColorStrip", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "", "changeIntensity", "");
+				submitform(0, "", "changeColor", "");
+				submitform(0, "", "changeColorStrip", "");
 				if (index < states.length - 1){
 					index += 1
 				}

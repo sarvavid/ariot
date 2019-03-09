@@ -40,13 +40,13 @@
 				hi.innerHTML = n;
 
 				if (currState == "stepper"){
-					submitform(n, "3f0035000547363332363639", "changeSpeed", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+					submitform(n, "", "changeSpeed", "");
 				}
 			}, 100);
 
 			function changeState(){
 				input.value = "0";
-				submitform(0, "3f0035000547363332363639", "changeSpeed", "3217c92c98c9e40168c4bb6c44ddd546fc307d32");
+				submitform(0, "", "changeSpeed", "");
 				if (index < states.length - 1){
 					index += 1
 				}
